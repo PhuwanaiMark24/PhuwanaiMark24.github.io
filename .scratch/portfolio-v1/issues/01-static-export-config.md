@@ -4,10 +4,14 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Cache Components and Partial Prefetching are no longer enabled
-- [ ] Static export and unoptimized images are enabled; `trailingSlash` stays at its default; no `basePath`
-- [ ] `npm run build` succeeds and produces an `out/` folder containing the home page HTML
-- [ ] `npm run lint` passes
-- [ ] Explanation (in Thai) of what changed and why, linking ADR 0001
+- [x] Cache Components and Partial Prefetching are no longer enabled
+- [x] Static export and unoptimized images are enabled; `trailingSlash` stays at its default; no `basePath`
+- [x] `npm run build` succeeds and produces an `out/` folder containing the home page HTML
+- [x] `npm run lint` passes
+- [x] Explanation (in Thai) of what changed and why, linking ADR 0001
+
+## Comments
+
+- 2026-11-07: Resolved in 90b6ee1 (+ cc71720 comment fix).

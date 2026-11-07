@@ -4,11 +4,15 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] Before installing anything, ask the Owner for permission and list every package (with its purpose) to be installed
-- [ ] `npm test` runs `vitest run` (single run, not watch mode) and exits
-- [ ] One passing test renders the home page component without errors (a smoke test for Seam A)
-- [ ] Path aliases used by the app resolve in tests
-- [ ] `npm run lint` and `npm run build` still pass
-- [ ] Explanation (in Thai) of what each tool does and how to read a test
+- [x] Before installing anything, ask the Owner for permission and list every package (with its purpose) to be installed
+- [x] `npm test` runs `vitest run` (single run, not watch mode) and exits
+- [x] One passing test renders the home page component without errors (a smoke test for Seam A)
+- [x] Path aliases used by the app resolve in tests
+- [x] `npm run lint` and `npm run build` still pass
+- [x] Explanation (in Thai) of what each tool does and how to read a test
+
+## Comments
+
+- 2026-11-07: Resolved in 8e1e8dd. vite-tsconfig-paths replaced by Vite `resolve.tsconfigPaths`; @types/node bumped to ^24; .gitattributes added.
