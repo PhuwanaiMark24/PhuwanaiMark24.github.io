@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Static HTML export for GitHub Pages (no server).
-  // Cache Components / Partial Prefetching are off: see docs/adr/0001.
+  // Cache Components / Partial Prefetching are off: see docs/adr/0001-static-export-without-cache-components.md
   output: "export",
   // The default image optimizer needs a server.
   images: { unoptimized: true },
