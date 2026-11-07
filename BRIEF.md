@@ -34,9 +34,9 @@
 
 ## 5. โครงสร้างเว็บ
 
-หน้าเดียว (single page) เลื่อนลงตามลำดับ มี navbar ลิงก์ไปแต่ละส่วนด้วย anchor (`#about` เป็นต้น)
+หน้าเดียว (single page) เลื่อนลงตามลำดับ มี navbar ลิงก์ไป About, Projects, Contact ด้วย anchor (`#about` เป็นต้น) — Hero ไม่ใช่ Section และไม่มีลิงก์ใน navbar (ดู GLOSSARY.md)
 
-| ลำดับ | Section | เนื้อหา |
+| ลำดับ | ส่วน | เนื้อหา |
 |---|---|---|
 | 1 | **Hero** | ชื่อ, ตำแหน่ง, tagline, ปุ่ม "View projects" + "Download resume" |
 | 2 | **About** | แนะนำตัว 2–3 ย่อหน้า, รายการทักษะ/เครื่องมือ (เป็นข้อความหรือ tag ไม่ใช้แถบ % ทักษะ) |
@@ -77,7 +77,7 @@
 
 ## 10. นิยามว่า "เสร็จ"
 
-- ครบ 4 section, ใช้ได้ดีบนมือถือ (กว้าง 360px) ถึงจอใหญ่
+- ครบ Hero + 3 Section (About, Projects, Contact) ตาม GLOSSARY.md, ใช้ได้ดีบนมือถือ (กว้าง 360px) ถึงจอใหญ่
 - ใช้ token จาก DESIGN.md เท่านั้น
 - Lighthouse: Accessibility ≥ 95, Performance ≥ 90
 - Deploy ผ่าน GitHub Actions อัตโนมัติเมื่อ push เข้า `main`
