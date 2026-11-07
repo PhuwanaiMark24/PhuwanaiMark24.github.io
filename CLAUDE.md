@@ -23,7 +23,7 @@ If a request conflicts with BRIEF.md or DESIGN.md, stop and say so before writin
 - Small changes. One ticket = one focused diff I can read in a few minutes.
 - I read every diff. Do not commit, push or install packages without asking me first.
 - Do not invent content (names, projects, links, numbers). Use `[[TODO: ...]]` placeholders.
-- Before saying a task is done, run `npm run lint` and `npm run build`, and confirm they pass.
+- Before saying a task is done, run `npm test`, `npm run lint` and `npm run build`, and confirm they pass.
 
 ## Static export constraints
 
@@ -52,6 +52,7 @@ public/         resume.pdf, images
 - `npm run dev` — local dev server
 - `npm run build` — static build into `out/`
 - `npm run lint`
+- `npm test` — run tests once (Vitest, not watch mode)
 
 ## Workflow (Matt Pocock skills)
 
