@@ -1,0 +1,34 @@
+# Lint, test and build on every push and pull request.
+# Does not deploy; deploy and output checks come in a later ticket.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# The workflow only reads the repo, so the token gets read access only.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # Get the repo code onto the runner.
+      - uses: actions/checkout@v5
+
+      # Node 24 (LTS). Next.js 16 needs >= 20.9. Cache npm downloads.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      # Clean install exactly what package-lock.json says.
+      - run: npm ci
+
+      - run: npm run lint
+
+      # `vitest run` exits after one pass (no watch mode).
+      - run: npm test
+
+      - run: npm run build
