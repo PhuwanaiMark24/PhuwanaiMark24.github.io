@@ -42,7 +42,8 @@
 
 | Token | ขนาด / line-height | น้ำหนัก | ใช้กับ |
 |---|---|---|---|
-| `display` | 48px / 1.1 (มือถือ 36px) | 600 | ชื่อใน Hero |
+| `display` | 48px / 1.1 | 600 | ชื่อใน Hero บนจอใหญ่ (`md:text-display`) |
+| `display-sm` | 36px / 1.1 | 600 | ชื่อใน Hero บนมือถือ (`text-display-sm`) |
 | `h1` | 32px / 1.2 | 600 | หัวข้อ section |
 | `h2` | 24px / 1.3 | 600 | ชื่อการ์ดงาน |
 | `h3` | 20px / 1.4 | 500 | หัวข้อย่อย |
@@ -51,6 +52,19 @@
 | `caption` | 12px / 1.4 | 500 | tag, label (มักใช้ mono) |
 
 ความกว้างบรรทัดของเนื้อหาไม่เกิน ~70 ตัวอักษร (`max-w-prose`)
+
+### Token → HTML tag
+
+ชื่อ token เป็นชื่อ **ขนาด** ไม่ใช่ชื่อแท็ก หน้านี้มี `<h1>` ได้ตัวเดียว (ชื่อใน Hero) ระดับหัวข้อจึงเลื่อนลงหนึ่งขั้น:
+
+| Token (class) | แท็ก HTML | ใช้กับ |
+|---|---|---|
+| `display` / `display-sm` | `<h1>` | ชื่อใน Hero (มีตัวเดียวทั้งหน้า) |
+| `h1` | `<h2>` | หัวข้อ section |
+| `h2` | `<h3>` | ชื่อการ์ดงาน |
+| `h3` | `<h4>` | หัวข้อย่อย |
+
+ตัวอย่าง: `<h2 className="text-h1">Projects</h2>`
 
 ## 4. ระยะห่าง (Spacing)
 
@@ -69,7 +83,17 @@
 
 > แผนเดิมกำหนดไว้ 4/8/16/24 ไฟล์นี้เพิ่ม 32/48/64/96 สำหรับระยะห่างระดับ section
 
-Layout: เนื้อหาอยู่ในกรอบกว้างไม่เกิน 1120px อยู่กึ่งกลาง ขอบซ้ายขวา 16px (มือถือ) / 24px (จอใหญ่)
+**ใช้ได้เฉพาะ 8 ค่านี้เท่านั้น** ตัวคูณ spacing ของ Tailwind ถูกปิดไว้ (ดูหัวข้อ 11) ดังนั้น class ที่ไม่มีใน token เช่น `w-5`, `p-3`, `gap-7` จะไม่ถูกสร้างและใช้ไม่ได้ ส่วน class ที่ไม่ได้อิง spacing เช่น `w-full`, `h-full`, `max-w-prose` ยังใช้ได้ตามปกติ
+
+Layout: เนื้อหาอยู่ในกรอบกว้างไม่เกิน `container-page` (1120px, class `max-w-page`) อยู่กึ่งกลาง ขอบซ้ายขวา `4` (16px, มือถือ) / `6` (24px, จอใหญ่)
+
+| Token | ค่า | ใช้กับ |
+|---|---|---|
+| `container-page` | 1120px | ความกว้างสูงสุดของ `Container` |
+
+### Breakpoint
+
+ใช้ breakpoint เริ่มต้นของ Tailwind (ไม่ reset) คำว่า **"จอใหญ่"** ในไฟล์นี้หมายถึง `md` (≥768px) เสมอ ส่วน "มือถือ" คือค่าที่ไม่มี prefix (mobile-first) เช่น `py-12 md:py-24`, `px-4 md:px-6`, `text-display-sm md:text-display`
 
 ## 5. มุมมน (Radius)
 
@@ -84,7 +108,8 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 
 - ใช้เส้นขอบ `1px solid border` เป็นหลัก
 - เงามีตัวเดียว: `shadow-card` = `0 1px 2px rgb(0 0 0 / 0.4)`
-- hover ของการ์ด: เปลี่ยนพื้นเป็น `surface-2` + ขอบเป็น `border-strong` ไม่ยกการ์ดด้วยเงาใหญ่
+- การ์ด **ไม่มี hover state** เพราะตัวการ์ดเองกดไม่ได้ สิ่งที่กดได้คือลิงก์ demo/code ข้างใน ถ้าการ์ดเปลี่ยนสีตอน hover คนดูจะเข้าใจผิดว่าทั้งการ์ดกดได้
+- ถ้าวันหนึ่งมีการ์ดที่ทั้งใบเป็นลิงก์ จึงค่อยใช้ hover นี้: เปลี่ยนพื้นเป็น `surface-2` + ขอบเป็น `border-strong` ไม่ยกการ์ดด้วยเงาใหญ่
 
 ## 7. การเคลื่อนไหว (Motion)
 
@@ -96,20 +121,44 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 
 | Component | Variants | หมายเหตุ |
 |---|---|---|
-| `Button` | `primary` (พื้น accent-strong), `secondary` (ขอบ border, พื้นโปร่ง), `ghost` (ไม่มีขอบ) | ขนาด `md` เดียวก่อน; รองรับ render เป็นลิงก์ |
-| `Card` | — | พื้น `surface`, ขอบ `border`, radius `lg`, padding `6` |
+| `Button` | `primary` (พื้น accent-strong), `secondary` (ขอบ border, พื้นโปร่ง), `ghost` (ไม่มีขอบ) | ขนาด `md` เดียวก่อน; ถ้ามี `href` จะ render เป็น `<a>` ธรรมดา ถ้าไม่มีจะเป็น `<button>` (ดูด้านล่าง) |
+| `Card` | — | พื้น `surface`, ขอบ `border`, radius `lg`, padding `6`, ไม่มี hover (ดู §6) |
 | `Tag` | — | mono, `caption`, พื้น `surface-2`, radius `sm` |
-| `Navbar` | — | sticky บนสุด, พื้น `bg` โปร่ง 80% + blur, ขอบล่าง `border` |
-| `Section` | — | wrapper ใส่ `id`, หัวข้อ, ระยะห่างแนวตั้งมาตรฐาน |
-| `Container` | — | กรอบกว้าง 1120px + ขอบซ้ายขวา |
+| `Navbar` | — | sticky บนสุด, สูง `h-16`, **พื้นทึบ `bg`** (ไม่โปร่ง ไม่ blur), ขอบล่าง `border` (ดูด้านล่าง) |
+| `Section` | — | wrapper ใส่ `id`, หัวข้อ (`<h2 class="text-h1">`), ระยะห่างแนวตั้งมาตรฐาน, `scroll-mt-16` |
+| `Container` | — | กรอบกว้าง `max-w-page` + ขอบซ้ายขวา |
+
+### ลิงก์
+
+- ใช้ `<a>` ธรรมดา ไม่ใช้ `next/link` เพราะลิงก์ในเว็บมีแค่ anchor (`#projects`), ไฟล์ (`/resume.pdf`) และลิงก์ภายนอก ไม่มีการเปลี่ยนหน้าภายในเว็บ
+- ลิงก์ resume ใส่ `download`
+- ลิงก์ภายนอกใส่ `target="_blank" rel="noopener noreferrer"`
+
+### Navbar
+
+- ไม่มีเมนู hamburger ใช้ลิงก์เป็นแถว (About, Projects, Contact) ขนาด `small` ทุกจอ
+- บนมือถือซ่อนชื่อ/โลโก้ทางซ้าย และแสดงตั้งแต่ `md` ขึ้นไป
+- เป็น Server Component ไม่ต้องใช้ `"use client"`
+- `Section` ใช้ `scroll-mt-16` (เท่ากับความสูง navbar) เพื่อไม่ให้หัวข้อโดน navbar บังเวลาคลิก anchor
+- ไม่ใช้ smooth scroll (§7)
+
+### Focus ring
 
 ทุก component ที่กดได้ต้องมี focus ring: `2px` สี `accent`, ห่างจากขอบ `2px`
+
+ให้ใช้ **`outline`** ห้ามใช้ `ring-*` เพราะใน Tailwind v4 `ring` ทำงานด้วย `box-shadow` ซึ่งนับเป็นเงาสีฟ้าที่ §10 ห้ามไว้:
+
+```
+focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+```
 
 ## 9. ไอคอน
 
 - ใช้ไลบรารีเดียว: **lucide-react**, ขนาด 16 หรือ 20px, stroke 1.5–2
 - โลโก้ GitHub ใช้ SVG ทางการของ GitHub
 - ทุกไอคอนที่ไม่มีข้อความประกบต้องมี `aria-label`
+- กำหนดขนาดด้วย prop `size` ของ lucide (`<Mail size={16} />`) ห้ามใช้ class อย่าง `w-5 h-5` เพราะ 20px ไม่มีใน spacing token และ class เหล่านี้ใช้ไม่ได้ (ดูหัวข้อ 4)
+- **ข้อยกเว้นข้อเดียว:** โลโก้ GitHub ทำเป็น `components/ui/GithubIcon.tsx` เป็น inline SVG ทางการของ GitHub ใช้ `fill="currentColor"` และรับ prop `size` แบบเดียวกับ lucide (lucide เลิกรองรับไอคอนแบรนด์แล้ว)
 
 ## 10. กฎห้าม (สำคัญ)
 
@@ -124,5 +173,13 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 ## 11. ที่เก็บ token ในโค้ด
 
 - Tailwind v4 (ค่าเริ่มต้นของ `create-next-app` ตอนนี้) ไม่มี `tailwind.config.js` แล้ว ให้นิยาม token ใน `app/globals.css` ด้วย `@theme` ซึ่งจะสร้างทั้ง CSS variables และ class ของ Tailwind ให้ในคราวเดียว
-- ปิด palette สีเริ่มต้นของ Tailwind (`--color-*: initial;`) เพื่อให้ใช้ได้เฉพาะสีใน token
-- หน้า `/styleguide` แสดงทุก token และทุก component เพื่อตรวจด้วยตา
+- ปิดค่าเริ่มต้นของ Tailwind ทุก namespace ที่ไฟล์นี้นิยามไว้ แล้วนิยามเฉพาะ token ของเรา เพื่อให้ class นอก token ไม่ถูกสร้างเลย:
+  - `--color-*: initial;` สี
+  - `--spacing: initial;` และ `--spacing-*: initial;` ระยะห่าง (ปิดตัวคูณ แล้วนิยาม `--spacing-1` … `--spacing-24` ทีละตัว)
+  - `--text-*: initial;` ขนาดตัวอักษร
+  - `--radius-*: initial;` มุมมน
+  - `--shadow-*: initial;` เงา
+- breakpoint (`--breakpoint-*`) ไม่ reset และใช้ค่าเริ่มต้นของ Tailwind
+- ใช้ชื่อ token ตามไฟล์นี้ตรงๆ ไม่ตั้งชื่อใหม่ แม้ class จะดูซ้ำ เช่น `bg-bg`, `text-text`, `text-text-muted`, `border-border`
+- ค่าแบบ arbitrary (`p-[13px]`) ยังเขียนได้ทางเทคนิค เพราะไม่มี lint plugin คอยจับ ให้ `/code-review` ตรวจแทน
+- หน้า `/styleguide` แสดงทุก token และทุก component เพื่อตรวจด้วยตา หน้านี้ deploy ขึ้นเว็บจริงด้วย (ไม่มีลิงก์ใน navbar) และตั้ง `robots: { index: false }` ไว้

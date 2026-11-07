@@ -34,7 +34,7 @@ Not allowed (they need a server): API routes, Server Actions, middleware, ISR/re
 ## Design rules (summary — full rules in DESIGN.md)
 
 - Only use tokens defined in `app/globals.css` `@theme`. No arbitrary values like `text-[#123456]` or `p-[13px]`.
-- No gradients. No emoji as icons. Icons from `lucide-react` only.
+- No gradients. No emoji as icons. Icons from `lucide-react` only, except the GitHub logo (see DESIGN.md §9).
 - Base components live in `components/ui/` and are built only from tokens. Sections compose them.
 
 ## Project structure

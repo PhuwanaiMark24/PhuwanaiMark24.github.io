@@ -8,7 +8,7 @@
 - ชื่อที่แสดง: `[[ชื่อ-นามสกุล ภาษาอังกฤษ]]`
 - ตำแหน่ง: **Frontend Developer**
 - Tagline (1 บรรทัด): `[[เช่น "Frontend developer building clean, accessible web interfaces — with a growing focus on AI tools."]]`
-- GitHub username: `[[username]]`
+- GitHub username: `PhuwanaiMark24`
 - อีเมล: `[[email]]`
 
 ## 2. เป้าหมาย
@@ -53,14 +53,13 @@
 | # | ชื่องาน | ประเภท | สถานะ |
 |---|---|---|---|
 | 1 | Personal portfolio (เว็บนี้) | Code / Web | กำลังทำ |
-| 2 | `[[ชื่องาน]]` | `[[Code/Web, AI/Agent, Design]]` | `[[ ]]` |
 
 กฎ: ห้ามสร้างงานตัวอย่างปลอม ถ้ามีงานน้อยให้แสดงเท่าที่มี layout ต้องดูดีตั้งแต่ 1 ชิ้น
 
 ## 7. ช่องทางติดต่อ
 
 - อีเมล: ลิงก์ `mailto:` (ไม่มีฟอร์ม เพราะ GitHub Pages ไม่มี server)
-- GitHub: `https://github.com/[[username]]`
+- GitHub: `https://github.com/PhuwanaiMark24`
 - Resume: ไฟล์ `public/resume.pdf` → ลิงก์ดาวน์โหลด
 - ไม่มี LinkedIn ในรอบแรก
 
@@ -68,7 +67,7 @@
 
 - Next.js (App Router) + TypeScript + Tailwind CSS
 - `output: 'export'` (static) → deploy บน GitHub Pages
-- Repo ชื่อ `[[username]].github.io` → **ไม่ต้องตั้ง `basePath`**
+- Repo ชื่อ `PhuwanaiMark24.github.io` → เว็บอยู่ที่ `https://phuwanaimark24.github.io` → **ไม่ต้องตั้ง `basePath`**
 - `images: { unoptimized: true }`
 - ห้ามใช้ฟีเจอร์ที่ต้องมี server: API routes, Server Actions, middleware, ISR
 
