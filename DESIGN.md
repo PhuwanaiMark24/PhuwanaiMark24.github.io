@@ -122,8 +122,8 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 | Component | Variants | หมายเหตุ |
 |---|---|---|
 | `Button` | `primary` (พื้น accent-strong → hover `accent-strong-hover`), `secondary` (ขอบ border, พื้นโปร่ง → hover ขอบ `border-strong`), `ghost` (ไม่มีขอบ → hover พื้น `surface-2`) ตัวอักษร `text-body` ทุกแบบ | ขนาด `md` เดียวก่อน; ถ้ามี `href` จะ render เป็น `<a>` ธรรมดา ถ้าไม่มีจะเป็น `<button>` (ดูด้านล่าง) |
-| `Card` | — | พื้น `surface`, ขอบ `border`, radius `lg`, padding `6`, ไม่มี hover (ดู §6) |
-| `Tag` | — | mono, `caption`, พื้น `surface-2`, radius `sm` |
+| `Card` | — | พื้น `surface`, ขอบ `border`, radius `lg`, padding `4` (มือถือ) / `6` (จอใหญ่), เงา `shadow-card`, ไม่มี hover (ดู §6) |
+| `Tag` | — | mono, `caption`, พื้น `surface-2`, ตัวอักษร `text-muted`, radius `sm`, padding `px-2 py-1` |
 | `Navbar` | — | sticky บนสุด, สูง `h-16`, **พื้นทึบ `bg`** (ไม่โปร่ง ไม่ blur), ขอบล่าง `border` (ดูด้านล่าง) |
 | `Section` | — | wrapper ใส่ `id`, หัวข้อ (`<h2 class="text-h1">`), ระยะห่างแนวตั้งมาตรฐาน, `scroll-mt-16` |
 | `Container` | — | กรอบกว้าง `max-w-page` + ขอบซ้ายขวา |

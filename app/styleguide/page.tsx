@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import Button, { type ButtonVariant } from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Container from "@/components/ui/Container";
+import GithubIcon from "@/components/ui/GithubIcon";
+import Tag from "@/components/ui/Tag";
 
 // Dev-facing page for checking Tokens and Base components by eye (DESIGN.md §11).
 // Not linked from the Navbar and hidden from search engines.
@@ -61,6 +65,9 @@ const radii = [
 ];
 
 const buttonVariants: ButtonVariant[] = ["primary", "secondary", "ghost"];
+
+// Real Stack of this site plus the In progress status (spec: Content model).
+const tagSamples = ["Next.js", "TypeScript", "Tailwind CSS", "In progress"];
 
 // Shared label for a Token: its name, then its value in muted mono.
 function TokenLabel({ name, value }: { name: string; value: string }) {
@@ -165,6 +172,62 @@ export default function StyleguidePage() {
               </div>
             </li>
           ))}
+        </ul>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-h1">Tag</h2>
+        <ul className="mt-8 flex flex-wrap gap-2">
+          {tagSamples.map((tag) => (
+            <li key={tag}>
+              <Tag>{tag}</Tag>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-h1">Card</h2>
+        <div className="mt-8 md:w-1/2">
+          <Card>
+            <h3 className="text-h2">Card</h3>
+            <p className="mt-2 text-small text-text-muted">
+              surface, border, radius lg, padding 4 / md:6, shadow card. No
+              hover state.
+            </p>
+          </Card>
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-h1">Container</h2>
+        <p className="mt-4 max-w-prose text-small text-text-muted">
+          The outline is the full width; the filled bar is the content area
+          inside the side padding.
+        </p>
+        <div className="mt-8 border border-dashed border-border-strong">
+          <Container>
+            <div className="h-8 bg-surface-2" />
+          </Container>
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <h2 className="text-h1">GitHub icon</h2>
+        <ul className="mt-8 flex flex-wrap items-center gap-8">
+          <li className="flex items-center gap-2">
+            <GithubIcon size={16} />
+            <TokenLabel name="size" value="16 (decorative)" />
+          </li>
+          <li className="flex items-center gap-2">
+            <GithubIcon size={20} />
+            <TokenLabel name="size" value="20 (decorative)" />
+          </li>
+          {/* Demo of the label prop. In real UI, label only icon-only links. */}
+          <li className="flex items-center gap-2">
+            <GithubIcon size={20} aria-label="GitHub" />
+            <TokenLabel name="aria-label" value="GitHub" />
+          </li>
         </ul>
       </section>
     </main>
