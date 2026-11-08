@@ -9,7 +9,7 @@
 - ตำแหน่ง: **Frontend Developer**
 - Tagline (1 บรรทัด): `Building with AI agents — and still reading every line of the diff.`
 - GitHub username: `PhuwanaiMark24`
-- อีเมล: `[[email]]`
+- อีเมล: `phuwanaimark.work@gmail.com`
 
 ## 2. เป้าหมาย
 
