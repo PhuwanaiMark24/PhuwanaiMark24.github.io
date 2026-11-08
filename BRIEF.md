@@ -7,7 +7,7 @@
 
 - ชื่อที่แสดง: `Phuwanai Mark`
 - ตำแหน่ง: **Frontend Developer**
-- Tagline (1 บรรทัด): `[[เช่น "Frontend developer building clean, accessible web interfaces — with a growing focus on AI tools."]]`
+- Tagline (1 บรรทัด): `Frontend developer who builds with AI agents — and still reads every line of the diff.`
 - GitHub username: `PhuwanaiMark24`
 - อีเมล: `[[email]]`
 
