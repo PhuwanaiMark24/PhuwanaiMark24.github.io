@@ -1,14 +1,24 @@
-# Lint, test and build on every push and pull request.
-# Does not deploy; deploy and output checks come in a later ticket.
+# One workflow (spec: Deploy).
+# - Every push and pull request: lint, test and build.
+# - Push to main only: also check the build output, then deploy to GitHub Pages.
+#
+# Manual step (once, by the Owner): repo Settings → Pages → Source:
+# "GitHub Actions". Without it the deploy job fails.
 name: CI
 
 on:
   push:
   pull_request:
 
-# The workflow only reads the repo, so the token gets read access only.
+# Default for every job: read the repo only. The deploy job asks for more.
 permissions:
   contents: read
+
+# Never run two deploys at once. A newer push waits; a running deploy is not
+# cancelled halfway.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   check:
@@ -32,3 +42,34 @@ jobs:
       - run: npm test
 
       - run: npm run build
+
+      # Fails on: a [[TODO Placeholder, a missing resume.pdf, a noindex home
+      # page, or a Styleguide without noindex. See scripts/check-output.sh.
+      - name: Check build output
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bash scripts/check-output.sh out
+
+      # Package out/ for the Pages deploy (only reached if the checks passed).
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    # Runs only after every step in `check` passed, and only for main.
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # What actions/deploy-pages needs: publish to Pages, and prove the run's
+    # identity with an OIDC token.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
