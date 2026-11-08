@@ -27,7 +27,7 @@
     - The year is checked as any 4 digits, not recomputed the way the code does it.
     - The external-link test from ticket 11 already covers the Contact and Footer links.
     - The accessible-name test passed on its first run. It was verified to fail when the Footer's `aria-label` is removed.
-  - **Build output**: the home page HTML now has no `[[TODO`. The only remaining deploy blocker for this page is `public/resume.pdf`.
+  - **Build output**: the home page HTML now has no `[[TODO`, and the Owner added `public/resume.pdf` in ec3ac13, so the Resume links resolve.
   - **Known**: the Footer's icon-link classes repeat the Navbar link classes. It also sets `target`/`rel` by hand, because Button takes no `aria-label`. Consider extracting a shared text-link component if a third use appears.
 
 ### คำอธิบาย (ภาษาไทย)
