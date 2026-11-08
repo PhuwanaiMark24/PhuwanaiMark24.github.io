@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Button, { type ButtonVariant } from "@/components/ui/Button";
 
-// Dev-facing page for checking Tokens by eye (DESIGN.md §11).
+// Dev-facing page for checking Tokens and Base components by eye (DESIGN.md §11).
 // Not linked from the Navbar and hidden from search engines.
 export const metadata: Metadata = {
   title: "Styleguide",
@@ -58,6 +59,8 @@ const radii = [
   { name: "lg", value: "12px", className: "rounded-lg" },
   { name: "full", value: "9999px", className: "rounded-full" },
 ];
+
+const buttonVariants: ButtonVariant[] = ["primary", "secondary", "ghost"];
 
 // Shared label for a Token: its name, then its value in muted mono.
 function TokenLabel({ name, value }: { name: string; value: string }) {
@@ -146,6 +149,23 @@ export default function StyleguidePage() {
         <div className="mt-8">
           <TokenLabel name="container-page" value="1120px (max-w-page)" />
         </div>
+      </section>
+
+      <section id="button" className="mt-16">
+        <h2 className="text-h1">Button</h2>
+        <ul className="mt-8 flex flex-col gap-6">
+          {buttonVariants.map((variant) => (
+            <li key={variant}>
+              <p className="font-mono text-small">{variant}</p>
+              <div className="mt-2 flex flex-wrap gap-4">
+                <Button variant={variant} href="#button">
+                  {variant} link
+                </Button>
+                <Button variant={variant}>{variant} button</Button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );
