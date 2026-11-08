@@ -35,7 +35,8 @@
   --color-accent-strong-hover: #1d4ed8;
   --color-on-accent: #ffffff;
 
-  /* Spacing (DESIGN.md §4) */
+  /* Spacing (DESIGN.md §4). 0 exists for resets like top-0 (sticky Navbar). */
+  --spacing-0: 0px;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-4: 16px;

@@ -72,6 +72,7 @@
 
 | Token | ค่า | ใช้กับ |
 |---|---|---|
+| `0` | 0px | ค่ารีเซ็ต ไม่ใช่ระยะห่าง เช่น `top-0` ของ Navbar ที่เป็น sticky |
 | `1` | 4px | ช่องไฟระหว่างไอคอนกับข้อความ |
 | `2` | 8px | ช่องว่างภายใน tag, ระหว่าง tag |
 | `4` | 16px | padding ปุ่ม/การ์ดบนมือถือ, ช่องว่างระหว่างย่อหน้า |
@@ -83,7 +84,7 @@
 
 > แผนเดิมกำหนดไว้ 4/8/16/24 ไฟล์นี้เพิ่ม 32/48/64/96 สำหรับระยะห่างระดับ section
 
-**ใช้ได้เฉพาะ 8 ค่านี้เท่านั้น** ตัวคูณ spacing ของ Tailwind ถูกปิดไว้ (ดูหัวข้อ 11) ดังนั้น class ที่ไม่มีใน token เช่น `w-5`, `p-3`, `gap-7` จะไม่ถูกสร้างและใช้ไม่ได้ ส่วน class ที่ไม่ได้อิง spacing เช่น `w-full`, `h-full`, `max-w-prose` ยังใช้ได้ตามปกติ
+**ใช้ได้เฉพาะค่าในตารางนี้เท่านั้น** ตัวคูณ spacing ของ Tailwind ถูกปิดไว้ (ดูหัวข้อ 11) ดังนั้น class ที่ไม่มีใน token เช่น `w-5`, `p-3`, `gap-7` จะไม่ถูกสร้างและใช้ไม่ได้ ส่วน class ที่ไม่ได้อิง spacing เช่น `w-full`, `h-full`, `max-w-prose` ยังใช้ได้ตามปกติ
 
 Layout: เนื้อหาอยู่ในกรอบกว้างไม่เกิน `container-page` (1120px, class `max-w-page`) อยู่กึ่งกลาง ขอบซ้ายขวา `4` (16px, มือถือ) / `6` (24px, จอใหญ่)
 
@@ -175,7 +176,7 @@ focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acc
 - Tailwind v4 (ค่าเริ่มต้นของ `create-next-app` ตอนนี้) ไม่มี `tailwind.config.js` แล้ว ให้นิยาม token ใน `app/globals.css` ด้วย `@theme` ซึ่งจะสร้างทั้ง CSS variables และ class ของ Tailwind ให้ในคราวเดียว
 - ปิดค่าเริ่มต้นของ Tailwind ทุก namespace ที่ไฟล์นี้นิยามไว้ แล้วนิยามเฉพาะ token ของเรา เพื่อให้ class นอก token ไม่ถูกสร้างเลย:
   - `--color-*: initial;` สี
-  - `--spacing: initial;` และ `--spacing-*: initial;` ระยะห่าง (ปิดตัวคูณ แล้วนิยาม `--spacing-1` … `--spacing-24` ทีละตัว)
+  - `--spacing: initial;` และ `--spacing-*: initial;` ระยะห่าง (ปิดตัวคูณ แล้วนิยาม `--spacing-0` … `--spacing-24` ทีละตัว)
   - `--text-*: initial;` ขนาดตัวอักษร
   - `--radius-*: initial;` มุมมน
   - `--shadow-*: initial;` เงา

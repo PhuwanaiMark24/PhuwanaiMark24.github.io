@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Button, { type ButtonVariant } from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
+import Navbar from "@/components/ui/Navbar";
+import Section from "@/components/ui/Section";
 import GithubIcon from "@/components/ui/GithubIcon";
 import Tag from "@/components/ui/Tag";
 
@@ -47,6 +49,7 @@ const textSizes = [
 ];
 
 const spacings = [
+  { name: "0", value: "0px", className: "w-0" },
   { name: "1", value: "4px", className: "w-1" },
   { name: "2", value: "8px", className: "w-2" },
   { name: "4", value: "16px", className: "w-4" },
@@ -81,155 +84,157 @@ function TokenLabel({ name, value }: { name: string; value: string }) {
 
 export default function StyleguidePage() {
   return (
-    <main className="mx-auto w-full max-w-page px-4 py-12 md:px-6 md:py-24">
-      <h1 className="text-display-sm md:text-display">Styleguide</h1>
-      <p className="mt-4 max-w-prose text-body text-text-muted">
-        Every Token from DESIGN.md, for checking by eye.
-      </p>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Color</h2>
-        <ul className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {colors.map((color) => (
-            <li key={color.name}>
-              <div
-                className={`h-16 rounded-md border border-border ${color.className}`}
-              />
-              <div className="mt-2">
-                <TokenLabel name={color.name} value={color.value} />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Text size</h2>
-        <ul className="mt-8 flex flex-col gap-6">
-          {textSizes.map((size) => (
-            <li key={size.name}>
-              <TokenLabel name={size.name} value={size.value} />
-              <p className={size.className}>Frontend Developer</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Spacing</h2>
-        <ul className="mt-8 flex flex-col gap-4">
-          {spacings.map((spacing) => (
-            <li key={spacing.name} className="flex items-center gap-4">
-              <div className={`h-4 shrink-0 bg-accent ${spacing.className}`} />
-              <TokenLabel name={spacing.name} value={spacing.value} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Radius</h2>
-        <ul className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {radii.map((radius) => (
-            <li key={radius.name}>
-              <div
-                className={`size-16 border border-border-strong bg-surface-2 ${radius.className}`}
-              />
-              <div className="mt-2">
-                <TokenLabel name={radius.name} value={radius.value} />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Shadow</h2>
-        <div className="mt-8 h-16 w-full rounded-lg border border-border bg-surface shadow-card md:w-1/2" />
-        <div className="mt-2">
-          <TokenLabel name="card" value="0 1px 2px rgb(0 0 0 / 0.4)" />
+    <main>
+      <Container>
+        <div className="pt-12 md:pt-24">
+          <h1 className="text-display-sm md:text-display">Styleguide</h1>
+          <p className="mt-4 max-w-prose text-body text-text-muted">
+            Every Token and Base component from DESIGN.md, for checking by eye.
+          </p>
         </div>
-      </section>
 
-      <section className="mt-16">
-        <h2 className="text-h1">Layout</h2>
-        <div className="mt-8">
+        <Section id="color" title="Color">
+          <ul className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {colors.map((color) => (
+              <li key={color.name}>
+                <div
+                  className={`h-16 rounded-md border border-border ${color.className}`}
+                />
+                <div className="mt-2">
+                  <TokenLabel name={color.name} value={color.value} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="text-size" title="Text size">
+          <ul className="flex flex-col gap-6">
+            {textSizes.map((size) => (
+              <li key={size.name}>
+                <TokenLabel name={size.name} value={size.value} />
+                <p className={size.className}>Frontend Developer</p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="spacing" title="Spacing">
+          <ul className="flex flex-col gap-4">
+            {spacings.map((spacing) => (
+              <li key={spacing.name} className="flex items-center gap-4">
+                <div className={`h-4 shrink-0 bg-accent ${spacing.className}`} />
+                <TokenLabel name={spacing.name} value={spacing.value} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="radius" title="Radius">
+          <ul className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {radii.map((radius) => (
+              <li key={radius.name}>
+                <div
+                  className={`size-16 border border-border-strong bg-surface-2 ${radius.className}`}
+                />
+                <div className="mt-2">
+                  <TokenLabel name={radius.name} value={radius.value} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="shadow" title="Shadow">
+          <div className="h-16 w-full rounded-lg border border-border bg-surface shadow-card md:w-1/2" />
+          <div className="mt-2">
+            <TokenLabel name="card" value="0 1px 2px rgb(0 0 0 / 0.4)" />
+          </div>
+        </Section>
+
+        <Section id="layout" title="Layout">
           <TokenLabel name="container-page" value="1120px (max-w-page)" />
-        </div>
-      </section>
+        </Section>
 
-      <section id="button" className="mt-16">
-        <h2 className="text-h1">Button</h2>
-        <ul className="mt-8 flex flex-col gap-6">
-          {buttonVariants.map((variant) => (
-            <li key={variant}>
-              <p className="font-mono text-small">{variant}</p>
-              <div className="mt-2 flex flex-wrap gap-4">
-                <Button variant={variant} href="#button">
-                  {variant} link
-                </Button>
-                <Button variant={variant}>{variant} button</Button>
-              </div>
+        <Section id="button" title="Button">
+          <ul className="flex flex-col gap-6">
+            {buttonVariants.map((variant) => (
+              <li key={variant}>
+                <p className="font-mono text-small">{variant}</p>
+                <div className="mt-2 flex flex-wrap gap-4">
+                  <Button variant={variant} href="#button">
+                    {variant} link
+                  </Button>
+                  <Button variant={variant}>{variant} button</Button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="tag" title="Tag">
+          <ul className="flex flex-wrap gap-2">
+            {tagSamples.map((tag) => (
+              <li key={tag}>
+                <Tag>{tag}</Tag>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="card" title="Card">
+          <div className="md:w-1/2">
+            <Card>
+              <h3 className="text-h2">Card</h3>
+              <p className="mt-2 text-small text-text-muted">
+                surface, border, radius lg, padding 4 / md:6, shadow card. No
+                hover state.
+              </p>
+            </Card>
+          </div>
+        </Section>
+
+        <Section id="container" title="Container">
+          <p className="max-w-prose text-small text-text-muted">
+            The outline is the full width; the filled bar is the content area
+            inside the side padding.
+          </p>
+          <div className="mt-4 border border-dashed border-border-strong">
+            <Container>
+              <div className="h-8 bg-surface-2" />
+            </Container>
+          </div>
+        </Section>
+
+        <Section id="navbar" title="Navbar">
+          <p className="max-w-prose text-small text-text-muted">
+            Links point to home page Sections, so they do nothing here. The
+            Owner&apos;s name shows from md up. The blocks on this page are laid
+            out with the Section component.
+          </p>
+          <div className="mt-4 border border-dashed border-border-strong">
+            <Navbar />
+          </div>
+        </Section>
+
+        <Section id="github-icon" title="GitHub icon">
+          <ul className="flex flex-wrap items-center gap-8">
+            <li className="flex items-center gap-2">
+              <GithubIcon size={16} />
+              <TokenLabel name="size" value="16 (decorative)" />
             </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Tag</h2>
-        <ul className="mt-8 flex flex-wrap gap-2">
-          {tagSamples.map((tag) => (
-            <li key={tag}>
-              <Tag>{tag}</Tag>
+            <li className="flex items-center gap-2">
+              <GithubIcon size={20} />
+              <TokenLabel name="size" value="20 (decorative)" />
             </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Card</h2>
-        <div className="mt-8 md:w-1/2">
-          <Card>
-            <h3 className="text-h2">Card</h3>
-            <p className="mt-2 text-small text-text-muted">
-              surface, border, radius lg, padding 4 / md:6, shadow card. No
-              hover state.
-            </p>
-          </Card>
-        </div>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">Container</h2>
-        <p className="mt-4 max-w-prose text-small text-text-muted">
-          The outline is the full width; the filled bar is the content area
-          inside the side padding.
-        </p>
-        <div className="mt-8 border border-dashed border-border-strong">
-          <Container>
-            <div className="h-8 bg-surface-2" />
-          </Container>
-        </div>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-h1">GitHub icon</h2>
-        <ul className="mt-8 flex flex-wrap items-center gap-8">
-          <li className="flex items-center gap-2">
-            <GithubIcon size={16} />
-            <TokenLabel name="size" value="16 (decorative)" />
-          </li>
-          <li className="flex items-center gap-2">
-            <GithubIcon size={20} />
-            <TokenLabel name="size" value="20 (decorative)" />
-          </li>
-          {/* Demo of the label prop. In real UI, label only icon-only links. */}
-          <li className="flex items-center gap-2">
-            <GithubIcon size={20} aria-label="GitHub" />
-            <TokenLabel name="aria-label" value="GitHub" />
-          </li>
-        </ul>
-      </section>
+            {/* Demo of the label prop. In real UI, label only icon-only links. */}
+            <li className="flex items-center gap-2">
+              <GithubIcon size={20} aria-label="GitHub" />
+              <TokenLabel name="aria-label" value="GitHub" />
+            </li>
+          </ul>
+        </Section>
+      </Container>
     </main>
   );
 }
