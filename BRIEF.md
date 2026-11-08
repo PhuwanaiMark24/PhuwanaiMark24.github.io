@@ -66,6 +66,10 @@
 
 กฎ: ห้ามสร้างงานตัวอย่างปลอม ถ้ามีงานน้อยให้แสดงเท่าที่มี layout ต้องดูดีตั้งแต่ 1 ชิ้น
 
+**ข้อความบนการ์ดงานชิ้นที่ 1 (ร่างแรก — Owner แก้ได้ภายหลัง)**
+- name: `Personal portfolio`
+- description: `This site. A static Next.js portfolio built on a token-based design system, planned as a spec and small tickets, and built with Claude Code one reviewed diff at a time.`
+
 ## 7. ช่องทางติดต่อ
 
 - อีเมล: ลิงก์ `mailto:` (ไม่มีฟอร์ม เพราะ GitHub Pages ไม่มี server)
