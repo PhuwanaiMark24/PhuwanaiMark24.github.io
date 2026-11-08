@@ -186,6 +186,12 @@ focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acc
 - กำหนดขนาดด้วย prop `size` ของ lucide (`<Mail size={16} />`) ห้ามใช้ class อย่าง `w-5 h-5` เพราะ 20px ไม่มีใน spacing token และ class เหล่านี้ใช้ไม่ได้ (ดูหัวข้อ 4)
 - **ข้อยกเว้นข้อเดียว:** โลโก้ GitHub ทำเป็น `components/ui/GithubIcon.tsx` เป็น inline SVG ทางการของ GitHub ใช้ `fill="currentColor"` และรับ prop `size` แบบเดียวกับ lucide (lucide เลิกรองรับไอคอนแบรนด์แล้ว)
 
+### Favicon
+
+- ไฟล์ `app/icon.svg` (Next.js ใส่ `<link rel="icon">` ให้เองตอน build)
+- อักษรย่อ "PM" สี `accent` (#60A5FA) น้ำหนัก 600 บนพื้น `bg` (#0B0D12) ขอบ `border` (#262B36) มุมมน 6/32
+- ไม่มี gradient · ตัวอักษรใช้ฟอนต์ของเครื่องผู้ชม (system-ui) จึงอาจต่างกันเล็กน้อยในแต่ละเครื่อง
+
 ## 10. กฎห้าม (สำคัญ)
 
 - ❌ ห้ามใช้ gradient (ทั้งพื้นหลัง ข้อความ และขอบ)

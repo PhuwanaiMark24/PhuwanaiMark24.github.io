@@ -15,7 +15,6 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-// [[TODO: favicon]] add app/icon.png when the Owner supplies one.
 export const metadata: Metadata = {
   title: `${site.name} — ${site.role}`,
   description: site.tagline,
