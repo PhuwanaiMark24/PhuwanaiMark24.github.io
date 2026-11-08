@@ -3,6 +3,7 @@ import { expect, test } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
 import { skills } from "@/content/about";
+import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 
 const sectionNames = ["About", "Projects", "Contact"];
@@ -92,4 +93,31 @@ test("About shows one Tag per Skill, in the listed order", () => {
   const skillList = within(about).getByRole("list", { name: "Skills" });
   const items = within(skillList).getAllByRole("listitem");
   expect(items.map((item) => item.textContent)).toEqual(skills);
+});
+
+test("Projects shows one card per Project, in content order", () => {
+  render(<Home />);
+
+  const section = screen.getByRole("region", { name: "Projects" });
+  const cards = within(section).getAllByRole("article");
+  expect(cards).toHaveLength(projects.length);
+
+  const names = cards.map(
+    (card) => within(card).getByRole("heading", { level: 3 }).textContent,
+  );
+  expect(names).toEqual(projects.map((project) => project.name));
+});
+
+test("every external link opens in a new tab with rel noopener noreferrer", () => {
+  render(<Home />);
+
+  const external = screen
+    .getAllByRole("link")
+    .filter((link) => /^https?:\/\//.test(link.getAttribute("href") ?? ""));
+  expect(external.length).toBeGreaterThan(0);
+
+  for (const link of external) {
+    expect(link.getAttribute("target")).toBe("_blank");
+    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+  }
 });

@@ -145,6 +145,18 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 - `Section` ใช้ `scroll-mt-16` (เท่ากับความสูง navbar) เพื่อไม่ให้หัวข้อโดน navbar บังเวลาคลิก anchor
 - ไม่ใช้ smooth scroll (§7)
 
+### การ์ดงาน (ProjectCard)
+
+ลำดับจากบนลงล่าง (อยู่ใน `Card` ไม่มี hover):
+
+1. Project type (`text-small text-text-muted`) + Tag สถานะ "In progress" ต่อท้ายในแถวเดียวกัน (งานที่ Finished ไม่มี Tag)
+2. ชื่องาน `<h3 class="text-h2">`
+3. description สี `text-muted` กว้างไม่เกิน `max-w-prose`
+4. Stack เป็นแถว Tag
+5. ลิงก์: "Live demo" ใช้ Button `secondary`, "Source code" ใช้ Button `ghost` (แสดงเฉพาะลิงก์ที่มี)
+
+Projects เป็นคอลัมน์เดียว การ์ดกว้างเต็ม Container
+
 ### Focus ring
 
 ทุก component ที่กดได้ต้องมี focus ring: `2px` สี `accent`, ห่างจากขอบ `2px`
