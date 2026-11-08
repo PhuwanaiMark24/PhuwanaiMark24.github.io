@@ -5,7 +5,7 @@
 
 ## 1. เจ้าของเว็บ
 
-- ชื่อที่แสดง: `[[ชื่อ-นามสกุล ภาษาอังกฤษ]]`
+- ชื่อที่แสดง: `Phuwanai Mark`
 - ตำแหน่ง: **Frontend Developer**
 - Tagline (1 บรรทัด): `[[เช่น "Frontend developer building clean, accessible web interfaces — with a growing focus on AI tools."]]`
 - GitHub username: `PhuwanaiMark24`
