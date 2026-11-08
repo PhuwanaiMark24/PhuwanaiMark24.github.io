@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 /*
+ * Tailwind scans every file in the repo for class names. Markdown docs and
+ * tickets mention example classes (e.g. banned `p-[13px]`, scaffold
+ * `dark:invert`), so skip them or those classes end up in the built CSS.
+ */
+@source not "../**/*.md";
+
+/*
  * Design tokens. Names and values come from DESIGN.md (do not rename).
  * Each namespace is reset first so Tailwind only generates classes
  * for our tokens. Breakpoints are not reset (DESIGN.md §4, §11).
