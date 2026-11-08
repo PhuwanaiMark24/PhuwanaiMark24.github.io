@@ -2,6 +2,7 @@
 import { expect, test } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
+import { skills } from "@/content/about";
 import { site } from "@/content/site";
 
 const sectionNames = ["About", "Projects", "Contact"];
@@ -82,4 +83,13 @@ test("Hero's View projects link jumps to the Projects Section", () => {
 
   const firstSection = screen.getAllByRole("region")[0];
   expect(isBefore(viewProjects, firstSection)).toBe(true);
+});
+
+test("About shows one Tag per Skill, in the listed order", () => {
+  render(<Home />);
+
+  const about = screen.getByRole("region", { name: "About" });
+  const skillList = within(about).getByRole("list", { name: "Skills" });
+  const items = within(skillList).getAllByRole("listitem");
+  expect(items.map((item) => item.textContent)).toEqual(skills);
 });

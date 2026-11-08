@@ -1,3 +1,4 @@
+import About from "@/components/About";
 import Hero from "@/components/Hero";
 import Container from "@/components/ui/Container";
 import Navbar from "@/components/ui/Navbar";
@@ -11,9 +12,7 @@ export default function Home() {
       <main>
         <Container>
           <Hero />
-          <Section id="about" title="About">
-            <p>[[TODO: about]]</p>
-          </Section>
+          <About />
           <Section id="projects" title="Projects">
             <p>[[TODO: projects]]</p>
           </Section>
