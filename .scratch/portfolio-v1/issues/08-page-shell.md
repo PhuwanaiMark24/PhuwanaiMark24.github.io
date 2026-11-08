@@ -14,5 +14,6 @@
 - [ ] Unused scaffold assets in the public folder are removed
 - [ ] Layout works at 360px wide
 - [ ] Built CSS contains no `prefers-color-scheme` (the scaffold's `dark:` classes, such as `dark:invert`, are gone with the default page)
+- [ ] Styleguide page uses the Container and Section Base components instead of its hand-written `main`/`section` wrappers (follow-up from ticket 05)
 - [ ] `npm run lint`, `npm test` and `npm run build` pass
 - [ ] Explanation (in Thai): layout vs page, composing Base components, anchor links
