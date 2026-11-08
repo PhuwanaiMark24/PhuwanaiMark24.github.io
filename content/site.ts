@@ -1,7 +1,9 @@
 // Owner details shared by metadata, Navbar, Hero and Footer.
-// Placeholders until the Owner supplies real values (never invent them).
+// Values come from the Owner. Use a `[[TODO: ...]]` Placeholder for anything
+// not supplied yet; never invent it.
 export const site = {
   name: "Phuwanai Mark",
+  role: "Frontend Developer",
   tagline:
-    "Frontend developer who builds with AI agents — and still reads every line of the diff.",
+    "Building with AI agents — and still reading every line of the diff.",
 };

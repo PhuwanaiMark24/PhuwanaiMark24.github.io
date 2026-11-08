@@ -2,6 +2,7 @@
 import { expect, test } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import Home from "@/app/page";
+import { site } from "@/content/site";
 
 const sectionNames = ["About", "Projects", "Contact"];
 
@@ -43,4 +44,42 @@ test("Navbar links to each Section by id and to nothing else (not the Hero)", ()
   for (const link of links) {
     expect(sectionIds).toContain(link.getAttribute("href"));
   }
+});
+
+test("page has exactly one level-1 heading: the Owner's name in the Hero", () => {
+  render(<Home />);
+
+  const headings = screen.getAllByRole("heading", { level: 1 });
+  expect(headings).toHaveLength(1);
+  expect(headings[0].textContent).toBe(site.name);
+});
+
+// True when `a` comes before `b` in reading order.
+function isBefore(a: Element, b: Element) {
+  return Boolean(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+}
+
+test("Hero has a Download resume link: an anchor to the Resume PDF with download", () => {
+  render(<Home />);
+
+  const resumeLinks = screen.getAllByRole("link", { name: "Download resume" });
+  for (const link of resumeLinks) {
+    expect(link.getAttribute("href")).toBe("/resume.pdf");
+    expect(link.hasAttribute("download")).toBe(true);
+  }
+
+  // The Hero is everything above the first Section.
+  const firstSection = screen.getAllByRole("region")[0];
+  expect(resumeLinks.some((link) => isBefore(link, firstSection))).toBe(true);
+});
+
+test("Hero's View projects link jumps to the Projects Section", () => {
+  render(<Home />);
+
+  const viewProjects = screen.getByRole("link", { name: "View projects" });
+  const projects = screen.getByRole("region", { name: "Projects" });
+  expect(viewProjects.getAttribute("href")).toBe(`#${projects.id}`);
+
+  const firstSection = screen.getAllByRole("region")[0];
+  expect(isBefore(viewProjects, firstSection)).toBe(true);
 });

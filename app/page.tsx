@@ -1,3 +1,4 @@
+import Hero from "@/components/Hero";
 import Container from "@/components/ui/Container";
 import Navbar from "@/components/ui/Navbar";
 import Section from "@/components/ui/Section";
@@ -9,6 +10,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Container>
+          <Hero />
           <Section id="about" title="About">
             <p>[[TODO: about]]</p>
           </Section>
