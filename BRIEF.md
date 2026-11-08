@@ -46,6 +46,16 @@
 
 หน้า style guide (`/styleguide`) มีไว้ใช้ตอนพัฒนา ไม่ใส่ลิงก์ใน navbar
 
+## 5.1 เนื้อหา About (ร่างแรก — Owner แก้ได้ภายหลัง)
+
+**Paragraphs**
+
+1. I'm a student and frontend developer who builds clean, accessible websites with React, Next.js and Tailwind CSS.
+2. I work with AI coding agents like Claude Code, but not on autopilot. I write the brief and design rules first, break the work into small tickets, and review every change before it ships. This site was built that way — the spec, tickets and commit history are all on GitHub.
+3. I'm open to junior frontend roles and freelance projects. If you need a fast, well-structured website, get in touch.
+
+**Skills** (ลำดับตามนี้): HTML/CSS, JavaScript, React, Next.js, Tailwind CSS, Claude Code
+
 ## 6. ผลงาน (Projects)
 
 ตอนนี้มีงานจริง 1–2 ชิ้น จึงออกแบบให้ **เพิ่มงานได้ง่ายโดยแก้ไฟล์ข้อมูลไฟล์เดียว** (เช่น `content/projects.ts`) ไม่ต้องแตะ component
