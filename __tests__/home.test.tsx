@@ -121,3 +121,51 @@ test("every external link opens in a new tab with rel noopener noreferrer", () =
     expect(link.getAttribute("rel")).toBe("noopener noreferrer");
   }
 });
+
+test("Contact has a mailto: link to the Owner's email", () => {
+  render(<Home />);
+
+  const contact = screen.getByRole("region", { name: "Contact" });
+  const mailLinks = within(contact)
+    .getAllByRole("link")
+    .filter((link) => link.getAttribute("href")?.startsWith("mailto:"));
+  expect(mailLinks.map((link) => link.getAttribute("href"))).toEqual([
+    "mailto:phuwanaimark.work@gmail.com",
+  ]);
+});
+
+test("every Resume link (Hero and Contact) is an anchor to the Resume PDF with download", () => {
+  render(<Home />);
+
+  const resumeLinks = screen.getAllByRole("link", { name: "Download resume" });
+  expect(resumeLinks).toHaveLength(2);
+  for (const link of resumeLinks) {
+    expect(link.getAttribute("href")).toBe("/resume.pdf");
+    expect(link.hasAttribute("download")).toBe(true);
+  }
+
+  const contact = screen.getByRole("region", { name: "Contact" });
+  expect(within(contact).getByRole("link", { name: "Download resume" })).toBeTruthy();
+});
+
+test("Footer shows the copyright line and a GitHub link, and is not a Section", () => {
+  render(<Home />);
+
+  const footer = screen.getByRole("contentinfo");
+  expect(footer.textContent).toMatch(/© \d{4} Phuwanai Mark/);
+
+  const github = within(footer).getByRole("link", { name: "GitHub" });
+  expect(github.getAttribute("href")).toBe("https://github.com/PhuwanaiMark24");
+
+  // Not a Section: still exactly three regions, none of them inside the Footer.
+  expect(screen.getAllByRole("region")).toHaveLength(3);
+  expect(within(footer).queryAllByRole("region")).toHaveLength(0);
+});
+
+test("every link has an accessible name, including icon-only links", () => {
+  render(<Home />);
+
+  const allLinks = screen.getAllByRole("link");
+  const namedLinks = screen.getAllByRole("link", { name: /\S/ });
+  expect(namedLinks).toHaveLength(allLinks.length);
+});

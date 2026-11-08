@@ -157,6 +157,17 @@ Layout: เนื้อหาอยู่ในกรอบกว้างไม
 
 Projects เป็นคอลัมน์เดียว การ์ดกว้างเต็ม Container
 
+### Contact
+
+- ปุ่ม 3 ตัวเรียงแถวเดียว ขึ้นบรรทัดใหม่ได้ (`flex flex-wrap gap-4`) ตามลำดับ: "Download resume" (`primary`) → อีเมล (`secondary`, ข้อความบนปุ่มคือตัวอีเมล) → "GitHub" + ไอคอน (`ghost`)
+- Resume มาก่อนเพราะเป็น action หลักของ Recruiter (BRIEF §3)
+
+### Footer
+
+- ไม่ใช่ Section ไม่มีลิงก์ใน Navbar
+- ขอบบน `border`, สูง `h-16`, ตัวอักษร `small` สี `text-muted`
+- ซ้าย: `© <ปีที่ build> <ชื่อ Owner>` ขวา: ไอคอน GitHub (มี `aria-label` เพราะไม่มีข้อความประกบ)
+
 ### Focus ring
 
 ทุก component ที่กดได้ต้องมี focus ring: `2px` สี `accent`, ห่างจากขอบ `2px`
