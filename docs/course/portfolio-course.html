@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Course · Phuwanai Mark</title>
+<meta name="description" content="บทเรียนจากการสร้าง phuwanaimark24.github.io ด้วย Next.js, TypeScript, Tailwind และระบบของ Matt Pocock">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<style>
+:root{--bg:#0b0d12;--surface:#12151c;--surface-2:#1a1e27;--border:#262b36;--border-strong:#353b48;--text:#e6e8ec;--muted:#9aa3b2;--subtle:#6b7280;--accent:#60a5fa;--accent-strong:#2563eb;--ok:#34d399;--warn:#fbbf24;
+--sans:"Inter","Noto Sans Thai","Leelawadee UI",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:auto;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.75}
+a{color:var(--accent)}code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);border:1px solid var(--border);padding:.1em .35em;border-radius:4px;word-break:break-word}
+.topbar{display:none}
+.side{position:fixed;inset:0 auto 0 0;width:300px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:20px 16px 40px;z-index:20}
+.brand{font-weight:600;font-size:15px;margin:0 0 4px}.brand small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+.progress{margin:14px 0 10px;font-size:13px;color:var(--muted)}.bar{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:0;background:var(--accent-strong);transition:width .2s}
+.search{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit;font-size:14px;margin-bottom:12px}
+.side ul{list-style:none;margin:0;padding:0}
+.nav-part a{display:block;margin:18px 0 6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-decoration:none;font-weight:600}
+.nav-lesson a{display:flex;gap:8px;align-items:flex-start;padding:5px 8px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14px;line-height:1.45}
+.nav-lesson a:hover{background:var(--surface-2)}.nav-lesson a.active{background:var(--surface-2);color:var(--accent)}
+.tick{flex:none;width:14px;height:14px;margin-top:3px;border-radius:50%;border:1.5px solid var(--border-strong)}.nav-lesson a.is-done .tick{background:var(--ok);border-color:var(--ok)}
+main{margin-left:300px;padding:40px 48px 120px;max-width:1040px}
+.part{margin:64px 0 8px;padding-top:24px;border-top:1px solid var(--border)}.part:first-child{margin-top:0;border-top:0;padding-top:0}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em}
+.part h1{font-size:34px;line-height:1.2;margin:6px 0 8px}.lead{color:var(--muted);font-size:17px;margin:0;max-width:70ch}
+.lesson{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin:24px 0}
+.lesson-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:8px}
+.lesson-head h2{font-size:24px;line-height:1.3;margin:0;flex:1 1 380px}.meta{margin:0;color:var(--muted);font-size:13px}
+.done{font-size:13px;color:var(--muted);display:inline-flex;gap:6px;align-items:center;cursor:pointer;user-select:none}.done input{accent-color:var(--ok)}
+h3{font-size:18px;margin:28px 0 8px}p{margin:10px 0;max-width:75ch;overflow-wrap:anywhere}td,li{overflow-wrap:anywhere}ul,ol{padding-left:22px;max-width:75ch}li{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0}table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.55}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}th{background:var(--surface-2);font-weight:600}
+.code{margin:16px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#0d1117}
+.code-cap{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;background:var(--surface-2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.copy{font:inherit;font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:6px;padding:2px 8px;cursor:pointer}.copy:hover{color:var(--text);border-color:var(--border-strong)}
+.code pre{margin:0;padding:14px 16px;overflow-x:auto;line-height:1.6}.code pre code{background:none;border:0;padding:0;font-size:13.5px;line-height:1.6;white-space:pre}
+.hljs{background:transparent!important}
+.note{display:block;border:1px solid var(--border);border-left:3px solid var(--accent);background:var(--surface-2);border-radius:8px;padding:12px 16px;margin:16px 0}
+.note strong{display:block;margin-bottom:4px}.note.warn{border-left-color:var(--warn)}.note.key{border-left-color:var(--ok)}
+.quiz{border:1px solid var(--border);border-radius:8px;margin:12px 0;background:var(--bg)}
+.quiz summary{cursor:pointer;padding:10px 14px;list-style:none}.quiz summary::-webkit-details-marker{display:none}
+.quiz .q{font-family:var(--mono);font-size:11px;color:var(--bg);background:var(--accent);border-radius:4px;padding:1px 6px;margin-right:6px}
+.quiz[open] summary{border-bottom:1px solid var(--border)}.quiz>div{padding:10px 14px;color:var(--text)}
+.try{border:1px dashed var(--border-strong);border-radius:8px;padding:12px 16px;margin:16px 0}.try strong{color:var(--ok)}
+.tmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:12px 0 4px}
+.tmeta div{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:8px 10px}.tmeta span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.tmeta b{font-weight:500;font-size:13.5px;word-break:break-word}
+.diagram{margin:16px 0}.d-page{border:1px solid var(--border-strong);border-radius:10px;overflow:hidden;max-width:620px}
+.d-page>div{padding:10px 14px;border-bottom:1px solid var(--border);font-weight:600}.d-page>div:last-child{border-bottom:0}.d-page span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.d-nav{background:var(--surface-2)}.d-hero{background:#15203a}.d-foot{background:var(--surface-2)}
+.loops{display:grid;gap:8px;margin:16px 0}.loop{border:1px solid var(--border);border-radius:10px;padding:10px 14px;background:var(--bg)}.loop span{display:block;font-size:14px;color:var(--muted)}
+.l1{margin-left:0}.l2{margin-left:16px}.l3{margin-left:32px}.l4{margin-left:48px;border-color:var(--accent-strong)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0;font-size:13px;color:var(--muted)}.flow span{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:4px 8px;color:var(--text)}.flow .ok{border-color:var(--ok);color:var(--ok)}
+.check ol{counter-reset:none}.check li{padding:4px 0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:1000px){
+ html{scroll-padding-top:64px}
+ .topbar{display:flex;position:sticky;top:0;z-index:30;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+ .topbar b{font-size:15px}.menu-btn{font:inherit;font-size:14px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:6px 12px}
+ .side{transform:translateX(-100%);transition:transform .2s;width:min(320px,88vw);top:0}.side.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.5)}
+ main{margin-left:0;padding:24px 16px 80px}.lesson{padding:20px 16px}.part h1{font-size:26px}.l2,.l3,.l4{margin-left:0}
+}
+@media print{.side,.topbar,.copy,.done{display:none}main{margin:0;max-width:none}.lesson{break-inside:avoid-page}details{display:block}details>div{display:block}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topbar"><b>Portfolio Course</b><button class="menu-btn" type="button" aria-expanded="false">สารบัญ</button></div>
+<nav class="side" aria-label="สารบัญ">
+<p class="brand">Portfolio Course<small>Next.js · TypeScript · Tailwind · Matt Pocock skills</small></p>
+<div class="progress">ความคืบหน้า <b id="pcount">0 / 40</b><div class="bar"><i id="pbar"></i></div></div>
+<input class="search" type="search" placeholder="ค้นหาบทเรียน…" aria-label="ค้นหาบทเรียน">
+<ul><li class="nav-part"><a href="#start">เริ่มต้นที่นี่</a></li><li class="nav-lesson"><a href="#intro" data-id="intro"><span class="tick" aria-hidden="true"></span>บทนำ: เราสร้างอะไร และเรียนอะไรจากมัน</a></li><li class="nav-lesson"><a href="#map" data-id="map"><span class="tick" aria-hidden="true"></span>แผนที่ของกระบวนการทั้งหมด</a></li><li class="nav-part"><a href="#part-a">ภาค A · กระบวนการ (ระบบของ Matt Pocock)</a></li><li class="nav-lesson"><a href="#a1" data-id="a1"><span class="tick" aria-hidden="true"></span>A1 · ทำไมต้องมีระบบ: vibe coding กับการคุมงานเอง</a></li><li class="nav-lesson"><a href="#a2" data-id="a2"><span class="tick" aria-hidden="true"></span>A2 · เตรียมเครื่องและเครื่องมือ</a></li><li class="nav-lesson"><a href="#a3" data-id="a3"><span class="tick" aria-hidden="true"></span>A3 · เอกสาร 3 ตัว: BRIEF, DESIGN, CLAUDE</a></li><li class="nav-lesson"><a href="#a4" data-id="a4"><span class="tick" aria-hidden="true"></span>A4 · ติดตั้งและตั้งค่า skills ของ Matt</a></li><li class="nav-lesson"><a href="#a5" data-id="a5"><span class="tick" aria-hidden="true"></span>A5 · /grill-with-docs: ให้ AI ซักจนเข้าใจตรงกัน</a></li><li class="nav-lesson"><a href="#a6" data-id="a6"><span class="tick" aria-hidden="true"></span>A6 · GLOSSARY และ ADR: ความจำถาวรของโปรเจกต์</a></li><li class="nav-lesson"><a href="#a7" data-id="a7"><span class="tick" aria-hidden="true"></span>A7 · /to-spec: จากบทสนทนาเป็นเอกสารเดียว</a></li><li class="nav-lesson"><a href="#a8" data-id="a8"><span class="tick" aria-hidden="true"></span>A8 · /to-tickets: แตกงานให้เล็กพออ่าน diff ได้</a></li><li class="nav-lesson"><a href="#a9" data-id="a9"><span class="tick" aria-hidden="true"></span>A9 · Loop ของแต่ละ ticket: implement → review → ปิดงาน</a></li><li class="nav-lesson"><a href="#a10" data-id="a10"><span class="tick" aria-hidden="true"></span>A10 · โหมดของ Claude Code และกับดัก</a></li><li class="nav-lesson"><a href="#a11" data-id="a11"><span class="tick" aria-hidden="true"></span>A11 · Git และ GitHub ที่ใช้จริง</a></li><li class="nav-lesson"><a href="#a12" data-id="a12"><span class="tick" aria-hidden="true"></span>A12 · บันทึกเหตุการณ์: สิ่งที่พลาดและบทเรียน</a></li><li class="nav-part"><a href="#part-b">ภาค B · พื้นฐานภาษาและเครื่องมือ</a></li><li class="nav-lesson"><a href="#b1" data-id="b1"><span class="tick" aria-hidden="true"></span>B1 · HTML: โครงหน้าเว็บที่มีความหมาย</a></li><li class="nav-lesson"><a href="#b2" data-id="b2"><span class="tick" aria-hidden="true"></span>B2 · CSS และ Tailwind CSS v4</a></li><li class="nav-lesson"><a href="#b3" data-id="b3"><span class="tick" aria-hidden="true"></span>B3 · JavaScript: ไวยากรณ์ที่เจอในเว็บนี้</a></li><li class="nav-lesson"><a href="#b4" data-id="b4"><span class="tick" aria-hidden="true"></span>B4 · TypeScript: บอกชนิดข้อมูลให้เครื่องช่วยตรวจ</a></li><li class="nav-lesson"><a href="#b5" data-id="b5"><span class="tick" aria-hidden="true"></span>B5 · React: component, props, children, map, เงื่อนไข</a></li><li class="nav-lesson"><a href="#b6" data-id="b6"><span class="tick" aria-hidden="true"></span>B6 · Next.js App Router</a></li><li class="nav-lesson"><a href="#b7" data-id="b7"><span class="tick" aria-hidden="true"></span>B7 · การเทสต์: Vitest + Testing Library + TDD</a></li><li class="nav-lesson"><a href="#b8" data-id="b8"><span class="tick" aria-hidden="true"></span>B8 · CI/CD: GitHub Actions และ GitHub Pages</a></li><li class="nav-part"><a href="#part-c">ภาค C · ทีละ ticket (01–13)</a></li><li class="nav-lesson"><a href="#t01" data-id="t01"><span class="tick" aria-hidden="true"></span>Ticket 01 · Static export config</a></li><li class="nav-lesson"><a href="#t02" data-id="t02"><span class="tick" aria-hidden="true"></span>Ticket 02 · Test harness (Vitest)</a></li><li class="nav-lesson"><a href="#t03" data-id="t03"><span class="tick" aria-hidden="true"></span>Ticket 03 · Tokens, fonts, dark theme</a></li><li class="nav-lesson"><a href="#t04" data-id="t04"><span class="tick" aria-hidden="true"></span>Ticket 04 · CI: lint, test, build ทุกครั้งที่ push</a></li><li class="nav-lesson"><a href="#t05" data-id="t05"><span class="tick" aria-hidden="true"></span>Ticket 05 · Styleguide page (Tokens)</a></li><li class="nav-lesson"><a href="#t06" data-id="t06"><span class="tick" aria-hidden="true"></span>Ticket 06 · Button</a></li><li class="nav-lesson"><a href="#t07" data-id="t07"><span class="tick" aria-hidden="true"></span>Ticket 07 · Tag, Card, Container, GitHub icon</a></li><li class="nav-lesson"><a href="#t08" data-id="t08"><span class="tick" aria-hidden="true"></span>Ticket 08 · Page shell: Navbar, Section, metadata</a></li><li class="nav-lesson"><a href="#t09" data-id="t09"><span class="tick" aria-hidden="true"></span>Ticket 09 · Hero</a></li><li class="nav-lesson"><a href="#t10" data-id="t10"><span class="tick" aria-hidden="true"></span>Ticket 10 · About</a></li><li class="nav-lesson"><a href="#t11" data-id="t11"><span class="tick" aria-hidden="true"></span>Ticket 11 · Projects</a></li><li class="nav-lesson"><a href="#t12" data-id="t12"><span class="tick" aria-hidden="true"></span>Ticket 12 · Contact + Footer</a></li><li class="nav-lesson"><a href="#t13" data-id="t13"><span class="tick" aria-hidden="true"></span>Ticket 13 · ตรวจผล build + Deploy ขึ้น GitHub Pages</a></li><li class="nav-part"><a href="#part-d">ภาค D · คู่มือใช้งานและดูแลเว็บ</a></li><li class="nav-lesson"><a href="#d1" data-id="d1"><span class="tick" aria-hidden="true"></span>D1 · งานที่ทำบ่อย ทำยังไง</a></li><li class="nav-lesson"><a href="#d2" data-id="d2"><span class="tick" aria-hidden="true"></span>D2 · คำสั่งที่ใช้บ่อย</a></li><li class="nav-lesson"><a href="#d3" data-id="d3"><span class="tick" aria-hidden="true"></span>D3 · เริ่มโปรเจกต์ใหม่: checklist</a></li><li class="nav-lesson"><a href="#d4" data-id="d4"><span class="tick" aria-hidden="true"></span>D4 · คำศัพท์เทคนิค ไทย–อังกฤษ</a></li><li class="nav-lesson"><a href="#d5" data-id="d5"><span class="tick" aria-hidden="true"></span>D5 · แบบทดสอบรวม</a></li></ul>
+</nav>
+<main>
+<section class="part" id="start"><div class="part-head"><span class="kicker">START</span><h1>เริ่มต้นที่นี่</h1><p class="lead">บทเรียนนี้สร้างจากโปรเจกต์จริงของคุณ — เว็บ phuwanaimark24.github.io ทุกโค้ดที่เห็นคือโค้ดที่อยู่ใน repo จริง ไม่ใช่ตัวอย่างสมมุติ</p></div></section><article class="lesson" id="intro"><header class="lesson-head"><h2>บทนำ: เราสร้างอะไร และเรียนอะไรจากมัน</h2><p class="meta">อ่าน 5 นาที</p><label class="done"><input type="checkbox" data-done="intro"> อ่านจบแล้ว</label></header><p>ตลอดโปรเจกต์นี้คุณสร้างเว็บ portfolio หน้าเดียวด้วย <b>Next.js + TypeScript + Tailwind CSS</b> แบบ static export แล้ว deploy ขึ้น <b>GitHub Pages</b> โดยให้ Claude Code เป็นคนเขียนโค้ด แต่คุณเป็นคนคุมทิศทาง อ่าน diff และตัดสินใจทุกจุด</p><p>บทเรียนนี้แบ่งเป็น 4 ภาค อ่านเรียงก็ได้ หรือกระโดดไปบทที่สนใจจากสารบัญด้านซ้ายก็ได้</p><div class="tw"><table><thead><tr><th>ภาค</th><th>เนื้อหา</th><th>เหมาะกับตอนไหน</th></tr></thead><tbody><tr><td><b>ภาค A</b> กระบวนการ</td><td>ระบบของ Matt Pocock ตั้งแต่เขียนโจทย์ → grill → spec → tickets → implement → review → deploy รวมบทเรียนจากปัญหาที่เจอจริง</td><td>ก่อนเริ่มโปรเจกต์ใหม่ทุกครั้ง</td></tr><tr><td><b>ภาค B</b> พื้นฐานภาษา</td><td>HTML, CSS/Tailwind, JavaScript, TypeScript, React, Next.js, การเทสต์, CI — อธิบายจากโค้ดในเว็บนี้</td><td>เมื่ออ่านโค้ดแล้วไม่เข้าใจไวยากรณ์</td></tr><tr><td><b>ภาค C</b> ทีละ ticket</td><td>ticket 01–13 แต่ละอันทำอะไร ไฟล์ไหน โค้ดทีละบรรทัด ตัดสินใจอะไร และแบบฝึกหัด</td><td>อยากเข้าใจว่าเว็บนี้ถูกประกอบขึ้นมาอย่างไร</td></tr><tr><td><b>ภาค D</b> คู่มือใช้งาน</td><td>เพิ่มผลงาน เปลี่ยน resume ใส่ favicon เริ่มโปรเจกต์ใหม่ คำสั่งที่ใช้บ่อย</td><td>ใช้เปิดดูเวลาทำงานจริง</td></tr></tbody></table></div><h3>ภาพรวมของเว็บที่เสร็จแล้ว</h3><div class="diagram"><div class="d-page">
+<div class="d-nav">Navbar <span>About · Projects · Contact</span></div>
+<div class="d-hero">Hero <span>ชื่อ (h1) · ตำแหน่ง · tagline · ปุ่ม Resume / View projects</span></div>
+<div class="d-sec">Section: About <span>ย่อหน้าแนะนำตัว · Skills เป็น Tag</span></div>
+<div class="d-sec">Section: Projects <span>การ์ดงาน (Card) · Stack · ลิงก์ demo/code</span></div>
+<div class="d-sec">Section: Contact <span>Resume · อีเมล · GitHub</span></div>
+<div class="d-foot">Footer <span>© ปี + ชื่อ · ไอคอน GitHub</span></div>
+</div></div><p>ทุกส่วนประกอบขึ้นจาก <b>Base component</b> เล็กๆ (Button, Card, Tag, Section, Container, Navbar, GithubIcon) ซึ่งใช้ได้เฉพาะค่า <b>Token</b> ที่นิยามไว้ใน DESIGN.md เท่านั้น</p><h3>ตัวเลขของโปรเจกต์</h3><div class="tw"><table><thead><tr><th>รายการ</th><th>จำนวน</th></tr></thead><tbody><tr><td>Ticket</td><td>13 (ทุกอันปิดแล้ว)</td></tr><tr><td>Commit</td><td>40+</td></tr><tr><td>เทสต์</td><td>16 ตัว ใน 3 ไฟล์</td></tr><tr><td>Base component</td><td>7 ตัว</td></tr><tr><td>Token สี</td><td>12</td></tr><tr><td>ADR</td><td>1 (static export without Cache Components)</td></tr></tbody></table></div><aside class="note tip"><strong>วิธีใช้หน้านี้</strong><div>ติ๊ก “อ่านจบแล้ว” ที่หัวแต่ละบท เบราว์เซอร์จะจำไว้ให้ (เก็บในเครื่องคุณเท่านั้น) · กดปุ่ม copy ที่มุมกล่องโค้ดเพื่อคัดลอก · คำถาม “ทดสอบตัวเอง” กดเปิดดูเฉลยได้</div></aside></article><article class="lesson" id="map"><header class="lesson-head"><h2>แผนที่ของกระบวนการทั้งหมด</h2><p class="meta">อ่าน 3 นาที</p><label class="done"><input type="checkbox" data-done="map"> อ่านจบแล้ว</label></header><p>ทั้งโปรเจกต์คือ loop ซ้อนกัน 4 ชั้น ชั้นนอกทำครั้งเดียว ชั้นในทำบ่อยที่สุด</p><div class="loops">
+<div class="loop l1"><b>ชั้น 1 · ครั้งเดียวต่อเครื่อง</b><span>ติดตั้ง Git, Node, Claude Code · git config · ติดตั้ง plugin ของ Matt (user scope)</span></div>
+<div class="loop l2"><b>ชั้น 2 · ครั้งเดียวต่อโปรเจกต์</b><span>โฟลเดอร์ → git init → BRIEF / DESIGN / CLAUDE.md → /setup-matt-pocock-skills → create-next-app → repo GitHub + push</span></div>
+<div class="loop l3"><b>ชั้น 3 · ทุกฟีเจอร์</b><span>/grill-with-docs → GLOSSARY + ADR → /to-spec → /to-tickets</span></div>
+<div class="loop l4"><b>ชั้น 4 · ทุก ticket</b><span>/implement (plan → TDD red→green) → /code-review → อ่าน diff → commit → ปิด ticket → push → CI ✅</span></div>
+</div><div class="tw"><table><thead><tr><th>ขั้น</th><th>ผลลัพธ์ที่ได้ (ไฟล์)</th><th>ใครทำ</th></tr></thead><tbody><tr><td>เขียนโจทย์</td><td>BRIEF.md, DESIGN.md, CLAUDE.md</td><td>คุณ (ร่วมกับ Claude ในแชต)</td></tr><tr><td>Grill</td><td>GLOSSARY.md, docs/adr/0001-…md, แก้ DESIGN.md</td><td>Claude ถาม · คุณตอบ</td></tr><tr><td>Spec</td><td>.scratch/portfolio-v1/spec.md</td><td>Claude เขียน · คุณตรวจ</td></tr><tr><td>Tickets</td><td>.scratch/portfolio-v1/issues/01…13</td><td>Claude แตก · คุณปรับขนาด</td></tr><tr><td>Implement</td><td>โค้ด + เทสต์ + commit</td><td>Claude เขียน · คุณอ่าน diff และอนุมัติ</td></tr><tr><td>Deploy</td><td>.github/workflows/ci.yml → GitHub Pages</td><td>อัตโนมัติทุกครั้งที่ push</td></tr></tbody></table></div><aside class="note key"><strong>หัวใจของระบบ</strong><div>ทุกการตัดสินใจถูกเขียนลงไฟล์ ไม่ได้อยู่ในความจำของแชต Claude ตัวใหม่ใน session ใหม่อ่านไฟล์แล้วทำงานต่อได้ทันที นี่คือเหตุผลที่เราปิด ticket ด้วยการเขียน Comments และแก้ DESIGN.md ทุกครั้งที่ตัดสินใจเรื่องใหม่</div></aside></article><section class="part" id="part-a"><div class="part-head"><span class="kicker">PART A</span><h1>ภาค A · กระบวนการ (ระบบของ Matt Pocock)</h1><p class="lead">ทำงานกับ AI agent แบบที่คุณเป็นคนคุม: ทำให้เข้าใจตรงกันก่อน แล้วค่อยแตกงานเล็กๆ ที่อ่าน diff ได้ทุกบรรทัด</p></div></section><article class="lesson" id="a1"><header class="lesson-head"><h2>A1 · ทำไมต้องมีระบบ: vibe coding กับการคุมงานเอง</h2><p class="meta">อ่าน 6 นาที</p><label class="done"><input type="checkbox" data-done="a1"> อ่านจบแล้ว</label></header><p><b>Vibe coding</b> คือการบอก AI กว้างๆ ว่า “ทำเว็บ portfolio ให้หน่อย” แล้วรับทุกอย่างที่ได้มา ผลที่มักเกิดคือหน้าตาแบบ “AI slop” (gradient ม่วง, อีโมจิแทนไอคอน, สีไม่เป็นระบบ) และโค้ดที่เจ้าของเองอ่านไม่ออก แก้ต่อไม่ได้</p><p>ระบบของ Matt Pocock แก้ปัญหาที่ต้นเหตุ: <b>คนกับ agent เข้าใจไม่ตรงกัน</b> เลยแบ่งงานเป็นขั้นที่แต่ละขั้นทิ้ง “หลักฐาน” เป็นไฟล์ไว้</p><div class="tw"><table><thead><tr><th>ปัญหา</th><th>สิ่งที่ระบบใช้แก้</th><th>ตัวอย่างในโปรเจกต์นี้</th></tr></thead><tbody><tr><td>AI ตีความคำผิด</td><td>GLOSSARY.md (คำศัพท์ร่วม)</td><td>“Hero ไม่ใช่ Section” · “Skill ไม่เหมือน Stack”</td></tr><tr><td>ลืมว่าทำไมเคยตัดสินใจแบบนั้น</td><td>ADR (Architecture Decision Record)</td><td>ADR 0001 ทำไมปิด cacheComponents</td></tr><tr><td>งานใหญ่เกินจะตรวจ</td><td>Ticket เล็กๆ ที่อ่าน diff จบในไม่กี่นาที</td><td>13 ticket แต่ละอันแก้ 1–13 ไฟล์</td></tr><tr><td>AI เขียนโค้ดที่ “ดูเหมือนใช้ได้”</td><td>TDD + code review 2 แกน</td><td>เทสต์ 16 ตัว · ลองลบ rel เพื่อพิสูจน์ว่าเทสต์จับได้จริง</td></tr><tr><td>หน้าตาไม่เป็นระบบ</td><td>Design token + reset Tailwind</td><td>class นอก token เช่น w-5 ไม่ถูกสร้างเลย</td></tr></tbody></table></div><aside class="note key"><strong>หลักการของโปรเจกต์ (จาก PLAN.md)</strong><div>ไม่ vibe code — ให้ AI ลงมือ แต่เราคุมการออกแบบและอ่าน diff ทุกครั้ง</div></aside><h3>Skills 3 ค่ายที่เรียนมา และใช้ตอนไหน</h3><div class="tw"><table><thead><tr><th>ค่าย</th><th>แก้ปัญหาอะไร</th><th>ใช้เมื่อ</th></tr></thead><tbody><tr><td>Matt Pocock</td><td>คนกับ agent เข้าใจไม่ตรงกัน</td><td>ใช้เป็นหลักทุกโปรเจกต์ (โปรเจกต์นี้ใช้ค่ายนี้)</td></tr><tr><td>EGM</td><td>ออกแบบก่อนเขียนโค้ด</td><td>ฟีเจอร์ใหญ่ที่ต้องคิดสถาปัตยกรรม</td></tr><tr><td>pstack</td><td>build + ให้ model อื่นหาจุดพังใน diff</td><td>โค้ดเยอะ อยากได้ผู้ตรวจอิสระ</td></tr></tbody></table></div><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ถ้า AI สร้างปุ่มด้วยสี #7c3aed ที่ไม่มีใน DESIGN.md ระบบนี้จับได้ที่ขั้นไหนบ้าง?</summary><div><ol><li>Tailwind ไม่สร้าง class สีนอก token (เพราะ reset <code>--color-*</code>) — ถ้าเขียนเป็น class ปกติจะไม่มีผล</li><li>ถ้าเขียนเป็น arbitrary value <code>bg-[#7c3aed]</code> ตัว build ไม่จับ แต่ <code>/code-review</code> ฝั่ง Standards จับ เพราะ CLAUDE.md ห้ามไว้</li><li>คุณอ่าน diff ก่อนกด Yes</li></ol></div></details></article><article class="lesson" id="a2"><header class="lesson-head"><h2>A2 · เตรียมเครื่องและเครื่องมือ</h2><p class="meta">ชั้น 1 · ทำครั้งเดียว</p><label class="done"><input type="checkbox" data-done="a2"> อ่านจบแล้ว</label></header><h3>สิ่งที่ติดตั้ง</h3><div class="tw"><table><thead><tr><th>เครื่องมือ</th><th>ไว้ทำอะไร</th><th>เช็กว่าติดตั้งแล้ว</th></tr></thead><tbody><tr><td>Git</td><td>เก็บประวัติโค้ด ย้อนกลับได้</td><td><code>git --version</code></td></tr><tr><td>Node.js (v24)</td><td>รัน Next.js, npm, เทสต์</td><td><code>node --version</code></td></tr><tr><td>Claude Code</td><td>agent ที่เขียนโค้ดในโฟลเดอร์โปรเจกต์</td><td><code>claude --version</code></td></tr><tr><td>Windows Terminal / PowerShell</td><td>รันคำสั่ง แยกแท็บได้</td><td>Ctrl+Shift+T เปิดแท็บใหม่</td></tr></tbody></table></div><h3>ตั้งค่า Git ครั้งแรก</h3><figure class="code"><div class="code-cap"><span>powershell</span><button class="copy" type="button">copy</button></div><pre><code class="language-powershell">git config --global user.name &quot;Phuwanai Mark&quot;
+git config --global user.email &quot;phuwanaimark.work@gmail.com&quot;
+git config --global init.defaultBranch main</code></pre></figure><p>ถ้าไม่ตั้ง จะเจอ <code>Author identity unknown</code> ตอน commit ครั้งแรก (เกิดจริงในโปรเจกต์นี้) อีเมลนี้จะเห็นได้ใน commit ของ repo สาธารณะ ถ้าไม่อยากเปิดเผยใช้อีเมล noreply ของ GitHub แทน</p><h3>Claude Code: เช็ก 3 อย่างบนหัวจอ</h3><div class="tw"><table><thead><tr><th>เห็นอะไร</th><th>แปลว่า</th><th>ต้องทำ</th></tr></thead><tbody><tr><td><code>API Usage Billing</code></td><td>คิดเงินแยกตาม token ไม่ใช้โควตา Pro</td><td><code>/logout</code> แล้ว <code>/login</code> เลือก Claude account (Pro/Max)</td></tr><tr><td><code>Claude Pro</code></td><td>ใช้โควตาแพ็กเกจ</td><td>✅ ถูกต้อง</td></tr><tr><td><code>C:\Users\User</code></td><td>รันผิดโฟลเดอร์</td><td><code>/exit</code> → <code>cd D:\Projects\portfolio</code> → <code>claude</code></td></tr></tbody></table></div><h3>จัดหน้าจอแบบ 3 แท็บ</h3><div class="tw"><table><thead><tr><th>แท็บ</th><th>รันอะไร</th><th>ปล่อยค้างไว้?</th></tr></thead><tbody><tr><td>1</td><td><code>npm run dev</code> → localhost:3000</td><td>ใช่ หน้าเว็บอัปเดตทันทีที่โค้ดเปลี่ยน</td></tr><tr><td>2</td><td><code>claude</code></td><td>ใช่</td></tr><tr><td>3</td><td><code>git ...</code> / <code>npm test</code></td><td>ใช้ตามต้องการ</td></tr></tbody></table></div><aside class="note warn"><strong>พื้นที่ไดรฟ์ C เต็ม</strong><div>ไม่ต้องย้าย <code>C:\Users\User</code> แค่สร้างโปรเจกต์ไว้ที่ <code>D:\Projects\...</code> แล้ว <code>cd</code> เข้าไปก่อนรัน <code>claude</code> ถ้าย้ายโฟลเดอร์โปรเจกต์ ให้ลบ <code>node_modules</code> และ <code>.next</code> ก่อน แล้ว <code>npm install</code> ใหม่</div></aside></article><article class="lesson" id="a3"><header class="lesson-head"><h2>A3 · เอกสาร 3 ตัว: BRIEF, DESIGN, CLAUDE</h2><p class="meta">ชั้น 2 · เขียนก่อนเขียนโค้ด</p><label class="done"><input type="checkbox" data-done="a3"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>ไฟล์</th><th>ตอบคำถาม</th><th>ผู้อ่านหลัก</th><th>ตัวอย่างในโปรเจกต์</th></tr></thead><tbody><tr><td><b>BRIEF.md</b></td><td>ทำ<b>อะไร</b> เพื่อ<b>ใคร</b></td><td>คุณ + Claude</td><td>portfolio หน้าเดียว · Recruiter + Client · ภาษาอังกฤษ · Hero + 3 Section</td></tr><tr><td><b>DESIGN.md</b></td><td>หน้าตา<b>แบบไหน</b></td><td>Claude ตอนเขียน UI</td><td>สี 12 token · Inter + JetBrains Mono · กฎห้าม gradient/อีโมจิ</td></tr><tr><td><b>CLAUDE.md</b></td><td>Claude <b>ทำงานยังไง</b></td><td>Claude (อ่านอัตโนมัติทุก session)</td><td>อธิบายเป็นไทย · ห้าม commit เอง · ต้อง test/lint/build ก่อนบอกว่าเสร็จ</td></tr><tr><td>AGENTS.md</td><td>Next.js เวอร์ชันนี้ต่างจากที่ AI รู้</td><td>Claude</td><td>สร้างโดย create-next-app ห้ามแก้</td></tr></tbody></table></div><p>จำง่ายๆ: <b>BRIEF = โจทย์ · DESIGN = หน้าตา · CLAUDE = กติกา</b></p><h3>ตัวอย่างจาก CLAUDE.md จริง</h3><figure class="code"><div class="code-cap"><span>CLAUDE.md (บางส่วน)</span><button class="copy" type="button">copy</button></div><pre><code class="language-markdown">## About the developer (important)
+
+- I am new to React. This project is how I learn.
+- Explain in **Thai**. Keep code, comments, commit messages and site copy in **English**.
+- For every new or changed component, give a short explanation: what it does,
+  its props, and which React concept it uses.
+- Prefer simple, readable code over clever code. No abstractions until there
+  are at least 2 real uses.
+
+## Working rules
+
+- Small changes. One ticket = one focused diff I can read in a few minutes.
+- I read every diff. Do not commit, push or install packages without asking me first.
+- Do not invent content (names, projects, links, numbers). Use `[[TODO: ...]]` placeholders.
+- Before saying a task is done, run `npm test`, `npm run lint` and `npm run build`.</code></pre></figure><p>ทุกกฎข้างบนมีผลจริงตลอดโปรเจกต์ เช่น Claude ถามก่อน commit ทุกครั้ง, ใส่ <code>[[TODO: owner name]]</code> แทนการเดาชื่อ, และเขียนคำอธิบายภาษาไทยท้ายทุก ticket</p><h3>กฎทองของการแก้</h3><aside class="note key"><strong>แก้เอกสารก่อนเสมอ แล้วค่อยแก้โค้ด</strong><div>ถ้าแก้โค้ดตรงๆ แต่เอกสารยังเขียนแบบเดิม session หน้า Claude จะอ่านเอกสารแล้วแก้โค้ดกลับ ตัวอย่างในโปรเจกต์: ทุกครั้งที่ตัดสินใจเรื่องใหม่ (hover ของ ghost, padding ของ Card, ลำดับปุ่มใน Contact) เราบันทึกลง DESIGN.md §8 ก่อน commit</div></aside><div class="tw"><table><thead><tr><th>อยากเปลี่ยน</th><th>แก้ที่</th></tr></thead><tbody><tr><td>เพิ่ม/ลดส่วนของเว็บ, กลุ่มเป้าหมาย</td><td>BRIEF.md → grill ใหม่</td></tr><tr><td>สี ฟอนต์ กฎออกแบบ</td><td>DESIGN.md (+ globals.css)</td></tr><tr><td>พฤติกรรมของ Claude</td><td>CLAUDE.md</td></tr><tr><td>ข้อความบนเว็บ</td><td>content/*.ts (+ BRIEF.md ให้ตรงกัน)</td></tr></tbody></table></div></article><article class="lesson" id="a4"><header class="lesson-head"><h2>A4 · ติดตั้งและตั้งค่า skills ของ Matt</h2><p class="meta">ชั้น 1–2</p><label class="done"><input type="checkbox" data-done="a4"> อ่านจบแล้ว</label></header><figure class="code"><div class="code-cap"><span>ใน Claude Code</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">/plugin install mattpocock-skills@claude-plugins-official
+/setup-matt-pocock-skills</code></pre></figure><div class="tw"><table><thead><tr><th>ตัวเลือกตอนติดตั้ง</th><th>ความหมาย</th><th>เลือก</th></tr></thead><tbody><tr><td>user scope</td><td>ใช้ได้ทุกโปรเจกต์ในเครื่อง</td><td>✅</td></tr><tr><td>project scope</td><td>บันทึกลง repo ให้คนอื่นใช้ด้วย</td><td>—</td></tr><tr><td>local scope</td><td>เฉพาะ repo นี้</td><td>—</td></tr></tbody></table></div><p>ค่าใช้จ่าย: ทุกข้อความใช้เพิ่ม ~1.6k token เพื่อให้ Claude รู้ว่ามี skill อะไร (น้อยมาก)</p><h3>Skills ที่ใช้จริงในโปรเจกต์นี้</h3><div class="tw"><table><thead><tr><th>Skill</th><th>หน้าที่</th><th>ผลลัพธ์</th></tr></thead><tbody><tr><td><code>/setup-matt-pocock-skills</code></td><td>ตั้งค่า issue tracker + path เอกสาร (ครั้งเดียวต่อ repo)</td><td><code>docs/agents/*.md</code> + ส่วน “Agent skills” ใน CLAUDE.md</td></tr><tr><td><code>/grill-with-docs</code></td><td>ถามทีละข้อเพื่อขัดเกลาแผน</td><td>GLOSSARY.md, ADR, แก้ DESIGN.md</td></tr><tr><td><code>/domain-modeling</code></td><td>เคลียร์คำศัพท์ที่กำกวม</td><td>GLOSSARY.md ที่แม่นขึ้น</td></tr><tr><td><code>/to-spec</code></td><td>แปลงบทสนทนาเป็น spec</td><td><code>.scratch/portfolio-v1/spec.md</code></td></tr><tr><td><code>/to-tickets</code></td><td>แตก spec เป็น ticket ที่มี Blocked by</td><td><code>.scratch/portfolio-v1/issues/NN-*.md</code></td></tr><tr><td><code>/implement</code></td><td>ลงมือทีละ ticket แบบ test-first</td><td>โค้ด + เทสต์</td></tr><tr><td><code>/tdd</code></td><td>วงจร red → green → refactor</td><td>เรียกจาก /implement</td></tr><tr><td><code>/code-review</code></td><td>รีวิว 2 แกน: Standards + Spec</td><td>รายการข้อสังเกต</td></tr></tbody></table></div><p>Skills อื่นที่มีไว้ใช้ทีหลัง: <code>/handoff</code> (ส่งงานต่อ session ใหม่), <code>/retro</code> (ทบทวนหลังจบงาน), <code>/improve-codebase-architecture</code>, <code>/diagnosing-bugs</code>, <code>/teach</code>, <code>/wayfinder</code> (งานใหญ่หลาย session)</p><aside class="note warn"><strong>บทเรียนจริง: setup เขียนทับ CLAUDE.md</strong><div>ตอนรัน <code>/setup-matt-pocock-skills</code> มันเขียน CLAUDE.md ใหม่เหลือ 13 บรรทัด ทับฉบับเต็มของเรา และ commit แรกเก็บฉบับสั้นไปด้วย แก้โดยรวมสองฉบับเข้าด้วยกัน <b>ครั้งหน้า: รัน setup ก่อนเขียน CLAUDE.md หรือ commit CLAUDE.md ก่อนแล้วเช็ก <code>git diff</code> หลังรัน setup</b></div></aside><p>setup ยังตั้งให้ใช้ <b>GLOSSARY.md</b> (ไม่ใช่ CONTEXT.md) และเก็บ ticket เป็นไฟล์ markdown ใน <code>.scratch/&lt;feature&gt;/</code></p></article><article class="lesson" id="a5"><header class="lesson-head"><h2>A5 · /grill-with-docs: ให้ AI ซักจนเข้าใจตรงกัน</h2><p class="meta">ชั้น 3</p><label class="done"><input type="checkbox" data-done="a5"> อ่านจบแล้ว</label></header><p>Grill คือการให้ Claude อ่านเอกสารแล้ว<b>ถามทีละข้อ</b>เฉพาะสิ่งที่ยังไม่ชัด พร้อมเสนอคำตอบที่แนะนำ คุณตอบสั้นๆ หรือพิมพ์ “แนะนำให้หน่อย อธิบายข้อดีข้อเสีย”</p><figure class="code"><div class="code-cap"><span>คำสั่งที่ใช้จริง</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">/grill-with-docs อ่าน CLAUDE.md, BRIEF.md, DESIGN.md, AGENTS.md ก่อน แล้วถามสิ่งที่ยังไม่ชัด
+เริ่มจากการตั้งค่า static export (cacheComponents ใช้ร่วมกับ output: &#x27;export&#x27; ได้ไหม) และ design system</code></pre></figure><h3>ตัวอย่างคำถามจริง และสิ่งที่เราเลือก</h3><div class="tw"><table><thead><tr><th>รอบ</th><th>คำถาม</th><th>คำตอบ</th><th>ทำไมสำคัญ</th></tr></thead><tbody><tr><td>1</td><td>cacheComponents ใช้กับ static export ได้ไหม</td><td>ไม่ได้ → ลบ + เขียน ADR 0001</td><td>Claude ทดลอง build จริง เจอ <code>Invariant: PPR cannot be enabled in export mode</code></td></tr><tr><td>1</td><td>ล็อก Tailwind ให้ใช้แค่ token ไหม</td><td>(a) reset ทุก namespace</td><td>ระบบกันค่านอก token แทนการพึ่งความจำ</td></tr><tr><td>1</td><td>ชื่อใน Hero บนมือถือ 36px ไม่มี token</td><td>เพิ่ม <code>display-sm</code></td><td>ทุกค่าต้องมีชื่อ</td></tr><tr><td>2</td><td>focus ring ใช้ ring หรือ outline</td><td>outline</td><td>ring ใน Tailwind v4 คือ box-shadow = “เงาสีฟ้า” ซึ่ง DESIGN.md ห้าม</td></tr><tr><td>2</td><td>Navbar โปร่ง + blur?</td><td>พื้นทึบ</td><td>blur นับเป็น glassmorphism ที่ห้ามไว้</td></tr><tr><td>2</td><td>ทำ hamburger menu ไหม</td><td>ไม่ทำ</td><td>ลิงก์ 3 อันพอดี 360px · เป็น Server Component ไม่ต้องใช้ state</td></tr><tr><td>2</td><td>Card hover เปลี่ยนสี?</td><td>ไม่มี hover</td><td>การ์ดกดไม่ได้ ถ้าเปลี่ยนสีคนจะเข้าใจผิด</td></tr><tr><td>3</td><td>ปุ่มไหนเป็น primary ใน Hero</td><td>Download resume</td><td>Recruiter ต้องหาเจอทันที</td></tr><tr><td>3</td><td>กัน [[TODO หลุดขึ้นเว็บ</td><td>CI ค้นใน out/ + เช็ก resume.pdf</td><td>ไฟล์ที่ขาดหาด้วย grep ไม่เจอ ต้องเช็กแยก</td></tr></tbody></table></div><h3>กติกาตอน grill</h3><ul><li>Claude ขอแก้ <code>.md</code> → อ่านแล้ว Yes</li><li>Claude ขอแก้โค้ด/config → <b>No</b> (ยังไม่ถึงเวลา)</li><li>ถ้าคำถามไหนตอบไว้ในเอกสารแล้ว ตอบ “ดูใน BRIEF.md” ได้เลย</li></ul><aside class="note warn"><strong>บทเรียนจริง</strong><div>ระหว่าง grill รอบแรก auto mode เปิดอยู่ Claude เลยแก้ <code>next.config.ts</code> และรัน build เองโดยไม่ถาม (แล้ว git restore คืน) — ต่อมาเราเพิ่มกติกา “ระหว่าง grill แก้ได้แค่ .md”</div></aside></article><article class="lesson" id="a6"><header class="lesson-head"><h2>A6 · GLOSSARY และ ADR: ความจำถาวรของโปรเจกต์</h2><p class="meta">ชั้น 3</p><label class="done"><input type="checkbox" data-done="a6"> อ่านจบแล้ว</label></header><p><b>GLOSSARY.md</b> คือพจนานุกรมที่ทำให้คุณกับ Claude ใช้คำเดียวกันแล้วหมายถึงสิ่งเดียวกัน แต่ละคำมี “Avoid” บอกคำที่ห้ามใช้แทน</p><figure class="code"><div class="code-cap"><span>GLOSSARY.md (บางส่วน)</span><button class="copy" type="button">copy</button></div><pre><code class="language-markdown">**Hero**:
+The top of the page that introduces the Owner by name. The Hero is not a Section.
+_Avoid_: Header, banner, intro section
+
+**Stack**:
+The tools and technologies one Project was built with.
+_Avoid_: Tech, skills, tags
+
+**Skill**:
+Something the Owner can do or use, listed in the About Section.
+Skills are kept separately from any Project&#x27;s Stack.
+_Avoid_: Tech, tools, expertise</code></pre></figure><h3>ทำไมต้องแยก “Hero ไม่ใช่ Section”</h3><p>ถ้า Hero เป็น Section มันต้องมีหัวข้อ <code>&lt;h2&gt;</code> ว่า “Hero” และต้องมีลิงก์ใน Navbar ซึ่งผิดทั้งคู่ การตกลงคำนี้ทำให้เทสต์เขียนได้ชัด: “หน้าเว็บมี region (Section) <b>3</b> อันพอดี”</p><h3>ทำไมต้องแยก Skill กับ Stack</h3><p>Figma อาจอยู่ใน Stack ของงานออกแบบชิ้นหนึ่ง แต่คุณอาจไม่อยากโฆษณาว่าใช้ Figma เป็น — สองรายการนี้จึงเก็บแยกไฟล์ (<code>content/about.ts</code> กับ <code>content/projects.ts</code>) ไม่ดึงจากกัน</p><h3>ADR — บันทึกการตัดสินใจ</h3><figure class="code"><div class="code-cap"><span>docs/adr/0001-static-export-without-cache-components.md</span><button class="copy" type="button">copy</button></div><pre><code class="language-markdown"># Static export without Cache Components
+
+The Next.js 16 scaffold enables `cacheComponents` and `partialPrefetching` by default,
+but we deploy to GitHub Pages with `output: &#x27;export&#x27;`, which has no server.
+`cacheComponents` turns on Partial Prerendering, and `next build` fails with
+`Invariant: PPR cannot be enabled in export mode` (verified on Next.js 16.4.5).
+
+## Consequences
+
+- `&quot;use cache&quot;`, `cacheLife` and `cacheTag` are not available. Do not add them.
+- Do not re-enable these flags unless the deploy target changes to one with a server.</code></pre></figure><p>ADR เขียนเมื่อการตัดสินใจ “ดูแปลก” สำหรับคนที่มาทีหลัง (ค่าเริ่มต้นเปิดไว้ แต่เราปิด) ถ้าไม่มีบันทึก วันหนึ่งอาจมีคนเปิดกลับเข้าไปแล้ว deploy พัง</p><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> Claude เขียนในหน้า Styleguide ว่า “Every block on this page is a Section” ผิดตรงไหน?</summary><div>ตาม GLOSSARY คำว่า Section หมายถึง About, Projects, Contact บนหน้าแรกเท่านั้น Styleguide แค่ <i>ใช้ component</i> Section เพื่อจัด layout — reviewer จับได้และแก้คำแล้วใน ticket 08</div></details></article><article class="lesson" id="a7"><header class="lesson-head"><h2>A7 · /to-spec: จากบทสนทนาเป็นเอกสารเดียว</h2><p class="meta">ชั้น 3</p><label class="done"><input type="checkbox" data-done="a7"> อ่านจบแล้ว</label></header><p>Spec รวมทุกอย่างที่ตกลงกันไว้เป็นไฟล์เดียว ติดสถานะ <code>Status: ready-for-agent</code> โครงของ spec มี 6 ส่วน</p><div class="tw"><table><thead><tr><th>ส่วน</th><th>มีอะไร</th><th>ในโปรเจกต์นี้</th></tr></thead><tbody><tr><td>Problem Statement</td><td>ปัญหาตอนนี้</td><td>scaffold เปล่าที่ export ไม่ได้</td></tr><tr><td>Solution</td><td>ภาพรวมทางออก</td><td>หน้าเดียว โทนเข้ม deploy อัตโนมัติ</td></tr><tr><td>User Stories</td><td>“As a …, I want …, so that …”</td><td>65 ข้อ แบ่ง Visitor / Owner</td></tr><tr><td>Implementation Decisions</td><td>การตัดสินใจทางเทคนิคทั้งหมด</td><td>config, token, base components, CI</td></tr><tr><td>Testing Decisions</td><td>seam ไหนเทสต์อะไร อะไรไม่เทสต์</td><td>Seam A, Seam B, CI checks</td></tr><tr><td>Out of Scope</td><td>สิ่งที่ตั้งใจไม่ทำ</td><td>blog, หลายภาษา, ฟอร์ม, light theme</td></tr></tbody></table></div><h3>User story ตัวอย่าง</h3><figure class="code"><div class="code-cap"><span>spec.md</span><button class="copy" type="button">copy</button></div><pre><code class="language-markdown">4. As a Recruiter, I want a clearly visible &quot;Download resume&quot; button in the Hero,
+   so that I can get the Resume without hunting for it.
+
+62. As the Owner, I want the deploy to fail if the home page is marked noindex,
+    so that a stray setting can never remove the whole site from search engines.</code></pre></figure><h3>Seam คืออะไร</h3><p><b>Seam</b> คือ “จุดที่เทสต์เข้าไปตรวจ” เลือกให้น้อยแต่ครอบคลุม โปรเจกต์นี้มี 2 seam + 1 ด่านใน CI</p><div class="tw"><table><thead><tr><th>Seam</th><th>ตรวจอะไร</th><th>ไฟล์เทสต์</th></tr></thead><tbody><tr><td>A: render หน้าแรก</td><td>สิ่งที่ผู้ใช้เห็น: หัวข้อ ลิงก์ ลำดับ attribute</td><td><code>__tests__/home.test.tsx</code></td></tr><tr><td>B: ข้อมูล Project</td><td>ทุกงานมีลิงก์ ≥ 1, type ถูกต้อง</td><td><code>__tests__/projects.test.ts</code></td></tr><tr><td>CI output checks</td><td>ผลลัพธ์ build: [[TODO, resume.pdf, noindex</td><td><code>scripts/check-output.sh</code></td></tr></tbody></table></div><p><b>ไม่เทสต์:</b> หน้าตา/class ของ Tailwind (ดูด้วยตาที่ /styleguide), หน้า Styleguide, root layout</p><aside class="note tip"><strong>สิ่งที่เราเพิ่มเองตอนตรวจ spec</strong><div>Contact ต้องมีลิงก์ mailto: · CI ต้องเช็ก “หน้าแรก<b>ไม่มี</b> noindex” ด้วย — ถ้ามีคนเผลอใส่ใน layout.tsx ทั้งเว็บจะหายจาก Google โดยไม่มีอะไรเตือน</div></aside></article><article class="lesson" id="a8"><header class="lesson-head"><h2>A8 · /to-tickets: แตกงานให้เล็กพออ่าน diff ได้</h2><p class="meta">ชั้น 3</p><label class="done"><input type="checkbox" data-done="a8"> อ่านจบแล้ว</label></header><p>ticket แต่ละใบมี: <b>What to build</b>, <b>Blocked by</b>, <b>Status</b>, <b>Acceptance criteria</b> (checkbox) และท้ายไฟล์มี <b>## Comments</b> สำหรับบันทึกตอนปิด</p><figure class="code"><div class="code-cap"><span>.scratch/portfolio-v1/issues/01-static-export-config.md</span><button class="copy" type="button">copy</button></div><pre><code class="language-markdown"># 01: Static export config
+
+**What to build:** The site builds as a fully static export ...
+
+**Blocked by:** None (can start immediately)
+
+**Status:** ready-for-agent
+
+- [ ] Cache Components and Partial Prefetching are no longer enabled
+- [ ] Static export and unoptimized images are enabled; no `basePath`
+- [ ] `npm run build` succeeds and produces an `out/` folder
+- [ ] `npm run lint` passes
+- [ ] Explanation (in Thai) of what changed and why, linking ADR 0001</code></pre></figure><h3>เราปรับขนาด ticket อย่างไร</h3><ul><li>Claude เสนอ 10 ticket → เราขอแยก Button ออกจาก component อื่น (Button มี logic มากสุด)</li><li>แยก CI เป็น 2: <b>04</b> lint/test/build (ต้องเขียวเสมอ) กับ <b>13</b> ตรวจผล + deploy (ทำท้ายสุด) — ไม่อย่างนั้นทุก push จะแดงเพราะ Placeholder จนชินกับสีแดง</li><li>แยก token กับหน้า Styleguide</li><li>ได้ 13 ticket แล้วเปลี่ยนเลขตามลำดับที่ทำจริง</li></ul><div class="tw"><table><thead><tr><th>สัญญาณ</th><th>แปลว่า</th><th>ทำ</th></tr></thead><tbody><tr><td>diff ยาวจนอ่านไม่จบ / มี component ใหม่หลายตัวที่ยังไม่เข้าใจ</td><td>ใหญ่เกิน</td><td>แยก</td></tr><tr><td>แก้ 1–2 บรรทัดแต่รอ review นานกว่าเขียน</td><td>เล็กเกิน</td><td>รวม</td></tr></tbody></table></div><aside class="note tip"><strong>ทำทีละ ticket</strong><div>Claude บอกว่า 01 กับ 02 ทำคู่กันได้ แต่สำหรับการเรียน เราทำทีละใบ อ่าน diff + commit ให้จบก่อนเริ่มใบถัดไป</div></aside></article><article class="lesson" id="a9"><header class="lesson-head"><h2>A9 · Loop ของแต่ละ ticket: implement → review → ปิดงาน</h2><p class="meta">ชั้น 4 · ทำบ่อยที่สุด</p><label class="done"><input type="checkbox" data-done="a9"> อ่านจบแล้ว</label></header><ol><li><b>(ticket ใหญ่) plan mode</b> — Shift+Tab ไป <code>plan mode on</code> → สั่ง implement → อ่านแผน → เลือก <b>Yes, manually approve edits</b></li><li><b>Red</b> — Claude เขียนเทสต์ก่อน รันให้ fail ด้วยเหตุผลที่ถูกต้อง (ไม่ใช่ fail เพราะไฟล์ยังไม่มี)</li><li><b>Green</b> — เขียนโค้ดน้อยที่สุดให้ผ่าน</li><li><b>ตรวจ</b> — <code>tsc</code>, <code>npm test</code>, <code>npm run lint</code>, <code>npm run build</code> + เช็กผล build (เช่น grep CSS)</li><li><b>/code-review</b> — Standards (ตรงกฎ repo ไหม) + Spec (ครบ ticket ไหม)</li><li><b>คุณ</b> — อ่าน diff, เปิด localhost ดูด้วยตา (360px ด้วย DevTools), ตอบคำถามที่ Claude ส่งกลับมา</li><li><b>ปิดช่องว่างเอกสาร</b> — สิ่งที่ตัดสินใจใหม่ลง DESIGN.md</li><li><b>Commit 2 อัน</b> — <code>feat: …</code> (โค้ด + เอกสาร) และ <code>docs: mark ticket NN resolved</code> (Status, checkbox, Comments + คำอธิบายภาษาไทย)</li><li><b>Push</b> → CI ✅</li></ol><figure class="code"><div class="code-cap"><span>สั่งเริ่ม ticket</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">/mattpocock-skills:implement .scratch/portfolio-v1/issues/06-button.md</code></pre></figure><figure class="code"><div class="code-cap"><span>สั่งปิด ticket</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">ปิด ticket นี้ (Status: resolved, ติ๊ก checkbox, ใส่ hash commit)
+และต่อท้ายคำอธิบายภาษาไทยไว้ใน ## Comments แล้ว commit + push</code></pre></figure><h3>พิสูจน์ว่าเทสต์ใช้ได้จริง</h3><p>ถ้าเทสต์ผ่านตั้งแต่รอบแรก (เพราะโค้ดเดิมทำถูกอยู่แล้ว) Claude จะ<b>ทำให้โค้ดผิดชั่วคราว</b>เพื่อดูว่าเทสต์ fail จริง แล้วคืนไฟล์ — เกิดใน ticket 11 (ลบ <code>rel</code> ออกจาก Button) และ 12 (ลบ <code>aria-label</code>)</p><h3>Code review 2 แกน</h3><div class="tw"><table><thead><tr><th>แกน</th><th>ถามว่า</th><th>ตัวอย่างที่จับได้</th></tr></thead><tbody><tr><td>Standards</td><td>ตรงกฎใน CLAUDE.md / DESIGN.md / GLOSSARY ไหม</td><td>ประโยคใน Styleguide ขัด GLOSSARY · DESIGN.md §8 ยังไม่บันทึก padding ของ Card</td></tr><tr><td>Spec</td><td>ทำครบ ticket ไหม เกินไหม</td><td>Hero ใช้ค่าจริงแทน Placeholder · ลำดับปุ่มใน Contact ต่างจาก spec</td></tr></tbody></table></div><aside class="note tip"><strong>ประหยัดโควตา</strong><div>ticket เล็กสั่งว่า “รีวิวเองใน session นี้ ไม่ต้องเปิด background agent” ได้</div></aside></article><article class="lesson" id="a10"><header class="lesson-head"><h2>A10 · โหมดของ Claude Code และกับดัก</h2><p class="meta">สำคัญมาก</p><label class="done"><input type="checkbox" data-done="a10"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>แถบล่าง</th><th>โหมด</th><th>ใช้?</th></tr></thead><tbody><tr><td><code>manual mode on</code></td><td>ถามก่อนแก้ไฟล์และรันคำสั่งทุกครั้ง</td><td>✅ ใช้ตลอด</td></tr><tr><td><code>plan mode on</code></td><td>วางแผนอย่างเดียว ไม่แก้ไฟล์</td><td>✅ ticket ใหญ่ ดูแผนก่อน</td></tr><tr><td><code>accept edits on</code></td><td>แก้ไฟล์ได้เองไม่ถาม</td><td>❌ ไม่ได้อ่าน diff</td></tr><tr><td><code>auto mode on</code></td><td>ทำเองทุกอย่าง</td><td>❌</td></tr></tbody></table></div><p>Shift+Tab วนตามลำดับ manual → accept edits → plan → auto → manual กดช้าๆ แล้วดูแถบล่างทุกครั้ง</p><h3>ตอบคำขออนุญาตอย่างไร</h3><div class="tw"><table><thead><tr><th>Claude ขอ</th><th>ตอบ</th></tr></thead><tbody><tr><td>อ่าน/ค้นไฟล์ (ls, cat, grep, Read)</td><td>Yes</td></tr><tr><td>แก้ .md</td><td>Yes (อ่านคร่าวๆ)</td></tr><tr><td>แก้ .ts/.tsx/.css/config</td><td>อ่าน diff ก่อน แล้ว Yes</td></tr><tr><td>npm test / lint / build / tsc</td><td>Yes</td></tr><tr><td>npm install, git commit/push, rm</td><td>ดูให้แน่ใจก่อน</td></tr><tr><td>ตัวเลือก “switch to auto mode”</td><td>ไม่เลือก</td></tr></tbody></table></div><h3>กับดักที่เจอจริง</h3><div class="tw"><table><thead><tr><th>อาการ</th><th>สาเหตุ</th><th>แก้</th></tr></thead><tbody><tr><td>กดเลขหรือลูกศรแล้วกลายเป็นตัวอักษร <code>1</code>, <code>^Z</code></td><td>เปิดแผนด้วย Ctrl+G แล้ว <b>Notepad ยังไม่ปิด</b> Claude รอ editor อยู่</td><td>ปิด Notepad (Don't Save) แล้วค่อยกดเลือก</td></tr><tr><td>Claude แก้ไฟล์เองโดยไม่ถาม</td><td>เผลอกดไปเป็น auto mode</td><td>Shift+Tab กลับ manual · บอก Claude ห้าม commit · อ่าน diff ย้อนหลัง</td></tr><tr><td>อยากหยุดกลางคัน</td><td>—</td><td>Esc หยุดทันที · ไฟล์ที่แก้ยังอยู่ · <code>git status</code> ดู · <code>git restore .</code> ทิ้ง</td></tr><tr><td>กลับมาทำต่อ</td><td>—</td><td><code>claude --continue</code> หรือ session ใหม่แล้วสั่ง ticket ถัดไป (ทุกอย่างอยู่ในไฟล์)</td></tr></tbody></table></div></article><article class="lesson" id="a11"><header class="lesson-head"><h2>A11 · Git และ GitHub ที่ใช้จริง</h2><p class="meta">ชั้น 2 + 4</p><label class="done"><input type="checkbox" data-done="a11"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>คำสั่ง</th><th>ทำอะไร</th></tr></thead><tbody><tr><td><code>git status</code></td><td>ดูไฟล์ที่เปลี่ยน/ค้าง</td></tr><tr><td><code>git diff</code></td><td>ดูว่าเปลี่ยนอะไรทีละบรรทัด</td></tr><tr><td><code>git add &lt;ไฟล์&gt;</code></td><td>เลือกไฟล์เข้า commit (ระวัง <code>git add .</code> ตอนมีงานอื่นค้าง)</td></tr><tr><td><code>git commit -m &quot;...&quot;</code></td><td>บันทึกจุดหนึ่งในประวัติ</td></tr><tr><td><code>git push</code></td><td>ส่งขึ้น GitHub (ครั้งแรก <code>git push -u origin main</code>)</td></tr><tr><td><code>git restore &lt;ไฟล์&gt;</code></td><td>คืนไฟล์เป็นแบบ commit ล่าสุด (ทดลองแก้แล้วทิ้งได้)</td></tr><tr><td><code>git log --oneline</code></td><td>ดูประวัติสั้นๆ</td></tr><tr><td><code>git branch -M main</code></td><td>เปลี่ยนชื่อ branch master → main</td></tr></tbody></table></div><h3>รูปแบบข้อความ commit ที่ใช้</h3><div class="tw"><table><thead><tr><th>prefix</th><th>ใช้กับ</th><th>ตัวอย่างจริง</th></tr></thead><tbody><tr><td><code>feat:</code></td><td>ฟีเจอร์ใหม่</td><td>feat: add Button base component</td></tr><tr><td><code>fix:</code></td><td>แก้บั๊ก</td><td>fix: stop Tailwind scanning markdown for classes</td></tr><tr><td><code>docs:</code></td><td>เอกสาร/ticket</td><td>docs: mark ticket 08 resolved</td></tr><tr><td><code>chore:</code></td><td>ตั้งค่า เครื่องมือ</td><td>chore: enable static export and drop cache components (ADR 0001)</td></tr><tr><td><code>ci:</code></td><td>workflow</td><td>ci: add build-output checks and GitHub Pages deploy</td></tr><tr><td><code>content:</code></td><td>ข้อความบนเว็บ</td><td>content: set tagline</td></tr></tbody></table></div><h3>ปัญหาที่เจอ</h3><div class="tw"><table><thead><tr><th>ข้อความ</th><th>ความหมาย</th><th>แก้</th></tr></thead><tbody><tr><td><code>LF will be replaced by CRLF</code></td><td>Windows/Linux ขึ้นบรรทัดต่างกัน (แค่เตือน)</td><td>เพิ่ม <code>.gitattributes</code> ให้ใช้ LF ทุกไฟล์ → diff ไม่เพี้ยนทั้งไฟล์อีก</td></tr><tr><td><code>Unable to connect ... 20.205.243.166:443</code></td><td>เน็ตต่อเซิร์ฟเวอร์ GitHub ไม่ติดเป็นช่วงๆ</td><td>ลอง push ซ้ำ / ปิด VPN / ใช้ hotspot · <b>อย่าใส่รหัสผ่านที่ prompt</b></td></tr><tr><td><code>Test-NetConnection github.com -Port 443</code></td><td>เช็กว่าต่อ GitHub ได้</td><td>TcpTestSucceeded : True = ใช้ได้</td></tr></tbody></table></div><figure class="code"><div class="code-cap"><span>.gitattributes</span><button class="copy" type="button">copy</button></div><pre><code class="language-text"># Normalize all text files to LF, in the repo and in the working tree.
+* text=auto eol=lf
+
+# Binary files: never touch line endings.
+*.ico binary
+*.png binary
+*.jpg binary
+*.pdf binary</code></pre></figure></article><article class="lesson" id="a12"><header class="lesson-head"><h2>A12 · บันทึกเหตุการณ์: สิ่งที่พลาดและบทเรียน</h2><p class="meta">อ่านก่อนเริ่มโปรเจกต์ใหม่</p><label class="done"><input type="checkbox" data-done="a12"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>เกิดอะไร</th><th>บทเรียน</th></tr></thead><tbody><tr><td>Claude Code ขึ้น API Usage Billing</td><td>เช็กหัวจอทุกครั้ง ถ้าไม่ใช่ Pro ให้ /logout /login</td></tr><tr><td>/setup-matt-pocock-skills เขียนทับ CLAUDE.md</td><td>commit ก่อนรัน setup แล้วดู git diff</td></tr><tr><td>คิดว่าใช้ CONTEXT.md แต่จริงคือ GLOSSARY.md</td><td>เช็กกับสิ่งที่ skill สร้างจริง ไม่ใช่บทความ</td></tr><tr><td>create-next-app ไม่ยอมสร้างในโฟลเดอร์ที่มี .md</td><td>ย้ายเข้า docs/ ชั่วคราวแล้วย้ายกลับ</td></tr><tr><td>auto mode ทำงานเองตอน grill / ticket 07</td><td>ดูแถบล่างก่อนสั่งงานทุกครั้ง</td></tr><tr><td>Next 16 เปิด cacheComponents ทำให้ export พัง</td><td>ทดลอง build จริงก่อนตัดสิน + เขียน ADR</td></tr><tr><td>Vitest 5 ต้องการ @types/node ≥ 22</td><td>อัปเดตให้ตรงกับ Node ที่ใช้จริง (24)</td></tr><tr><td>Vite 8 ทำ tsconfigPaths ได้เอง</td><td>อ่านคำเตือนตอนรัน ตัดปลั๊กอินที่ไม่จำเป็น</td></tr><tr><td><b>Tailwind สแกนไฟล์ .md</b> ทำให้ class ต้องห้ามจากตัวอย่างใน DESIGN.md ถูกสร้างจริง</td><td><code>@source not "../**/*.md";</code> — จับได้เพราะ acceptance criterion “ไม่มี prefers-color-scheme” ที่เพิ่มไว้ล่วงหน้า</td></tr><tr><td>เอกสารกับโค้ดไม่ตรงกันเกือบทุก ticket</td><td>ปกติ — ปิดช่องว่างตอนจบ ticket ทุกครั้ง</td></tr><tr><td>Tagline ซ้ำคำ “Frontend developer” กับบรรทัดตำแหน่ง</td><td>อ่านข้อความในบริบทหน้าจอจริง ไม่ใช่แยกเดี่ยว</td></tr><tr><td>spec ไม่มี description ของการ์ดงาน</td><td>เช็กว่าข้อมูลที่ ticket ต้องใช้มีครบก่อนเริ่ม</td></tr><tr><td>push ไม่ผ่านเพราะเน็ต</td><td>push ซ้ำ / hotspot / ปิด VPN</td></tr><tr><td>Pages เคย publish ไฟล์ดิบ (pages build and deployment)</td><td>ตั้ง Settings → Pages → Source → GitHub Actions</td></tr></tbody></table></div></article><section class="part" id="part-b"><div class="part-head"><span class="kicker">PART B</span><h1>ภาค B · พื้นฐานภาษาและเครื่องมือ</h1><p class="lead">อธิบายไวยากรณ์ทุกอย่างที่ใช้ในเว็บนี้ โดยยกตัวอย่างจากโค้ดจริงของคุณ</p></div></section><article class="lesson" id="b1"><header class="lesson-head"><h2>B1 · HTML: โครงหน้าเว็บที่มีความหมาย</h2><p class="meta">semantic HTML</p><label class="done"><input type="checkbox" data-done="b1"> อ่านจบแล้ว</label></header><p>HTML บอก<b>ความหมาย</b>ของเนื้อหา ไม่ใช่หน้าตา เว็บนี้ใช้แท็กที่มีความหมายทุกจุด ซึ่งช่วยทั้ง screen reader, Google และเทสต์ (Testing Library หา element ตาม “role” ที่มาจากแท็กเหล่านี้)</p><div class="tw"><table><thead><tr><th>แท็ก</th><th>role ที่ได้</th><th>ใช้ที่ไหนในเว็บนี้</th></tr></thead><tbody><tr><td><code>&lt;header&gt;</code></td><td>banner</td><td>Navbar</td></tr><tr><td><code>&lt;nav aria-label=&quot;Main&quot;&gt;</code></td><td>navigation (ชื่อ Main)</td><td>ลิงก์ About/Projects/Contact</td></tr><tr><td><code>&lt;main&gt;</code></td><td>main</td><td>ครอบ Hero + 3 Section (มีได้ตัวเดียว)</td></tr><tr><td><code>&lt;section aria-labelledby&gt;</code></td><td>region (มีชื่อ)</td><td>About, Projects, Contact</td></tr><tr><td><code>&lt;article&gt;</code></td><td>article</td><td>การ์ดงานแต่ละใบ</td></tr><tr><td><code>&lt;footer&gt;</code></td><td>contentinfo</td><td>Footer</td></tr><tr><td><code>&lt;h1&gt;…&lt;h4&gt;</code></td><td>heading (level 1–4)</td><td>h1 = ชื่อ, h2 = หัว Section, h3 = ชื่องาน/Skills</td></tr><tr><td><code>&lt;ul&gt;&lt;li&gt;</code></td><td>list / listitem</td><td>Skills, Stack, ลิงก์ใน Navbar</td></tr><tr><td><code>&lt;a href&gt;</code></td><td>link</td><td>ทุกปุ่มที่เป็นลิงก์</td></tr><tr><td><code>&lt;button&gt;</code></td><td>button</td><td>Button ที่ไม่มี href</td></tr></tbody></table></div><h3>ลำดับหัวข้อ (heading outline)</h3><p>หน้าเว็บควรมี <code>&lt;h1&gt;</code> ตัวเดียว และหัวข้อต้องลงทีละขั้น ห้ามข้ามระดับ (h2 → h4) เทสต์ในเว็บนี้เช็กว่า h1 มีตัวเดียวและเป็นชื่อเจ้าของ</p><figure class="code"><div class="code-cap"><span>โครงหัวข้อของหน้าแรก</span><button class="copy" type="button">copy</button></div><pre><code class="language-html">&lt;h1&gt;Phuwanai Mark&lt;/h1&gt;              ← Hero (ตัวเดียวทั้งหน้า)
+  &lt;h2&gt;About&lt;/h2&gt;                   ← Section
+    &lt;h3&gt;Skills&lt;/h3&gt;                ← หัวข้อย่อยใต้ About
+  &lt;h2&gt;Projects&lt;/h2&gt;
+    &lt;h3&gt;Personal portfolio&lt;/h3&gt;    ← ชื่อการ์ดงาน
+  &lt;h2&gt;Contact&lt;/h2&gt;</code></pre></figure><h3>ลิงก์ 4 แบบในเว็บนี้</h3><div class="tw"><table><thead><tr><th>แบบ</th><th>ตัวอย่าง</th><th>พฤติกรรม</th></tr></thead><tbody><tr><td>anchor ในหน้า</td><td><code>href=&quot;#projects&quot;</code></td><td>เลื่อนไป element ที่มี id="projects"</td></tr><tr><td>ไฟล์</td><td><code>href=&quot;/resume.pdf&quot; download</code></td><td>ดาวน์โหลดไฟล์</td></tr><tr><td>ภายนอก</td><td><code>href=&quot;https://github.com/...&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;</code></td><td>เปิดแท็บใหม่ อย่างปลอดภัย</td></tr><tr><td>อีเมล</td><td><code>href=&quot;mailto:phuwanaimark.work@gmail.com&quot;</code></td><td>เปิดแอปอีเมลของผู้ชม</td></tr></tbody></table></div><h3>Accessibility (a11y) ที่ใช้</h3><ul><li><code>aria-labelledby</code> — ตั้งชื่อ section ตามหัวข้อ → กลายเป็น region ที่ screen reader ประกาศว่า “About”</li><li><code>aria-label</code> — ตั้งชื่อให้ลิงก์ที่มีแต่ไอคอน (GitHub ใน Footer)</li><li><code>aria-hidden</code> — ซ่อนไอคอนตกแต่งจาก screen reader (เพราะมีข้อความข้างๆ อยู่แล้ว)</li><li>focus outline — กด Tab แล้วเห็นกรอบฟ้ารอบสิ่งที่เลือก</li></ul><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ทำไม Footer ไม่ใช้ <code>&lt;section&gt;</code>?</summary><div>เพราะตาม GLOSSARY Footer ไม่ใช่ Section และ <code>&lt;footer&gt;</code> ให้ role “contentinfo” ซึ่งตรงความหมายกว่า เทสต์เช็กด้วยว่ายังมี region แค่ 3 อัน</div></details></article><article class="lesson" id="b2"><header class="lesson-head"><h2>B2 · CSS และ Tailwind CSS v4</h2><p class="meta">utility class + design token</p><label class="done"><input type="checkbox" data-done="b2"> อ่านจบแล้ว</label></header><p>Tailwind ให้เราเขียนสไตล์ด้วย class เล็กๆ ใน HTML แทนเขียนไฟล์ CSS แยก เช่น <code>p-4</code> = padding 16px, <code>text-h1</code> = ตัวอักษร 32px</p><h3>Token กลายเป็น class อย่างไร</h3><p>ใน Tailwind v4 ไม่มี tailwind.config.js แล้ว เรานิยาม token ใน <code>@theme</code> ของ globals.css ส่วนหน้าของชื่อ (namespace) บอกว่าได้ class แบบไหน</p><div class="tw"><table><thead><tr><th>ประกาศใน @theme</th><th>class ที่ได้</th></tr></thead><tbody><tr><td><code>--color-surface: #12151c;</code></td><td><code>bg-surface</code> <code>text-surface</code> <code>border-surface</code></td></tr><tr><td><code>--spacing-4: 16px;</code></td><td><code>p-4</code> <code>m-4</code> <code>gap-4</code> <code>h-4</code> <code>scroll-mt-4</code></td></tr><tr><td><code>--text-h1: 32px;</code><br><code>--text-h1--line-height: 1.2;</code><br><code>--text-h1--font-weight: 600;</code></td><td><code>text-h1</code> (ได้ทั้ง 3 ค่าใน class เดียว)</td></tr><tr><td><code>--radius-lg: 12px;</code></td><td><code>rounded-lg</code></td></tr><tr><td><code>--shadow-card: ...;</code></td><td><code>shadow-card</code></td></tr><tr><td><code>--container-page: 1120px;</code></td><td><code>max-w-page</code></td></tr></tbody></table></div><h3>Reset: ปิดค่าเริ่มต้นของ Tailwind</h3><figure class="code"><div class="code-cap"><span>app/globals.css</span><button class="copy" type="button">copy</button></div><pre><code class="language-css">@theme {
+  --color-*: initial;     /* ลบสีทั้งหมดของ Tailwind (zinc, blue, …) */
+  --spacing: initial;     /* ปิดตัวคูณ → w-5, p-3 สร้างไม่ได้ */
+  --spacing-*: initial;
+  --text-*: initial;      /* ลบ text-xl, text-3xl, … */
+  --radius-*: initial;
+  --shadow-*: initial;
+  /* แล้วค่อยนิยาม token ของเราทีละตัว */
+}</code></pre></figure><p>ผลคือ ถ้าใครเขียน <code>bg-zinc-50</code> หรือ <code>w-5</code> จะไม่มีผลอะไรเลย ระบบบังคับให้ใช้ token แทนการพึ่งความจำ</p><h3>Responsive: mobile-first</h3><p>class ที่ไม่มี prefix ใช้กับทุกจอ class ที่มี <code>md:</code> ทับเมื่อจอกว้าง ≥ 768px</p><figure class="code"><div class="code-cap"><span>tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">&lt;h1 className=&quot;text-display-sm md:text-display&quot;&gt;   36px มือถือ → 48px จอใหญ่
+&lt;div className=&quot;pt-12 md:pt-24&quot;&gt;                    48px → 96px
+&lt;span className=&quot;hidden md:block&quot;&gt;                  ซ่อนบนมือถือ แสดงบนจอใหญ่</code></pre></figure><h3>State: hover, focus-visible, motion-reduce</h3><figure class="code"><div class="code-cap"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">hover:bg-surface-2                     เมาส์ชี้ → พื้นเปลี่ยน
+focus-visible:outline-2                กด Tab มาถึง → มีกรอบ 2px
+focus-visible:outline-offset-2         กรอบห่างขอบ 2px
+focus-visible:outline-accent           สีกรอบ = accent
+transition-colors duration-150 ease-out    เปลี่ยนสีนุ่มๆ 150ms
+motion-reduce:transition-none          ผู้ใช้ที่ตั้งลดการเคลื่อนไหว → ไม่มี transition</code></pre></figure><h3>Layout ด้วย Flexbox</h3><figure class="code"><div class="code-cap"><span>text</span><button class="copy" type="button">copy</button></div><pre><code class="language-text">flex                 จัดลูกเรียงเป็นแถว
+flex-col             เรียงเป็นคอลัมน์ (บนลงล่าง)
+flex-wrap            ล้นแล้วขึ้นบรรทัดใหม่ (ปุ่มใน Contact)
+items-center         จัดกลางแนวตั้ง
+justify-between      ดันลูกไปชิดซ้าย-ขวา (Navbar บนจอใหญ่)
+justify-end          ชิดขวา (Navbar บนมือถือ)
+gap-4                ช่องว่างระหว่างลูก 16px</code></pre></figure><h3>กับดัก 2 ข้อของ Tailwind</h3><aside class="note warn"><strong>1. ห้ามต่อชื่อ class เป็นชิ้นๆ</strong><div>Tailwind หา class จากข้อความเต็มในไฟล์ ถ้าเขียน <code>`bg-${name}`</code> Tailwind มองไม่เห็นและไม่สร้าง CSS ให้ ต้องเขียนเต็มเช่น <code>"bg-surface-2"</code> (หน้า Styleguide จึงเก็บ className เต็มไว้ใน array)</div></aside><aside class="note warn"><strong>2. Tailwind อ่านทุกไฟล์รวมถึง .md</strong><div>ตัวอย่าง “ห้ามใช้ <code>p-[13px]</code>” ใน DESIGN.md ถูกสร้างเป็น CSS จริง แก้ด้วย <code>@source not "../**/*.md";</code></div></aside></article><article class="lesson" id="b3"><header class="lesson-head"><h2>B3 · JavaScript: ไวยากรณ์ที่เจอในเว็บนี้</h2><p class="meta">ES modules + syntax</p><label class="done"><input type="checkbox" data-done="b3"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>ไวยากรณ์</th><th>ตัวอย่างจากเว็บนี้</th><th>ความหมาย</th></tr></thead><tbody><tr><td>import</td><td><code>import Button from &quot;@/components/ui/Button&quot;;</code></td><td>ยืม default export จากไฟล์อื่น · <code>@/</code> = รากโปรเจกต์</td></tr><tr><td>named import</td><td><code>import { site } from &quot;@/content/site&quot;;</code></td><td>ยืมของที่ export ด้วยชื่อ</td></tr><tr><td>export default</td><td><code>export default function Hero() {…}</code></td><td>ของหลักของไฟล์</td></tr><tr><td>export const</td><td><code>export const site = {…};</code></td><td>ส่งออกค่าที่มีชื่อ</td></tr><tr><td>const</td><td><code>const year = new Date().getFullYear();</code></td><td>ตั้งชื่อค่าที่ไม่เปลี่ยน</td></tr><tr><td>object</td><td><code>{ name: &quot;Phuwanai Mark&quot;, role: &quot;Frontend Developer&quot; }</code></td><td>ข้อมูลแบบ ชื่อ: ค่า</td></tr><tr><td>array</td><td><code>[&quot;HTML/CSS&quot;, &quot;JavaScript&quot;, &quot;React&quot;]</code></td><td>รายการ</td></tr><tr><td>เข้าถึงค่า</td><td><code>site.name</code> · <code>project.links.demo</code></td><td>จุดเพื่อเข้าไปในวัตถุ</td></tr><tr><td>template literal</td><td><code>`${site.name} — ${site.role}`</code></td><td>แทรกค่าลงข้อความ</td></tr><tr><td>arrow function</td><td><code>(skill) =&gt; &lt;Tag&gt;{skill}&lt;/Tag&gt;</code></td><td>ฟังก์ชันสั้น</td></tr><tr><td>ternary</td><td><code>isExternal(href) ? {…} : {}</code></td><td>ถ้า…ได้ค่านี้ ไม่งั้นได้ค่านั้น</td></tr><tr><td>&&</td><td><code>project.status &amp;&amp; &lt;Tag&gt;…&lt;/Tag&gt;</code></td><td>ถ้ามีค่า แสดงสิ่งที่อยู่ขวา</td></tr><tr><td>spread</td><td><code>{...externalProps}</code></td><td>กระจาย object ออกเป็น props</td></tr><tr><td>.map()</td><td><code>skills.map((s) =&gt; …)</code></td><td>แปลง array ทีละตัว</td></tr><tr><td>startsWith</td><td><code>href.startsWith(&quot;https://&quot;)</code></td><td>ข้อความขึ้นต้นด้วย…ไหม</td></tr></tbody></table></div><h3>ฟังก์ชันเล็กๆ จาก Button</h3><figure class="code"><div class="code-cap"><span>components/ui/Button.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">function isExternal(href: string) {
+  return href.startsWith(&quot;http://&quot;) || href.startsWith(&quot;https://&quot;);
+}</code></pre></figure><p><code>||</code> แปลว่า “หรือ” · ฟังก์ชันนี้คืนค่า true/false ใช้ตัดสินว่าจะเปิดแท็บใหม่ไหม</p></article><article class="lesson" id="b4"><header class="lesson-head"><h2>B4 · TypeScript: บอกชนิดข้อมูลให้เครื่องช่วยตรวจ</h2><p class="meta">type, union, optional</p><label class="done"><input type="checkbox" data-done="b4"> อ่านจบแล้ว</label></header><p>TypeScript = JavaScript + ชนิดข้อมูล ถ้าเขียนผิดรูปแบบ editor จะขึ้นเส้นแดงทันที และ <code>next build</code> จะล้ม</p><figure class="code"><div class="code-cap"><span>content/projects.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">// Union type: TypeScript rejects any other string.
+export type ProjectType = &quot;Code/Web&quot; | &quot;AI/Agent&quot; | &quot;Design&quot;;
+
+export type Project = {
+  name: string;
+  description: string;
+  type: ProjectType;
+  stack: string[];            // array ของ string
+  status?: &quot;In progress&quot;;     // ? = ใส่หรือไม่ใส่ก็ได้
+  links: {
+    demo?: string;
+    code?: string;
+  };
+};
+
+export const projects: Project[] = [ … ];   // array ของ Project</code></pre></figure><div class="tw"><table><thead><tr><th>แนวคิด</th><th>ตัวอย่าง</th><th>ผล</th></tr></thead><tbody><tr><td>type alias</td><td><code>type Project = {…}</code></td><td>ตั้งชื่อรูปร่างข้อมูล</td></tr><tr><td>union</td><td><code>&quot;Code/Web&quot; | &quot;AI/Agent&quot; | &quot;Design&quot;</code></td><td>รับได้แค่ 3 ค่านี้ · พิมพ์ "Blog" = error</td></tr><tr><td>optional</td><td><code>status?: …</code></td><td>ไม่ใส่ก็ได้ (= Finished)</td></tr><tr><td>array type</td><td><code>string[]</code>, <code>Project[]</code></td><td>รายการของชนิดนั้น</td></tr><tr><td>Record</td><td><code>Record&lt;ButtonVariant, string&gt;</code></td><td>object ที่ต้องมี key ครบทุก variant</td></tr><tr><td>ReactNode</td><td><code>children: ReactNode</code></td><td>อะไรก็ได้ที่ React แสดงผลได้</td></tr><tr><td>import type</td><td><code>import type { Metadata } from &quot;next&quot;;</code></td><td>เอามาแค่ชนิด ไม่ใช่โค้ดที่รัน</td></tr></tbody></table></div><h3>@ts-expect-error: เทสต์ที่ตรวจด้วย type</h3><figure class="code"><div class="code-cap"><span>__tests__/projects.test.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">export const unknownType: Project = {
+  name: &quot;Example&quot;,
+  description: &quot;Example&quot;,
+  // @ts-expect-error &quot;Blog&quot; is not a Project type.
+  type: &quot;Blog&quot;,
+  stack: [],
+  links: { code: &quot;https://example.com&quot; },
+};</code></pre></figure><p>บรรทัด <code>@ts-expect-error</code> บอกว่า “บรรทัดถัดไป<b>ต้อง</b> error” ถ้าวันหนึ่งมีคนเพิ่ม "Blog" เป็นประเภทที่ถูกต้อง บรรทัดนี้จะไม่ error อีก → tsc ฟ้องว่า Unused '@ts-expect-error' → CI ล้ม</p></article><article class="lesson" id="b5"><header class="lesson-head"><h2>B5 · React: component, props, children, map, เงื่อนไข</h2><p class="meta">หัวใจของ frontend</p><label class="done"><input type="checkbox" data-done="b5"> อ่านจบแล้ว</label></header><h3>Component คือฟังก์ชันที่คืนค่าหน้าตา</h3><figure class="code"><div class="code-cap"><span>components/ui/Tag.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Tag({ children }: { children: ReactNode }) {
+  return (
+    &lt;span className=&quot;inline-block rounded-sm bg-surface-2 px-2 py-1 font-mono text-caption text-text-muted&quot;&gt;
+      {children}
+    &lt;/span&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>ส่วน</th><th>ความหมาย</th></tr></thead><tbody><tr><td>ชื่อขึ้นต้นตัวใหญ่ <code>Tag</code></td><td>React แยก component ออกจากแท็ก HTML ด้วยตัวพิมพ์ใหญ่</td></tr><tr><td><code>{ children }</code></td><td>props ที่รับเข้ามา (ใช้ destructuring ดึงออกจาก object)</td></tr><tr><td><code>return ( … )</code></td><td>สิ่งที่จะแสดง</td></tr><tr><td><code>{children}</code></td><td>ปีกกาใน JSX = ค่า JavaScript</td></tr></tbody></table></div><h3>JSX ต่างจาก HTML</h3><div class="tw"><table><thead><tr><th>HTML</th><th>JSX</th><th>ทำไม</th></tr></thead><tbody><tr><td><code>class=&quot;...&quot;</code></td><td><code>className=&quot;...&quot;</code></td><td>class เป็นคำสงวนของ JS</td></tr><tr><td><code>&lt;img&gt;</code></td><td><code>&lt;img /&gt;</code></td><td>ทุกแท็กต้องปิด</td></tr><tr><td>ข้อความล้วน</td><td><code>{site.name}</code></td><td>แทรกค่าจากโค้ด</td></tr><tr><td><code>&lt;!-- comment --&gt;</code></td><td><code>{/* comment */}</code></td><td>คอมเมนต์ใน JSX</td></tr><tr><td>หลาย element ติดกัน</td><td><code>&lt;&gt; … &lt;/&gt;</code></td><td>Fragment ห่อโดยไม่สร้างแท็กเพิ่ม (page.tsx)</td></tr></tbody></table></div><h3>Props: ส่งข้อมูลเข้า component</h3><figure class="code"><div class="code-cap"><span>tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">&lt;Button variant=&quot;secondary&quot; href=&quot;#projects&quot;&gt;View projects&lt;/Button&gt;
+//      ↑ prop variant       ↑ prop href   ↑ children</code></pre></figure><figure class="code"><div class="code-cap"><span>components/ui/Button.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Button({
+  variant = &quot;primary&quot;,   // ค่าเริ่มต้น ถ้าไม่ส่งมา
+  href,
+  download,
+  children,
+}: ButtonProps) { … }</code></pre></figure><h3>children: component ที่เป็นกล่อง</h3><figure class="code"><div class="code-cap"><span>tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">&lt;Card&gt;
+  &lt;h3&gt;Personal portfolio&lt;/h3&gt;   ← ทั้งหมดนี้คือ children
+  &lt;p&gt;…&lt;/p&gt;
+&lt;/Card&gt;</code></pre></figure><p>Card, Container, Section, Tag ไม่ต้องรู้ว่าข้างในมีอะไร จึงใช้ซ้ำได้ทุกที่</p><h3>แสดงรายการด้วย .map และ key</h3><figure class="code"><div class="code-cap"><span>components/About.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">{skills.map((skill) =&gt; (
+  &lt;li key={skill}&gt;
+    &lt;Tag&gt;{skill}&lt;/Tag&gt;
+  &lt;/li&gt;
+))}</code></pre></figure><p><code>key</code> ต้องไม่ซ้ำในรายการเดียวกัน React ใช้จำว่ารายการไหนคือรายการไหน ใช้ข้อความเป็น key ได้เพราะไม่ซ้ำ ไม่ใช้ index เพราะถ้าสลับลำดับ key จะไม่ตามข้อมูล</p><h3>แสดงตามเงื่อนไข (conditional rendering)</h3><figure class="code"><div class="code-cap"><span>tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">// แบบ &amp;&amp; : มีค่าค่อยแสดง
+{project.status &amp;&amp; &lt;Tag&gt;{project.status}&lt;/Tag&gt;}
+{project.links.demo &amp;&amp; &lt;Button variant=&quot;secondary&quot; href={project.links.demo}&gt;Live demo&lt;/Button&gt;}
+
+// แบบ if : คืน element คนละแบบ
+if (href) {
+  return &lt;a href={href} …&gt;{children}&lt;/a&gt;;
+}
+return &lt;button type=&quot;button&quot; …&gt;{children}&lt;/button&gt;;</code></pre></figure><h3>Server Component vs "use client"</h3><p>ทุก component ในเว็บนี้เป็น <b>Server Component</b> (ไม่มี <code>"use client"</code>) เพราะไม่มี state (ค่าที่เปลี่ยนตอนผู้ใช้กด) และไม่มี event อย่าง onClick ผลคือหน้าเว็บเป็น HTML ล้วน ไม่ต้องส่ง JavaScript ของ component ไปที่เบราว์เซอร์ ถ้าวันหนึ่งทำเมนู hamburger ที่เปิด/ปิดได้ ถึงตอนนั้นค่อยต้องใช้ <code>"use client"</code> + <code>useState</code></p><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ถ้าเพิ่ม variant ที่ 4 ชื่อ "danger" ลงใน <code>ButtonVariant</code> แต่ลืมใส่ class ใน <code>variantClasses</code> จะเกิดอะไร?</summary><div>TypeScript ฟ้องทันที เพราะ <code>Record&lt;ButtonVariant, string&gt;</code> บังคับให้ object มี key ครบทุกค่าของ union → build ไม่ผ่าน</div></details></article><article class="lesson" id="b6"><header class="lesson-head"><h2>B6 · Next.js App Router</h2><p class="meta">โครงไฟล์ = โครงเว็บ</p><label class="done"><input type="checkbox" data-done="b6"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>ไฟล์/โฟลเดอร์</th><th>ได้อะไร</th></tr></thead><tbody><tr><td><code>app/layout.tsx</code></td><td>กรอบที่ครอบทุกหน้า: <html>, <body>, ฟอนต์, metadata ตั้งต้น</td></tr><tr><td><code>app/page.tsx</code></td><td>หน้า /</td></tr><tr><td><code>app/styleguide/page.tsx</code></td><td>หน้า /styleguide (ชื่อโฟลเดอร์ = URL)</td></tr><tr><td><code>app/globals.css</code></td><td>CSS ทั้งเว็บ + token</td></tr><tr><td><code>public/</code></td><td>ไฟล์ที่เสิร์ฟตรงๆ เช่น /resume.pdf</td></tr><tr><td><code>next.config.ts</code></td><td>ตั้งค่า Next.js</td></tr></tbody></table></div><h3>layout กับ page</h3><figure class="code"><div class="code-cap"><span>app/layout.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function RootLayout({ children }: LayoutProps&lt;&quot;/&quot;&gt;) {
+  return (
+    &lt;html lang=&quot;en&quot; className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}&gt;
+      &lt;body className=&quot;min-h-full flex flex-col bg-bg text-text font-sans&quot;&gt;
+        {children}      ← เนื้อหาของแต่ละหน้ามาแทนที่ตรงนี้
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre></figure><p>Navbar กับ Footer อยู่ใน <code>page.tsx</code> ไม่ใช่ layout เพราะถ้าใส่ใน layout หน้า /styleguide จะมี Navbar ที่ลิงก์ไป #about ซึ่งไม่มีอยู่ในหน้านั้น</p><h3>metadata</h3><figure class="code"><div class="code-cap"><span>app/layout.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export const metadata: Metadata = {
+  title: `${site.name} — ${site.role}`,   // → &quot;Phuwanai Mark — Frontend Developer&quot;
+  description: site.tagline,
+};</code></pre></figure><p>หน้าไหน export metadata เอง จะทับค่าจาก layout เช่น Styleguide ตั้ง <code>robots: { index: false }</code> เฉพาะหน้านั้น</p><h3>next/font</h3><p><code>Inter(...)</code> และ <code>JetBrains_Mono(...)</code> ถูกเรียก<b>ตอน build</b> Next.js ดาวน์โหลดฟอนต์มาเก็บใน out/ เอง (self-host) ผู้ชมไม่ต้องโหลดจาก Google</p><h3>Static export</h3><figure class="code"><div class="code-cap"><span>next.config.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">const nextConfig: NextConfig = {
+  output: &quot;export&quot;,              // build เป็นไฟล์ HTML/CSS/JS ล้วนใน out/
+  images: { unoptimized: true }, // ตัวย่อรูปต้องมี server
+};</code></pre></figure><p>GitHub Pages ไม่มี server จึงห้ามใช้ API routes, Server Actions, middleware, ISR, cookies()/headers() — โค้ดทุกบรรทัดใน component รันครั้งเดียวตอน <code>npm run build</code> เช่น ปีใน Footer</p></article><article class="lesson" id="b7"><header class="lesson-head"><h2>B7 · การเทสต์: Vitest + Testing Library + TDD</h2><p class="meta">ตรวจสิ่งที่ผู้ใช้เห็น</p><label class="done"><input type="checkbox" data-done="b7"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>เครื่องมือ</th><th>หน้าที่</th></tr></thead><tbody><tr><td>Vitest</td><td>ตัวรันเทสต์ (<code>npm test</code> = <code>vitest run</code> รันรอบเดียวจบ)</td></tr><tr><td>jsdom</td><td>จำลองเบราว์เซอร์ใน Node</td></tr><tr><td>@testing-library/react</td><td><code>render()</code> และ <code>screen</code> ค้นหา element แบบที่ผู้ใช้เห็น</td></tr><tr><td>@vitejs/plugin-react</td><td>อ่าน JSX</td></tr></tbody></table></div><h3>โครงของเทสต์</h3><figure class="code"><div class="code-cap"><span>__tests__/home.test.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">test(&quot;page has exactly one level-1 heading: the Owner&#x27;s name in the Hero&quot;, () =&gt; {
+  render(&lt;Home /&gt;);                                             // 1. แสดงหน้า
+
+  const headings = screen.getAllByRole(&quot;heading&quot;, { level: 1 }); // 2. ค้นหาแบบผู้ใช้
+  expect(headings).toHaveLength(1);                             // 3. ยืนยันผล
+  expect(headings[0].textContent).toBe(site.name);
+});</code></pre></figure><div class="tw"><table><thead><tr><th>คำสั่ง</th><th>หาอะไร</th></tr></thead><tbody><tr><td><code>getByRole(&quot;main&quot;)</code></td><td>element ตัวเดียวที่มี role นั้น (ไม่เจอ = fail)</td></tr><tr><td><code>getAllByRole(&quot;region&quot;)</code></td><td>ทุกตัว</td></tr><tr><td><code>getByRole(&quot;link&quot;, { name: &quot;View projects&quot; })</code></td><td>ลิงก์ที่มีชื่อนี้</td></tr><tr><td><code>queryByText(...)</code></td><td>ไม่เจอได้ (คืน null) ใช้เช็กว่า “ไม่มี”</td></tr><tr><td><code>within(section).getBy...(...)</code></td><td>ค้นเฉพาะข้างใน element นั้น</td></tr></tbody></table></div><h3>TDD: red → green</h3><ol><li>เขียนเทสต์ของพฤติกรรมที่ยังไม่มี → รัน → <b>แดง</b> (ต้องแดงเพราะพฤติกรรมยังไม่มี ไม่ใช่เพราะพิมพ์ผิด)</li><li>เขียนโค้ดน้อยที่สุดให้ผ่าน → <b>เขียว</b></li><li>ปรับโค้ดให้สวย (refactor) โดยเทสต์ยังเขียว</li></ol><h3>Fixture: ข้อมูลปลอมสำหรับเทสต์เท่านั้น</h3><p>ข้อมูลจริงยังไม่มีงานที่ Finished จึงสร้างข้อมูลทดสอบ 2 ชิ้นแล้วส่งเข้า <code>&lt;Projects projects={fixture} /&gt;</code> — เป็นเหตุผลที่ Projects รับข้อมูลเป็น prop แทน import เอง</p><aside class="note key"><strong>หลักของเทสต์ในโปรเจกต์นี้</strong><div>เทสต์ “สิ่งที่ผู้ชมเห็นหรือกดได้” (role, ชื่อ, href, attribute, ลำดับ) ไม่เทสต์ class ของ Tailwind หรือโครงสร้าง DOM ภายใน — เปลี่ยนหน้าตาได้โดยเทสต์ไม่พัง</div></aside></article><article class="lesson" id="b8"><header class="lesson-head"><h2>B8 · CI/CD: GitHub Actions และ GitHub Pages</h2><p class="meta">ให้ GitHub ทำงานแทนเรา</p><label class="done"><input type="checkbox" data-done="b8"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>คำ</th><th>ความหมาย</th></tr></thead><tbody><tr><td>workflow</td><td>ไฟล์ .yml ใน .github/workflows/ บอกว่าจะรันอะไรเมื่อไร</td></tr><tr><td>on</td><td>เหตุการณ์ที่สั่งให้รัน (push, pull_request)</td></tr><tr><td>job</td><td>งานหนึ่งชุด รันบนเครื่องของ GitHub (ubuntu-latest)</td></tr><tr><td>step</td><td>ขั้นในงาน ถ้าขั้นไหน fail ขั้นถัดไปไม่รัน</td></tr><tr><td>uses</td><td>เรียก action สำเร็จรูป (checkout, setup-node, deploy-pages)</td></tr><tr><td>run</td><td>รันคำสั่ง shell</td></tr><tr><td>needs</td><td>รอ job อื่นเสร็จก่อน</td></tr><tr><td>if</td><td>รันเฉพาะเมื่อเงื่อนไขจริง</td></tr><tr><td>permissions</td><td>สิทธิ์ของ token (ให้น้อยที่สุด)</td></tr></tbody></table></div><p><b>CI</b> (Continuous Integration) = ตรวจทุกครั้งที่ push · <b>CD</b> (Continuous Deployment) = ขึ้นเว็บอัตโนมัติเมื่อผ่าน</p><div class="flow"><span>push</span>→<span>npm ci</span>→<span>lint</span>→<span>test</span>→<span>build</span>→<span>check-output.sh</span>→<span>upload out/</span>→<span>deploy</span>→<span class="ok">phuwanaimark24.github.io</span></div><p>รายละเอียดเต็มอยู่ใน ticket 04 และ 13 (ภาค C)</p></article><section class="part" id="part-c"><div class="part-head"><span class="kicker">PART C</span><h1>ภาค C · ทีละ ticket (01–13)</h1><p class="lead">แต่ละบท: เป้าหมาย → ไฟล์ที่แตะ → โค้ดจริงพร้อมคำอธิบาย → การตัดสินใจระหว่างทาง → แบบฝึกหัด</p></div></section><article class="lesson" id="t01"><header class="lesson-head"><h2>Ticket 01 · Static export config</h2><p class="meta">ช่วงตั้งพื้นฐาน</p><label class="done"><input type="checkbox" data-done="t01"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>01</b></div><div><span>Commit</span><b><code>90b6ee1</code></b></div><div><span>ไฟล์</span><b>next.config.ts</b></div><div><span>แนวคิดหลัก</span><b>static export, ADR</b></div></div><h3>เป้าหมาย</h3><p>ให้ <code>npm run build</code> สร้างโฟลเดอร์ <code>out/</code> ที่มีแต่ไฟล์ static เพื่อขึ้น GitHub Pages ได้</p><h3>ก่อน → หลัง</h3><figure class="code"><div class="code-cap"><span>ก่อน</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">const nextConfig: NextConfig = {
+  cacheComponents: true,        // ← ค่าเริ่มต้นของ Next 16 (ทำให้ export พัง)
+  partialPrefetching: true,
+  turbopack: { … },
+};</code></pre></figure><figure class="code"><div class="code-cap"><span>หลัง — next.config.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">const nextConfig: NextConfig = {
+  // Static HTML export for GitHub Pages (no server).
+  // Cache Components / Partial Prefetching are off: see docs/adr/0001-…md
+  output: &quot;export&quot;,
+  // The default image optimizer needs a server.
+  images: { unoptimized: true },
+  turbopack: {
+    rules: {
+      &quot;*.css&quot;: { loaders: [&quot;@tailwindcss/turbopack&quot;], as: &quot;*.css&quot; },
+    },
+  },
+};</code></pre></figure><div class="tw"><table><thead><tr><th>บรรทัด</th><th>ทำไม</th></tr></thead><tbody><tr><td><code>output: &quot;export&quot;</code></td><td>ให้ build เป็น HTML ล้วน</td></tr><tr><td><code>images: { unoptimized: true }</code></td><td>ตัวย่อรูปของ Next ต้องมี server</td></tr><tr><td>ลบ cacheComponents</td><td>เปิด PPR ซึ่งต้องมี server → build error</td></tr><tr><td>คง turbopack.rules</td><td>Tailwind v4 ต่อผ่าน loader นี้</td></tr><tr><td>ไม่มี basePath</td><td>repo ชื่อ <username>.github.io เว็บอยู่ที่ราก /</td></tr></tbody></table></div><h3>ตรวจยังไง</h3><p>ticket นี้ยังไม่มีชุดเทสต์ จึงพิสูจน์ด้วย build จริง: มีโฟลเดอร์ out/ และมี index.html</p><div class="try"><strong>ลองทำเอง</strong><ol><li>รัน <code>npm run build</code> แล้วเปิดโฟลเดอร์ <code>out/</code> ดูว่ามีไฟล์อะไรบ้าง</li><li>ลองใส่ <code>cacheComponents: true</code> กลับเข้าไป แล้ว build → เห็น error ที่ ADR พูดถึง → <code>git restore next.config.ts</code></li></ol></div></article><article class="lesson" id="t02"><header class="lesson-head"><h2>Ticket 02 · Test harness (Vitest)</h2><p class="meta">ช่วงตั้งพื้นฐาน</p><label class="done"><input type="checkbox" data-done="t02"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>02</b></div><div><span>Commit</span><b><code>8e1e8dd</code></b></div><div><span>ไฟล์</span><b>vitest.config.mts, vitest.setup.ts, __tests__/home.test.tsx, package.json, .gitattributes</b></div><div><span>แนวคิดหลัก</span><b>test runner, smoke test</b></div></div><h3>package ที่ติดตั้ง (devDependencies)</h3><div class="tw"><table><thead><tr><th>package</th><th>หน้าที่</th></tr></thead><tbody><tr><td><code>vitest</code></td><td>รันเทสต์</td></tr><tr><td><code>@vitejs/plugin-react</code></td><td>อ่าน JSX</td></tr><tr><td><code>jsdom</code></td><td>DOM จำลอง</td></tr><tr><td><code>@testing-library/react</code></td><td>render + screen</td></tr><tr><td><code>@testing-library/dom</code></td><td>แกนของ testing library</td></tr></tbody></table></div><p>ตัดสินใจระหว่างทาง: Vitest 5 ต้องใช้ <code>@types/node</code> ≥ 22 → อัปเดตเป็น ^24 ให้ตรงกับ Node ที่ใช้ · Vite 8 อ่าน tsconfig paths ได้เอง → ถอดปลั๊กอิน vite-tsconfig-paths ออก</p><figure class="code"><div class="code-cap"><span>vitest.config.mts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">export default defineConfig({
+  plugins: [react()],                    // Compile JSX/TSX.
+  resolve: { tsconfigPaths: true },      // ให้ import &quot;@/...&quot; ใช้ได้
+  test: {
+    environment: &quot;jsdom&quot;,                // DOM จำลอง
+    setupFiles: [&quot;./vitest.setup.ts&quot;],   // รันก่อนทุกไฟล์เทสต์
+  },
+});</code></pre></figure><figure class="code"><div class="code-cap"><span>vitest.setup.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">afterEach(() =&gt; {
+  cleanup();   // ถอด component ออกหลังแต่ละเทสต์ ไม่ให้ปนกัน
+});</code></pre></figure><figure class="code"><div class="code-cap"><span>__tests__/home.test.tsx — smoke test แรก</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">test(&quot;home page renders its main content&quot;, () =&gt; {
+  render(&lt;Home /&gt;);
+  expect(screen.getByRole(&quot;main&quot;)).toBeTruthy();
+});</code></pre></figure><p>รีวิวจับได้ว่าเวอร์ชันแรกเช็ก <code>container.firstChild</code> (โครงสร้าง DOM) → เปลี่ยนเป็น <code>getByRole("main")</code> (สิ่งที่ผู้ใช้เห็น)</p><figure class="code"><div class="code-cap"><span>package.json → scripts</span><button class="copy" type="button">copy</button></div><pre><code class="language-json">&quot;test&quot;: &quot;vitest run&quot;</code></pre></figure><p>ต้องเป็น <code>vitest run</code> ไม่ใช่ <code>vitest</code> เพราะแบบหลังเป็น watch mode ค้างไม่จบ ใน CI จะค้าง</p><div class="try"><strong>ลองทำเอง</strong><ol><li>รัน <code>npm test</code> แล้วอ่านผล: ชื่อเทสต์, Tests passed, Duration</li><li>เปลี่ยน <code>"main"</code> เป็น <code>"banner"</code> ในเทสต์แรก → ดูเทสต์แดง → คืนค่า</li></ol></div></article><article class="lesson" id="t03"><header class="lesson-head"><h2>Ticket 03 · Tokens, fonts, dark theme</h2><p class="meta">ช่วงตั้งพื้นฐาน</p><label class="done"><input type="checkbox" data-done="t03"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>03</b></div><div><span>Commit</span><b><code>35ae1b4</code></b></div><div><span>ไฟล์</span><b>app/globals.css, app/layout.tsx</b></div><div><span>แนวคิดหลัก</span><b>@theme, reset, next/font</b></div></div><p>นิยาม token ทุกตัวจาก DESIGN.md ใน <code>@theme</code>, reset ค่าเริ่มต้นของ Tailwind, เปลี่ยน Geist → Inter + JetBrains Mono, ตัดโหมดสว่างทิ้ง</p><figure class="code"><div class="code-cap"><span>app/globals.css (ย่อ)</span><button class="copy" type="button">copy</button></div><pre><code class="language-css">@theme {
+  /* Resets */
+  --color-*: initial;
+  --spacing: initial;
+  --spacing-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  /* Color (DESIGN.md §2) */
+  --color-bg: #0b0d12;
+  --color-surface: #12151c;
+  --color-text: #e6e8ec;
+  --color-text-muted: #9aa3b2;
+  --color-accent: #60a5fa;
+  --color-accent-strong: #2563eb;
+  /* … */
+
+  /* Spacing */
+  --spacing-1: 4px;  --spacing-2: 8px;  --spacing-4: 16px;  --spacing-6: 24px;
+  --spacing-8: 32px; --spacing-12: 48px; --spacing-16: 64px; --spacing-24: 96px;
+
+  /* Text: size + line-height + weight */
+  --text-h1: 32px;
+  --text-h1--line-height: 1.2;
+  --text-h1--font-weight: 600;
+  /* … */
+
+  --radius-lg: 12px;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --container-page: 1120px;
+}
+
+/* Fonts come from next/font CSS variables set on &lt;html&gt; in layout.tsx. */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+:root { color-scheme: dark; }   /* scrollbar และ form control เป็นโทนเข้มด้วย */</code></pre></figure><h3>ทำไม @theme inline สำหรับฟอนต์</h3><p><code>--font-inter</code> เป็นตัวแปรที่ next/font ใส่ให้ <code>&lt;html&gt;</code> ตอนรันจริง คำว่า <code>inline</code> บอกให้ Tailwind เขียน <code>var(--font-inter)</code> ลงใน class ตรงๆ แทนการอ่านค่าตอนประกาศ token</p><h3>ตรวจยังไง</h3><p>Claude เขียนสคริปต์ทิ้ง (ไม่ commit) ใช้ compiler ของ Tailwind ทดสอบว่า</p><div class="tw"><table><thead><tr><th>ต้องถูกสร้าง</th><th>ต้อง<b>ไม่</b>ถูกสร้าง</th></tr></thead><tbody><tr><td>p-4, h-16, scroll-mt-16, text-h1, text-display-sm, bg-surface, text-text-muted, rounded-lg, shadow-card, max-w-page, font-mono, md:py-24</td><td>w-5, p-3, gap-7, text-xl, bg-zinc-50, rounded-xl, shadow-md</td></tr></tbody></table></div><aside class="note warn"><strong>ค้างไว้ไปเช็กใน ticket 08</strong><div>CSS ยังมี <code>prefers-color-scheme</code> 1 rule (คิดว่ามาจากหน้า scaffold) → เพิ่มเป็น acceptance criterion ใน ticket 08 → ภายหลังพบว่าจริงๆ มาจากไฟล์ .md ที่ Tailwind สแกน</div></aside><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ทำไมต้องเขียน <code>--spacing: initial;</code> แยกจาก <code>--spacing-*: initial;</code>?</summary><div>Tailwind v4 สร้าง spacing จากตัวคูณ <code>--spacing</code> (เช่น w-5 = 5 × 0.25rem) ถ้าลบแค่ชื่อที่มี * ตัวคูณยังอยู่ → w-5 ยังใช้ได้ ต้องปิดตัวคูณด้วย</div></details></article><article class="lesson" id="t04"><header class="lesson-head"><h2>Ticket 04 · CI: lint, test, build ทุกครั้งที่ push</h2><p class="meta">ช่วงตั้งพื้นฐาน</p><label class="done"><input type="checkbox" data-done="t04"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>04</b></div><div><span>Commit</span><b><code>07d509f</code></b></div><div><span>ไฟล์</span><b>.github/workflows/ci.yml</b></div><div><span>แนวคิดหลัก</span><b>GitHub Actions</b></div></div><p>ก่อนทำ ticket นี้ต้องสร้าง repo <code>PhuwanaiMark24.github.io</code> (Public, ไม่ติ๊ก README) แล้ว push ครั้งแรก</p><figure class="code"><div class="code-cap"><span>powershell</span><button class="copy" type="button">copy</button></div><pre><code class="language-powershell">git remote add origin https://github.com/PhuwanaiMark24/PhuwanaiMark24.github.io.git
+git push -u origin main</code></pre></figure><figure class="code"><div class="code-cap"><span>.github/workflows/ci.yml (เวอร์ชัน ticket 04)</span><button class="copy" type="button">copy</button></div><pre><code class="language-yaml">name: CI
+
+on:
+  push:
+  pull_request:
+
+# The workflow only reads the repo, so the token gets read access only.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5          # ดึงโค้ดลงเครื่อง
+      - uses: actions/setup-node@v5        # ติดตั้ง Node 24 + cache npm
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci                        # ติดตั้งตาม package-lock แบบเป๊ะ
+      - run: npm run lint
+      - run: npm test                      # vitest run (ไม่ค้าง)
+      - run: npm run build</code></pre></figure><div class="tw"><table><thead><tr><th>ทำไม</th><th></th></tr></thead><tbody><tr><td><code>npm ci</code> ไม่ใช่ <code>npm install</code></td><td>ลบ node_modules แล้วติดตั้งตาม lockfile เป๊ะ ได้ผลเหมือนกันทุกครั้ง</td></tr><tr><td><code>permissions: contents: read</code></td><td>ให้สิทธิ์น้อยที่สุด (ข้อเสนอจาก review)</td></tr><tr><td>ไม่มี deploy</td><td>แยกไป ticket 13 เพื่อให้ CI เขียวเสมอระหว่างพัฒนา</td></tr></tbody></table></div><div class="try"><strong>ลองทำเอง</strong><ol><li>เปิดแท็บ Actions บน GitHub แล้วกดเข้า run หนึ่ง → job check → กางดู log ของแต่ละ step</li></ol></div></article><article class="lesson" id="t05"><header class="lesson-head"><h2>Ticket 05 · Styleguide page (Tokens)</h2><p class="meta">ช่วง design system</p><label class="done"><input type="checkbox" data-done="t05"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>05</b></div><div><span>Commit</span><b><code>7cf219e</code></b></div><div><span>ไฟล์</span><b>app/styleguide/page.tsx</b></div><div><span>แนวคิดหลัก</span><b>route, page metadata, .map</b></div></div><p>หน้า <code>/styleguide</code> แสดง token ทุกตัวให้ตรวจด้วยตา ไม่มีลิงก์ใน Navbar และบอก Google ไม่ให้เก็บ</p><figure class="code"><div class="code-cap"><span>app/styleguide/page.tsx (บางส่วน)</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export const metadata: Metadata = {
+  title: &quot;Styleguide&quot;,
+  robots: { index: false },          // → &lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;
+};
+
+// Tailwind only generates classes it finds as full strings in source code,
+// so each entry spells out its whole class name (never build it like `bg-${name}`).
+const colors = [
+  { name: &quot;bg&quot;,        value: &quot;#0b0d12&quot;, className: &quot;bg-bg&quot; },
+  { name: &quot;surface&quot;,   value: &quot;#12151c&quot;, className: &quot;bg-surface&quot; },
+  { name: &quot;surface-2&quot;, value: &quot;#1a1e27&quot;, className: &quot;bg-surface-2&quot; },
+  // …
+];
+
+function TokenLabel({ name, value }: { name: string; value: string }) {
+  return (
+    &lt;p className=&quot;text-small&quot;&gt;
+      &lt;span className=&quot;font-mono&quot;&gt;{name}&lt;/span&gt;{&quot; &quot;}
+      &lt;span className=&quot;font-mono text-text-muted&quot;&gt;{value}&lt;/span&gt;
+    &lt;/p&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>แนวคิด</th><th>อธิบาย</th></tr></thead><tbody><tr><td>route file</td><td>สร้าง <code>app/styleguide/page.tsx</code> ก็ได้หน้า /styleguide · ตอน export ได้ <code>out/styleguide.html</code></td></tr><tr><td>page metadata</td><td>ค่าในหน้าทับค่าจาก layout เฉพาะหน้านี้</td></tr><tr><td>.map</td><td>เก็บ token เป็น array แล้ววนสร้างกล่อง แทนการเขียนซ้ำ 12 รอบ</td></tr><tr><td>component ในไฟล์เดียวกัน</td><td>TokenLabel ใช้ 6 ที่ → ผ่านกฎ “≥ 2 ที่ค่อยแยก”</td></tr></tbody></table></div><p>รีวิวติ: ค่าสีเขียนซ้ำกับ globals.css → ยอมรับได้ เพราะกล่องสีดึงสีจริงจาก class ถ้าป้ายไม่ตรงจะเห็นทันที</p><div class="try"><strong>ลองทำเอง</strong><ol><li>เปิด localhost:3000/styleguide เทียบสีกับตารางใน DESIGN.md §2</li></ol></div></article><article class="lesson" id="t06"><header class="lesson-head"><h2>Ticket 06 · Button</h2><p class="meta">ช่วง design system · ได้เรียน React มากที่สุด</p><label class="done"><input type="checkbox" data-done="t06"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>06</b></div><div><span>Commit</span><b><code>0096c67</code></b></div><div><span>ไฟล์</span><b>components/ui/Button.tsx, Styleguide, DESIGN.md</b></div><div><span>แนวคิดหลัก</span><b>props, variants, conditional rendering</b></div></div><figure class="code"><div class="code-cap"><span>components/ui/Button.tsx (จัดรูปแบบให้อ่านง่าย)</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">import type { ReactNode } from &quot;react&quot;;
+
+export type ButtonVariant = &quot;primary&quot; | &quot;secondary&quot; | &quot;ghost&quot;;
+
+type ButtonProps = {
+  variant?: ButtonVariant;
+  href?: string;        // มี href → &lt;a&gt;  ไม่มี → &lt;button&gt;
+  download?: boolean;   // ใช้กับลิงก์เท่านั้น
+  children: ReactNode;
+};
+
+const baseClasses =
+  &quot;inline-flex items-center justify-center gap-2 rounded-md border px-4 py-2 text-body &quot; +
+  &quot;transition-colors duration-150 ease-out motion-reduce:transition-none &quot; +
+  &quot;focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent&quot;;
+
+const variantClasses: Record&lt;ButtonVariant, string&gt; = {
+  primary:   &quot;border-transparent bg-accent-strong text-on-accent hover:bg-accent-strong-hover&quot;,
+  secondary: &quot;border-border bg-transparent text-text hover:border-border-strong&quot;,
+  ghost:     &quot;border-transparent text-text hover:bg-surface-2&quot;,
+};
+
+function isExternal(href: string) {
+  return href.startsWith(&quot;http://&quot;) || href.startsWith(&quot;https://&quot;);
+}
+
+export default function Button({ variant = &quot;primary&quot;, href, download, children }: ButtonProps) {
+  const className = `${baseClasses} ${variantClasses[variant]}`;
+
+  if (href) {
+    const externalProps = isExternal(href)
+      ? { target: &quot;_blank&quot;, rel: &quot;noopener noreferrer&quot; }
+      : {};
+    return (
+      &lt;a href={href} download={download} className={className} {...externalProps}&gt;
+        {children}
+      &lt;/a&gt;
+    );
+  }
+
+  return (
+    &lt;button type=&quot;button&quot; className={className}&gt;
+      {children}
+    &lt;/button&gt;
+  );
+}</code></pre></figure><h3>อ่านทีละส่วน</h3><div class="tw"><table><thead><tr><th>ส่วน</th><th>ทำอะไร</th></tr></thead><tbody><tr><td><code>ButtonVariant</code></td><td>union 3 ค่า พิมพ์ผิดได้ error ทันที</td></tr><tr><td><code>baseClasses</code></td><td>class ที่ทุก variant ใช้ร่วม: ขนาด, focus, transition</td></tr><tr><td><code>variantClasses[variant]</code></td><td>ดึง class ตาม variant จาก object แทน if ทีละแบบ</td></tr><tr><td><code>border-transparent</code></td><td>ทุก variant มีขอบ 1px เท่ากัน → ความสูงเท่ากัน</td></tr><tr><td><code>if (href)</code></td><td>conditional rendering: ลิงก์หรือปุ่ม</td></tr><tr><td><code>{...externalProps}</code></td><td>กระจาย target/rel ใส่ <a> เฉพาะลิงก์ภายนอก</td></tr><tr><td><code>variant = &quot;primary&quot;</code></td><td>ค่าเริ่มต้นของ prop</td></tr></tbody></table></div><h3>ตัดสินใจระหว่างทาง</h3><ul><li>hover ของ ghost = พื้น surface-2 (ข้อ 2 ตัวอักษร accent จะดูเหมือนลิงก์)</li><li>ทุกแบบใช้ text-body</li><li>focus ใช้ outline ไม่ใช่ ring (ring = box-shadow = เงาสีฟ้าที่ห้ามไว้)</li><li>บันทึกทั้งหมดลง DESIGN.md §8</li></ul><div class="try"><strong>ลองทำเอง</strong><ol><li>ที่ /styleguide กด Tab วนผ่านปุ่ม ดูกรอบ focus</li><li>ลองใช้ <code>&lt;Button variant="ghost" href="https://example.com"&gt;</code> ใน Styleguide แล้ว inspect ดูว่าได้ target/rel</li></ol></div><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ถ้าส่ง <code>href="mailto:..."</code> ปุ่มจะเปิดแท็บใหม่ไหม?</summary><div>ไม่ เพราะ isExternal เช็กแค่ http:// และ https:// — ถูกต้องแล้ว เพราะ mailto ไม่มีเหตุผลจะเปิดแท็บใหม่</div></details></article><article class="lesson" id="t07"><header class="lesson-head"><h2>Ticket 07 · Tag, Card, Container, GitHub icon</h2><p class="meta">ช่วง design system</p><label class="done"><input type="checkbox" data-done="t07"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>07</b></div><div><span>Commit</span><b><code>dfb4be2</code></b></div><div><span>ไฟล์</span><b>components/ui/{Tag,Card,Container,GithubIcon}.tsx</b></div><div><span>แนวคิดหลัก</span><b>children prop, a11y ของไอคอน</b></div></div><figure class="code"><div class="code-cap"><span>components/ui/Card.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Card({ children }: { children: ReactNode }) {
+  return (
+    &lt;div className=&quot;rounded-lg border border-border bg-surface p-4 shadow-card md:p-6&quot;&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}</code></pre></figure><figure class="code"><div class="code-cap"><span>components/ui/Container.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Container({ children }: { children: ReactNode }) {
+  return &lt;div className=&quot;mx-auto w-full max-w-page px-4 md:px-6&quot;&gt;{children}&lt;/div&gt;;
+}</code></pre></figure><figure class="code"><div class="code-cap"><span>components/ui/GithubIcon.tsx (ย่อ path)</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function GithubIcon({ size = 24, &quot;aria-label&quot;: ariaLabel }: GithubIconProps) {
+  // Decorative by default: hidden from screen readers.
+  // With a label: exposed as an image with that name.
+  const a11yProps = ariaLabel
+    ? { role: &quot;img&quot;, &quot;aria-label&quot;: ariaLabel }
+    : { &quot;aria-hidden&quot;: true };
+
+  return (
+    &lt;svg width={size} height={size} viewBox=&quot;0 0 24 24&quot; fill=&quot;currentColor&quot; {...a11yProps}&gt;
+      &lt;path d=&quot;…official mark from primer/octicons…&quot; /&gt;
+    &lt;/svg&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>จุด</th><th>ทำไม</th></tr></thead><tbody><tr><td><code>fill=&quot;currentColor&quot;</code></td><td>สีตามตัวอักษรรอบข้าง เปลี่ยนตาม hover ได้</td></tr><tr><td><code>size</code> prop</td><td>API เหมือน lucide-react ใช้แทนกันได้</td></tr><tr><td>ข้อยกเว้นของกฎไอคอน</td><td>lucide เลิกมีไอคอนแบรนด์ → ใช้ SVG ทางการ (บันทึกใน DESIGN.md §9 + CLAUDE.md)</td></tr><tr><td>ดึงจาก primer/octicons จริง</td><td>ไม่เขียน path จากความจำ (กฎห้ามแต่งข้อมูล)</td></tr></tbody></table></div><aside class="note warn"><strong>เกิดจริง: เผลอเปิด auto mode</strong><div>ticket นี้ Claude สร้างไฟล์ทั้งหมดโดยไม่ถาม — ยังไม่ commit จึงไม่เสียหาย เราอ่านโค้ดย้อนหลัง พบว่า Card ใช้ p-4 md:p-6 + shadow-card ต่างจาก ticket แต่ตรง DESIGN.md → ยึด DESIGN.md แล้วอัปเดตตาราง §8</div></aside></article><article class="lesson" id="t08"><header class="lesson-head"><h2>Ticket 08 · Page shell: Navbar, Section, metadata</h2><p class="meta">ช่วงประกอบหน้า · ticket ใหญ่ที่สุด</p><label class="done"><input type="checkbox" data-done="t08"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>08</b></div><div><span>Commit</span><b><code>9331cc7 + fac0e84</code></b></div><div><span>ไฟล์</span><b>Navbar, Section, content/site.ts, page.tsx, layout.tsx, home.test.tsx, Styleguide, ลบ favicon + SVG</b></div><div><span>แนวคิดหลัก</span><b>layout vs page, composition, anchor</b></div></div><p>หน้า scaffold ของ Next.js หายไป แทนด้วยโครงจริง: Navbar ติดบน + 3 Section ว่าง</p><figure class="code"><div class="code-cap"><span>components/ui/Section.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Section({ id, title, children }: SectionProps) {
+  const headingId = `${id}-heading`;
+  return (
+    &lt;section id={id} aria-labelledby={headingId} className=&quot;scroll-mt-16 py-12 md:py-24&quot;&gt;
+      &lt;h2 id={headingId} className=&quot;text-h1&quot;&gt;{title}&lt;/h2&gt;
+      &lt;div className=&quot;mt-8&quot;&gt;{children}&lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>จุด</th><th>ทำไม</th></tr></thead><tbody><tr><td><code>id={id}</code></td><td>เป้าหมายของลิงก์ #about</td></tr><tr><td><code>aria-labelledby</code></td><td>ทำให้ section มีชื่อ = region “About” (เทสต์ใช้ค้นหา)</td></tr><tr><td><code>scroll-mt-16</code></td><td>เว้นที่ 64px เท่า Navbar หัวข้อจะไม่โดนบังตอนกดลิงก์</td></tr><tr><td><code>&lt;h2 className=&quot;text-h1&quot;&gt;</code></td><td>แท็ก h2 (ลำดับ) แต่ขนาด token h1</td></tr></tbody></table></div><figure class="code"><div class="code-cap"><span>components/ui/Navbar.tsx (ย่อ class)</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">const links = [
+  { label: &quot;About&quot;, href: &quot;#about&quot; },
+  { label: &quot;Projects&quot;, href: &quot;#projects&quot; },
+  { label: &quot;Contact&quot;, href: &quot;#contact&quot; },
+];
+
+export default function Navbar() {
+  return (
+    &lt;header className=&quot;sticky top-0 z-10 border-b border-border bg-bg&quot;&gt;
+      &lt;Container&gt;
+        &lt;div className=&quot;flex h-16 items-center justify-end md:justify-between&quot;&gt;
+          &lt;span className=&quot;hidden md:block&quot;&gt;{site.name}&lt;/span&gt;
+          &lt;nav aria-label=&quot;Main&quot;&gt;
+            &lt;ul className=&quot;flex gap-4 text-small&quot;&gt;
+              {links.map((link) =&gt; (
+                &lt;li key={link.href}&gt;
+                  &lt;a href={link.href} className=&quot;text-text-muted hover:text-text …&quot;&gt;{link.label}&lt;/a&gt;
+                &lt;/li&gt;
+              ))}
+            &lt;/ul&gt;
+          &lt;/nav&gt;
+        &lt;/div&gt;
+      &lt;/Container&gt;
+    &lt;/header&gt;
+  );
+}</code></pre></figure><figure class="code"><div class="code-cap"><span>content/site.ts (ฉบับสุดท้าย)</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">export const site = {
+  name: &quot;Phuwanai Mark&quot;,
+  role: &quot;Frontend Developer&quot;,
+  tagline: &quot;Building with AI agents — and still reading every line of the diff.&quot;,
+  email: &quot;phuwanaimark.work@gmail.com&quot;,
+  githubUrl: &quot;https://github.com/PhuwanaiMark24&quot;,
+};</code></pre></figure><p><b>แหล่งความจริงที่เดียว</b>: เปลี่ยนชื่อที่นี่ → แท็บเบราว์เซอร์, Navbar, Hero, Footer เปลี่ยนตามหมด</p><h3>เทสต์ Seam A ชุดแรก (TDD 2 รอบ)</h3><figure class="code"><div class="code-cap"><span>__tests__/home.test.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">test(&quot;page has exactly the About, Projects and Contact Sections, in order&quot;, () =&gt; {
+  render(&lt;Home /&gt;);
+  const sections = screen.getAllByRole(&quot;region&quot;);
+  expect(sections).toHaveLength(3);
+  sections.forEach((section, index) =&gt; {
+    const heading = within(section).getByRole(&quot;heading&quot;, { level: 2 });
+    expect(heading.textContent).toBe(sectionNames[index]);
+  });
+});
+
+test(&quot;Navbar links to each Section by id and to nothing else (not the Hero)&quot;, () =&gt; {
+  render(&lt;Home /&gt;);
+  const nav = screen.getByRole(&quot;navigation&quot;, { name: &quot;Main&quot; });
+  const links = within(nav).getAllByRole(&quot;link&quot;);
+  expect(links.map((l) =&gt; l.getAttribute(&quot;href&quot;))).toEqual([&quot;#about&quot;, &quot;#projects&quot;, &quot;#contact&quot;]);
+  // Every link target is a real Section on the page.
+  const sectionIds = screen.getAllByRole(&quot;region&quot;).map((s) =&gt; `#${s.id}`);
+  for (const link of links) expect(sectionIds).toContain(link.getAttribute(&quot;href&quot;));
+});</code></pre></figure><h3>สิ่งที่ค้นพบ: Tailwind สแกนไฟล์ markdown</h3><figure class="code"><div class="code-cap"><span>app/globals.css</span><button class="copy" type="button">copy</button></div><pre><code class="language-css">/*
+ * Tailwind scans every file in the repo for class names. Markdown docs and
+ * tickets mention example classes (e.g. banned `p-[13px]`, scaffold
+ * `dark:invert`), so skip them or those classes end up in the built CSS.
+ */
+@source not &quot;../**/*.md&quot;;</code></pre></figure><p>แยกเป็น commit <code>fix:</code> ของตัวเอง เพราะเป็นบั๊กที่มีมาตั้งแต่ ticket 03</p><h3>อื่นๆ</h3><ul><li>เพิ่ม token <code>--spacing-0: 0px</code> เพื่อใช้ <code>top-0</code> ของ sticky Navbar (บันทึกใน DESIGN.md §4)</li><li>Navbar อยู่ใน page.tsx ไม่ใช่ layout เพื่อไม่ให้ไปโผล่ใน Styleguide</li><li>หน้า Styleguide เปลี่ยนไปใช้ Container + Section (งานค้างจาก ticket 05)</li><li>เช็ก 360px ด้วย DevTools: F12 → Ctrl+Shift+M → ใส่ 360</li></ul><div class="try"><strong>ลองทำเอง</strong><ol><li>DevTools 360px: ลิงก์อยู่แถวเดียว · เลื่อนลง Navbar ติดบน · กด Contact หัวข้อไม่โดนบัง</li><li>ลบ <code>scroll-mt-16</code> ออกชั่วคราว แล้วกดลิงก์ Projects ดูหัวข้อโดน Navbar บัง → คืนค่า</li></ol></div></article><article class="lesson" id="t09"><header class="lesson-head"><h2>Ticket 09 · Hero</h2><p class="meta">ช่วงประกอบหน้า</p><label class="done"><input type="checkbox" data-done="t09"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>09</b></div><div><span>Commit</span><b><code>9077761</code></b></div><div><span>ไฟล์</span><b>components/Hero.tsx, site.role, home.test.tsx, BRIEF/DESIGN</b></div><div><span>แนวคิดหลัก</span><b>composition, responsive</b></div></div><figure class="code"><div class="code-cap"><span>components/Hero.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Hero() {
+  return (
+    &lt;div className=&quot;pt-12 md:pt-24&quot;&gt;
+      &lt;h1 className=&quot;text-display-sm md:text-display&quot;&gt;{site.name}&lt;/h1&gt;
+      &lt;p className=&quot;mt-2 text-h3&quot;&gt;{site.role}&lt;/p&gt;
+      &lt;p className=&quot;mt-4 max-w-prose text-body text-text-muted&quot;&gt;{site.tagline}&lt;/p&gt;
+      &lt;div className=&quot;mt-8 flex flex-wrap gap-4&quot;&gt;
+        &lt;Button href=&quot;/resume.pdf&quot; download&gt;Download resume&lt;/Button&gt;
+        &lt;Button variant=&quot;secondary&quot; href=&quot;#projects&quot;&gt;View projects&lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>จุด</th><th>ทำไม</th></tr></thead><tbody><tr><td>อยู่ใน components/ ไม่ใช่ components/ui/</td><td>ไม่ใช่ Base component — เป็นการประกอบ Base component</td></tr><tr><td><code>&lt;div&gt;</code> ไม่ใช่ Section</td><td>Hero ไม่ใช่ Section ตาม GLOSSARY ถ้าใช้ Section จะกลายเป็น region ตัวที่ 4 และเทสต์พัง</td></tr><tr><td><code>&lt;h1&gt;</code> ตัวเดียว</td><td>เทสต์เช็ก</td></tr><tr><td>ตำแหน่งใช้ <code>&lt;p className=&quot;text-h3&quot;&gt;</code></td><td>ไม่ใช่หัวข้อ จึงไม่ใช้แท็ก heading (บันทึกใน DESIGN.md §3)</td></tr><tr><td>Resume = primary</td><td>Recruiter ต้องเห็นก่อน</td></tr></tbody></table></div><h3>เทสต์ลำดับการอ่าน</h3><figure class="code"><div class="code-cap"><span>tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">// True when `a` comes before `b` in reading order.
+function isBefore(a: Element, b: Element) {
+  return Boolean(a.compareDocumentPosition(b) &amp; Node.DOCUMENT_POSITION_FOLLOWING);
+}
+// The Hero is everything above the first Section.
+const firstSection = screen.getAllByRole(&quot;region&quot;)[0];
+expect(isBefore(viewProjects, firstSection)).toBe(true);</code></pre></figure><p>Hero ไม่มี role ของตัวเอง เลยนิยามว่า “ทุกอย่างที่อยู่ก่อน Section แรก” แทนการผูกกับโครง DOM</p><aside class="note tip"><strong>บทเรียนเรื่องข้อความ</strong><div>tagline เดิม “Frontend developer who builds…” ซ้ำกับบรรทัดตำแหน่งที่อยู่ข้างบน Claude จับได้ตอนดูในบริบทหน้าจอ → แก้เป็น “Building with AI agents — and still reading every line of the diff.”</div></aside></article><article class="lesson" id="t10"><header class="lesson-head"><h2>Ticket 10 · About</h2><p class="meta">ช่วงประกอบหน้า</p><label class="done"><input type="checkbox" data-done="t10"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>10</b></div><div><span>Commit</span><b><code>f1da03d</code></b></div><div><span>ไฟล์</span><b>components/About.tsx, content/about.ts</b></div><div><span>แนวคิดหลัก</span><b>.map + key</b></div></div><figure class="code"><div class="code-cap"><span>content/about.ts</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">export const aboutParagraphs = [
+  &quot;I&#x27;m a student and frontend developer who builds clean, accessible websites …&quot;,
+  &quot;I work with AI coding agents like Claude Code, but not on autopilot. …&quot;,
+  &quot;I&#x27;m open to junior frontend roles and freelance projects. …&quot;,
+];
+
+export const skills = [&quot;HTML/CSS&quot;, &quot;JavaScript&quot;, &quot;React&quot;, &quot;Next.js&quot;, &quot;Tailwind CSS&quot;, &quot;Claude Code&quot;];</code></pre></figure><figure class="code"><div class="code-cap"><span>components/About.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function About() {
+  return (
+    &lt;Section id=&quot;about&quot; title=&quot;About&quot;&gt;
+      &lt;div className=&quot;flex max-w-prose flex-col gap-4&quot;&gt;
+        {aboutParagraphs.map((paragraph) =&gt; (
+          &lt;p key={paragraph}&gt;{paragraph}&lt;/p&gt;
+        ))}
+      &lt;/div&gt;
+
+      &lt;h3 id=&quot;skills-heading&quot; className=&quot;mt-8 text-h3&quot;&gt;Skills&lt;/h3&gt;
+      &lt;ul aria-labelledby=&quot;skills-heading&quot; className=&quot;mt-4 flex flex-wrap gap-2&quot;&gt;
+        {skills.map((skill) =&gt; (
+          &lt;li key={skill}&gt;&lt;Tag&gt;{skill}&lt;/Tag&gt;&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/Section&gt;
+  );
+}</code></pre></figure><h3>การตัดสินใจ: แท็ก vs ขนาด</h3><p>ตาราง token→แท็ก บอกว่า token h3 ใช้คู่ <code>&lt;h4&gt;</code> แต่ “Skills” อยู่ใต้ <code>&lt;h2&gt;</code> About โดยตรง ถ้าใช้ h4 จะข้ามระดับ → เลือก <code>&lt;h3 className="text-h3"&gt;</code> แล้วเพิ่มกฎใน DESIGN.md §3: <b>แท็กเลือกตามลำดับจริง ห้ามข้ามระดับ · token เลือกตามขนาด</b></p><figure class="code"><div class="code-cap"><span>เทสต์</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">test(&quot;About shows one Tag per Skill, in the listed order&quot;, () =&gt; {
+  render(&lt;Home /&gt;);
+  const about = screen.getByRole(&quot;region&quot;, { name: &quot;About&quot; });
+  const skillList = within(about).getByRole(&quot;list&quot;, { name: &quot;Skills&quot; });
+  const items = within(skillList).getAllByRole(&quot;listitem&quot;);
+  expect(items.map((item) =&gt; item.textContent)).toEqual(skills);
+});</code></pre></figure><div class="try"><strong>ลองทำเอง</strong><ol><li>เพิ่ม <code>"Git"</code> ต่อท้าย skills ใน content/about.ts → ดูหน้าเว็บ → รัน npm test (ยังผ่าน เพราะเทสต์อ่านจาก array เดียวกัน)</li></ol></div></article><article class="lesson" id="t11"><header class="lesson-head"><h2>Ticket 11 · Projects</h2><p class="meta">ช่วงประกอบหน้า</p><label class="done"><input type="checkbox" data-done="t11"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>11</b></div><div><span>Commit</span><b><code>81a74d0</code></b></div><div><span>ไฟล์</span><b>content/projects.ts, components/Projects.tsx, 3 ไฟล์เทสต์</b></div><div><span>แนวคิดหลัก</span><b>types, union, optional, data→component</b></div></div><figure class="code"><div class="code-cap"><span>components/Projects.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">function ProjectCard({ project }: { project: Project }) {
+  return (
+    &lt;article&gt;
+      &lt;Card&gt;
+        &lt;div className=&quot;flex flex-wrap items-center gap-2&quot;&gt;
+          &lt;p className=&quot;text-small text-text-muted&quot;&gt;{project.type}&lt;/p&gt;
+          {project.status &amp;&amp; &lt;Tag&gt;{project.status}&lt;/Tag&gt;}
+        &lt;/div&gt;
+        &lt;h3 className=&quot;mt-2 text-h2&quot;&gt;{project.name}&lt;/h3&gt;
+        &lt;p className=&quot;mt-2 max-w-prose text-text-muted&quot;&gt;{project.description}&lt;/p&gt;
+        &lt;ul aria-label=&quot;Stack&quot; className=&quot;mt-4 flex flex-wrap gap-2&quot;&gt;
+          {project.stack.map((tool) =&gt; &lt;li key={tool}&gt;&lt;Tag&gt;{tool}&lt;/Tag&gt;&lt;/li&gt;)}
+        &lt;/ul&gt;
+        &lt;div className=&quot;mt-6 flex flex-wrap gap-4&quot;&gt;
+          {project.links.demo &amp;&amp; &lt;Button variant=&quot;secondary&quot; href={project.links.demo}&gt;Live demo&lt;/Button&gt;}
+          {project.links.code &amp;&amp; &lt;Button variant=&quot;ghost&quot; href={project.links.code}&gt;Source code&lt;/Button&gt;}
+        &lt;/div&gt;
+      &lt;/Card&gt;
+    &lt;/article&gt;
+  );
+}
+
+// Takes the list as a prop so tests can pass fixture Projects.
+export default function Projects({ projects }: { projects: Project[] }) {
+  return (
+    &lt;Section id=&quot;projects&quot; title=&quot;Projects&quot;&gt;
+      &lt;div className=&quot;flex flex-col gap-6&quot;&gt;
+        {projects.map((project) =&gt; &lt;ProjectCard key={project.name} project={project} /&gt;)}
+      &lt;/div&gt;
+    &lt;/Section&gt;
+  );
+}</code></pre></figure><h3>เทสต์ 3 ชั้น</h3><div class="tw"><table><thead><tr><th>ชั้น</th><th>ไฟล์</th><th>ตรวจ</th></tr></thead><tbody><tr><td>Seam B (ข้อมูล)</td><td>projects.test.ts</td><td>ทุกงานมีลิงก์ ≥ 1 · type อยู่ในค่าที่อนุญาต · @ts-expect-error กับ "Blog"</td></tr><tr><td>Seam A (หน้า)</td><td>home.test.tsx</td><td>การ์ด 1 ใบต่อ 1 งาน เรียงตามไฟล์ · ลิงก์ภายนอกทุกอันมี target/rel</td></tr><tr><td>Seam A + fixture</td><td>project-status.test.tsx</td><td>In progress มี Tag · Finished ไม่มี</td></tr></tbody></table></div><aside class="note key"><strong>พิสูจน์ว่าเทสต์ใช้ได้</strong><div>เทสต์ลิงก์ภายนอกผ่านตั้งแต่รอบแรก (Button ทำไว้แล้ว) → Claude ลองลบ rel ออกจาก Button → เทสต์พัง → คืนไฟล์ · และลองใส่ type ที่ถูกแทน "Blog" → tsc ล้มด้วย Unused '@ts-expect-error'</div></aside><div class="try"><strong>ลองทำเอง</strong><ol><li>เพิ่มงานชิ้นที่ 2 (ภาค D มีวิธี) → ลบ <code>links</code> ทั้งหมดของมัน → npm test จะแดงที่ Seam B</li></ol></div></article><article class="lesson" id="t12"><header class="lesson-head"><h2>Ticket 12 · Contact + Footer</h2><p class="meta">ช่วงประกอบหน้า</p><label class="done"><input type="checkbox" data-done="t12"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>12</b></div><div><span>Commit</span><b><code>9e8c28e</code></b></div><div><span>ไฟล์</span><b>components/Contact.tsx, components/Footer.tsx, site.ts</b></div><div><span>แนวคิดหลัก</span><b>mailto, accessible label, build-time value</b></div></div><figure class="code"><div class="code-cap"><span>components/Contact.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Contact() {
+  return (
+    &lt;Section id=&quot;contact&quot; title=&quot;Contact&quot;&gt;
+      &lt;div className=&quot;flex flex-wrap gap-4&quot;&gt;
+        &lt;Button href=&quot;/resume.pdf&quot; download&gt;Download resume&lt;/Button&gt;
+        &lt;Button variant=&quot;secondary&quot; href={`mailto:${site.email}`}&gt;{site.email}&lt;/Button&gt;
+        &lt;Button variant=&quot;ghost&quot; href={site.githubUrl}&gt;
+          {/* Decorative: the visible text &quot;GitHub&quot; names the link. */}
+          &lt;GithubIcon size={16} /&gt;
+          GitHub
+        &lt;/Button&gt;
+      &lt;/div&gt;
+    &lt;/Section&gt;
+  );
+}</code></pre></figure><figure class="code"><div class="code-cap"><span>components/Footer.tsx</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">export default function Footer() {
+  // The page is a static export, so this runs once at build time:
+  // the year in the HTML is the build year.
+  const year = new Date().getFullYear();
+
+  return (
+    &lt;footer className=&quot;border-t border-border&quot;&gt;
+      &lt;Container&gt;
+        &lt;div className=&quot;flex h-16 items-center justify-between text-small text-text-muted&quot;&gt;
+          &lt;p&gt;© {year} {site.name}&lt;/p&gt;
+          {/* Icon-only link: the label lives on the &lt;a&gt;, the icon stays hidden. */}
+          &lt;a href={site.githubUrl} target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; aria-label=&quot;GitHub&quot; className=&quot;…&quot;&gt;
+            &lt;GithubIcon size={20} /&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/Container&gt;
+    &lt;/footer&gt;
+  );
+}</code></pre></figure><div class="tw"><table><thead><tr><th>จุด</th><th>อธิบาย</th></tr></thead><tbody><tr><td><code>mailto:</code></td><td>เปิดแอปอีเมลของผู้ชม ไม่ต้องมีฟอร์ม/server · ไม่ใช่ http จึงไม่เปิดแท็บใหม่</td></tr><tr><td>ลิงก์ไอคอนอย่างเดียว</td><td>ต้องมี aria-label บน &lt;a&gt; · ไอคอนข้างในซ่อนด้วย aria-hidden</td></tr><tr><td>ปีตอน build</td><td>โค้ดรันครั้งเดียวตอน npm run build · ปีหน้า build ใหม่ก็เปลี่ยนเอง</td></tr><tr><td>Footer ไม่ใช้ Button</td><td>Button ไม่รับ aria-label → เขียน &lt;a&gt; เอง (ซ้ำ class กับ Navbar 2 ที่ ยังไม่แยก)</td></tr><tr><td>Resume มาก่อน</td><td>ปุ่ม primary อยู่แรก ต่างจาก spec แต่มีเหตุผล → บันทึก DESIGN.md §8</td></tr></tbody></table></div><figure class="code"><div class="code-cap"><span>เทสต์ a11y</span><button class="copy" type="button">copy</button></div><pre><code class="language-tsx">test(&quot;every link has an accessible name, including icon-only links&quot;, () =&gt; {
+  render(&lt;Home /&gt;);
+  const allLinks = screen.getAllByRole(&quot;link&quot;);
+  const namedLinks = screen.getAllByRole(&quot;link&quot;, { name: /\S/ });
+  expect(namedLinks).toHaveLength(allLinks.length);
+});</code></pre></figure><p>หลัง ticket นี้ หน้าแรกที่ build ออกมาไม่มี <code>[[TODO</code> เหลือ — เหลือแค่ resume.pdf</p></article><article class="lesson" id="t13"><header class="lesson-head"><h2>Ticket 13 · ตรวจผล build + Deploy ขึ้น GitHub Pages</h2><p class="meta">ขึ้นเว็บจริง</p><label class="done"><input type="checkbox" data-done="t13"> อ่านจบแล้ว</label></header><div class="tmeta"><div><span>Ticket</span><b>13</b></div><div><span>Commit</span><b><code>676ac22</code></b></div><div><span>ไฟล์</span><b>.github/workflows/ci.yml, scripts/check-output.sh, README.md</b></div><div><span>แนวคิดหลัก</span><b>CD, OIDC, gate</b></div></div><h3>สคริปต์ตรวจ 4 ข้อ</h3><figure class="code"><div class="code-cap"><span>scripts/check-output.sh (ย่อ)</span><button class="copy" type="button">copy</button></div><pre><code class="language-bash">dir=&quot;${1:-out}&quot;
+failed=0
+fail() { echo &quot;::error::$1&quot;; failed=1; }
+
+# 1. No Placeholder may reach the live site.
+todo_files=$(grep -rlF &#x27;[[TODO&#x27; &quot;$dir&quot;)
+if [ -n &quot;$todo_files&quot; ]; then
+  fail &quot;Placeholder &#x27;[[TODO&#x27; found in build output. Files: $todo_files&quot;
+fi
+
+# 2. The Resume is the main call to action, so its link must not 404.
+[ -f &quot;$dir/resume.pdf&quot; ] || fail &quot;Resume missing: $dir/resume.pdf not found.&quot;
+
+noindex=&#x27;&lt;meta name=&quot;robots&quot; content=&quot;[^&quot;]*noindex&#x27;
+# 3. The home page must stay indexable.
+grep -q &quot;$noindex&quot; &quot;$dir/index.html&quot; &amp;&amp; fail &quot;Home page has a noindex directive.&quot;
+# 4. The Styleguide must stay out of search results.
+grep -q &quot;$noindex&quot; &quot;$dir/styleguide.html&quot; || fail &quot;Styleguide has no noindex directive.&quot;
+
+[ &quot;$failed&quot; -eq 1 ] &amp;&amp; exit 1
+echo &quot;Build output checks passed.&quot;</code></pre></figure><div class="tw"><table><thead><tr><th>จุดเด่น</th><th>ทำไม</th></tr></thead><tbody><tr><td>ตรวจครบทุกข้อก่อนสรุป</td><td>ผิด 2 ข้อเห็นทั้ง 2 ในรอบเดียว</td></tr><tr><td><code>::error::</code></td><td>ขึ้นเป็นกล่องแดงในแท็บ Actions</td></tr><tr><td>ไฟล์แยก</td><td>รันในเครื่องได้: <code>bash scripts/check-output.sh out</code></td></tr><tr><td>ทดลองให้ fail จริงทุกข้อ</td><td>ใส่ [[TODO ชั่วคราว, ลบ resume ชั่วคราว ฯลฯ</td></tr></tbody></table></div><h3>workflow ฉบับสุดท้าย</h3><figure class="code"><div class="code-cap"><span>.github/workflows/ci.yml (ส่วนที่เพิ่ม)</span><button class="copy" type="button">copy</button></div><pre><code class="language-yaml">concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false          # ไม่ deploy ซ้อนกัน
+
+jobs:
+  check:
+    steps:
+      # … checkout, setup-node, npm ci, lint, test, build …
+      - name: Check build output
+        if: github.event_name == &#x27;push&#x27; &amp;&amp; github.ref == &#x27;refs/heads/main&#x27;
+        run: bash scripts/check-output.sh out
+      - name: Upload Pages artifact
+        if: github.event_name == &#x27;push&#x27; &amp;&amp; github.ref == &#x27;refs/heads/main&#x27;
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: check                      # รอ check ผ่านทุก step
+    if: github.event_name == &#x27;push&#x27; &amp;&amp; github.ref == &#x27;refs/heads/main&#x27;
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write                    # publish ขึ้น Pages
+      id-token: write                 # ยืนยันตัวตนด้วย OIDC
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5</code></pre></figure><h3>ขั้นที่ต้องทำเองครั้งเดียว</h3><p>Repo → <b>Settings → Pages → Source → GitHub Actions</b> · ก่อนตั้ง GitHub ใช้ระบบเก่า “pages build and deployment” ที่ publish ไฟล์ดิบใน repo พอตั้งแล้วระบบเก่าหยุด เหลือแค่ workflow ของเรา</p><h3>อ่านผลเมื่อ run ล้ม</h3><div class="tw"><table><thead><tr><th>job ที่แดง</th><th>ดูที่</th><th>มักเป็น</th></tr></thead><tbody><tr><td>check → lint/test/build</td><td>log ของ step นั้น</td><td>โค้ดผิด / เทสต์ไม่ผ่าน</td></tr><tr><td>check → Check build output</td><td>กล่อง ::error::</td><td>[[TODO หลุด / ไม่มี resume.pdf / noindex ผิด</td></tr><tr><td>deploy</td><td>log ของ deploy</td><td>ยังไม่ตั้ง Pages Source เป็น GitHub Actions</td></tr></tbody></table></div><p>ผลจริง: CI#19 ✅ check → deploy → <b>https://phuwanaimark24.github.io</b> ออนไลน์ 🚀</p></article><section class="part" id="part-d"><div class="part-head"><span class="kicker">PART D</span><h1>ภาค D · คู่มือใช้งานและดูแลเว็บ</h1><p class="lead">เปิดหน้านี้เวลาจะแก้เว็บจริง</p></div></section><article class="lesson" id="d1"><header class="lesson-head"><h2>D1 · งานที่ทำบ่อย ทำยังไง</h2><p class="meta">สูตรสำเร็จ</p><label class="done"><input type="checkbox" data-done="d1"> อ่านจบแล้ว</label></header><h3>เพิ่มผลงานชิ้นใหม่</h3><ol><li>เปิด <code>content/projects.ts</code></li><li>เพิ่ม object ใน array <code>projects</code> (ลำดับในไฟล์ = ลำดับบนเว็บ)</li><li>ต้องมี demo หรือ code อย่างน้อย 1 ลิงก์ · type ต้องเป็น Code/Web, AI/Agent หรือ Design</li><li>ถ้างานเสร็จแล้ว ไม่ต้องใส่ <code>status</code></li><li><code>npm test</code> → commit → push</li></ol><figure class="code"><div class="code-cap"><span>ตัวอย่าง (แทนข้อมูลด้วยของจริง)</span><button class="copy" type="button">copy</button></div><pre><code class="language-ts">{
+  name: &quot;Expense tracker&quot;,
+  description: &quot;A small app for tracking daily spending, built with React and local storage.&quot;,
+  type: &quot;Code/Web&quot;,
+  stack: [&quot;React&quot;, &quot;TypeScript&quot;],
+  links: {
+    demo: &quot;https://…&quot;,
+    code: &quot;https://github.com/PhuwanaiMark24/…&quot;,
+  },
+},</code></pre></figure><aside class="note warn"><strong>ห้ามใส่งานปลอม</strong><div>BRIEF.md §6 · ถ้ายังไม่มีลิงก์ อย่าเพิ่ม (ใส่ [[TODO แล้ว deploy จะถูกบล็อก)</div></aside><h3>เปลี่ยนข้อความบนเว็บ</h3><div class="tw"><table><thead><tr><th>อยากเปลี่ยน</th><th>ไฟล์</th></tr></thead><tbody><tr><td>ชื่อ, ตำแหน่ง, tagline, อีเมล, ลิงก์ GitHub</td><td><code>content/site.ts</code></td></tr><tr><td>ย่อหน้า About, Skills</td><td><code>content/about.ts</code></td></tr><tr><td>ผลงาน</td><td><code>content/projects.ts</code></td></tr></tbody></table></div><p>แก้แล้วอัปเดต BRIEF.md ให้ตรงด้วย (เอกสารคือแหล่งความจริง)</p><h3>เปลี่ยน Resume</h3><ol><li>export Resume ตัวเต็มเป็น PDF</li><li>ตั้งชื่อ <b>resume.pdf</b> แล้ววางทับที่ <code>D:\Projects\portfolio\public\resume.pdf</code></li><li><code>git add public/resume.pdf</code> → <code>git commit -m &quot;content: update resume&quot;</code> → <code>git push</code></li></ol><h3>ใส่ favicon</h3><ol><li>เตรียมรูปสี่เหลี่ยมจัตุรัส PNG (เช่น 512×512)</li><li>วางที่ <code>app/icon.png</code> (Next.js ใช้อัตโนมัติ)</li><li>ลบคอมเมนต์ <code>[[TODO: favicon]]</code> ใน layout.tsx</li><li>build → commit → push</li></ol><h3>เปลี่ยนสี</h3><p>แก้ทั้ง DESIGN.md §2 และ <code>app/globals.css</code> → เปิด /styleguide ตรวจ → เช็ก contrast ต้องผ่าน WCAG AA</p></article><article class="lesson" id="d2"><header class="lesson-head"><h2>D2 · คำสั่งที่ใช้บ่อย</h2><p class="meta">cheat sheet</p><label class="done"><input type="checkbox" data-done="d2"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>คำสั่ง</th><th>ที่ไหน</th><th>ทำอะไร</th></tr></thead><tbody><tr><td><code>cd D:\Projects\portfolio</code></td><td>PowerShell</td><td>เข้าโฟลเดอร์</td></tr><tr><td><code>npm run dev</code></td><td>PowerShell</td><td>รันเว็บที่ localhost:3000</td></tr><tr><td><code>npm test</code></td><td>PowerShell</td><td>รันเทสต์</td></tr><tr><td><code>npm run lint</code></td><td>PowerShell</td><td>ตรวจรูปแบบโค้ด</td></tr><tr><td><code>npm run build</code></td><td>PowerShell</td><td>build เป็น out/</td></tr><tr><td><code>bash scripts/check-output.sh out</code></td><td>Git Bash/WSL</td><td>ตรวจผล build แบบ CI</td></tr><tr><td><code>claude</code> / <code>claude --continue</code></td><td>PowerShell</td><td>เปิด Claude Code / ต่อจากเดิม</td></tr><tr><td><code>/exit</code></td><td>Claude Code</td><td>ออก</td></tr><tr><td><code>/clear</code></td><td>Claude Code</td><td>ล้างบทสนทนา (เปลี่ยนงาน)</td></tr><tr><td><code>/context</code> / <code>/compact</code></td><td>Claude Code</td><td>ดู/ย่อ context</td></tr><tr><td>Shift+Tab</td><td>Claude Code</td><td>สลับโหมด (ดูแถบล่าง)</td></tr><tr><td>Esc</td><td>Claude Code</td><td>หยุด</td></tr><tr><td>Ctrl+G</td><td>Claude Code (หน้าแผน)</td><td>เปิดแผนใน Notepad — ต้องปิดก่อนกดต่อ</td></tr><tr><td>F12 → Ctrl+Shift+M</td><td>Chrome</td><td>จำลองมือถือ</td></tr></tbody></table></div></article><article class="lesson" id="d3"><header class="lesson-head"><h2>D3 · เริ่มโปรเจกต์ใหม่: checklist</h2><p class="meta">ชั้น 2 + 3</p><label class="done"><input type="checkbox" data-done="d3"> อ่านจบแล้ว</label></header><div class="check"><ol>
+<li>สร้างโฟลเดอร์บนไดรฟ์ D → <code>git init</code></li>
+<li>เขียน BRIEF.md, DESIGN.md (ใช้ของ portfolio เป็นแม่แบบ), CLAUDE.md (คัดส่วน About the developer + Working rules)</li>
+<li><b>commit เอกสารก่อน</b></li>
+<li><code>claude</code> → เช็กหัวจอ: โฟลเดอร์ถูก, Claude Pro, manual mode</li>
+<li><code>/setup-matt-pocock-skills</code> → <code>git diff CLAUDE.md</code> → รวมถ้าถูกทับ</li>
+<li>scaffold (เช่น create-next-app — ย้าย .md เข้า docs/ ชั่วคราว)</li>
+<li><code>/grill-with-docs</code> (แก้ได้แค่ .md) → GLOSSARY + ADR</li>
+<li><code>/to-spec</code> → ตรวจ: user stories, seams, out of scope, ข้อมูลครบไหม</li>
+<li><code>/to-tickets</code> → ปรับขนาด → commit</li>
+<li>สร้าง repo GitHub + push → ticket CI ตั้งแต่ต้น</li>
+<li>loop ทีละ ticket (บท A9)</li>
+<li>ticket deploy ท้ายสุด + ตั้ง Pages Source</li>
+</ol></div></article><article class="lesson" id="d4"><header class="lesson-head"><h2>D4 · คำศัพท์เทคนิค ไทย–อังกฤษ</h2><p class="meta">glossary</p><label class="done"><input type="checkbox" data-done="d4"> อ่านจบแล้ว</label></header><div class="tw"><table><thead><tr><th>คำ</th><th>ความหมาย</th></tr></thead><tbody><tr><td><b>component</b></td><td>ชิ้นส่วนหน้าเว็บที่เป็นฟังก์ชัน คืนค่า JSX</td></tr><tr><td><b>props</b></td><td>ข้อมูลที่ส่งเข้า component</td></tr><tr><td><b>children</b></td><td>สิ่งที่อยู่ระหว่างแท็กเปิด–ปิดของ component</td></tr><tr><td><b>JSX</b></td><td>ไวยากรณ์ HTML ในไฟล์ JavaScript</td></tr><tr><td><b>state</b></td><td>ค่าที่เปลี่ยนเมื่อผู้ใช้โต้ตอบ (เว็บนี้ยังไม่ใช้)</td></tr><tr><td><b>Server Component</b></td><td>component ที่ render ตอน build/บน server ไม่ส่ง JS ไปเบราว์เซอร์</td></tr><tr><td><b>token</b></td><td>ค่าออกแบบที่มีชื่อ เช่น --color-surface</td></tr><tr><td><b>utility class</b></td><td>class เล็กๆ ทำหน้าที่เดียว เช่น p-4</td></tr><tr><td><b>responsive</b></td><td>หน้าตาปรับตามความกว้างจอ</td></tr><tr><td><b>breakpoint</b></td><td>ความกว้างที่เปลี่ยนรูปแบบ (md = 768px)</td></tr><tr><td><b>static export</b></td><td>build เป็นไฟล์ล้วน ไม่ต้องมี server</td></tr><tr><td><b>union type</b></td><td>ชนิดที่รับได้หลายค่าที่กำหนดไว้</td></tr><tr><td><b>optional field</b></td><td>field ที่ไม่ใส่ก็ได้ (?)</td></tr><tr><td><b>seam</b></td><td>จุดที่เทสต์เข้าไปตรวจ</td></tr><tr><td><b>fixture</b></td><td>ข้อมูลปลอมที่ใช้ในเทสต์เท่านั้น</td></tr><tr><td><b>TDD</b></td><td>เขียนเทสต์ก่อน (red) แล้วเขียนโค้ดให้ผ่าน (green)</td></tr><tr><td><b>smoke test</b></td><td>เทสต์พื้นฐานที่สุด: render ได้ไหม</td></tr><tr><td><b>CI</b></td><td>ตรวจอัตโนมัติทุกครั้งที่ push</td></tr><tr><td><b>CD / deploy</b></td><td>ขึ้นเว็บจริงอัตโนมัติ</td></tr><tr><td><b>diff</b></td><td>ส่วนต่างระหว่างโค้ดเก่ากับใหม่</td></tr><tr><td><b>commit</b></td><td>จุดบันทึกในประวัติ git</td></tr><tr><td><b>ADR</b></td><td>บันทึกการตัดสินใจทางสถาปัตยกรรม</td></tr><tr><td><b>spec</b></td><td>เอกสารรายละเอียดงาน</td></tr><tr><td><b>ticket</b></td><td>งานย่อยหนึ่งชิ้น</td></tr><tr><td><b>Placeholder</b></td><td>[[TODO: …]] แทนข้อมูลที่ยังไม่มี</td></tr><tr><td><b>a11y</b></td><td>accessibility การเข้าถึงได้ของทุกคน</td></tr><tr><td><b>landmark / region</b></td><td>ส่วนสำคัญของหน้าที่ screen reader กระโดดไปได้</td></tr><tr><td><b>noindex</b></td><td>บอก search engine ไม่ให้เก็บหน้านั้น</td></tr><tr><td><b>OIDC</b></td><td>วิธียืนยันตัวตนของ workflow กับ GitHub Pages</td></tr><tr><td><b>lockfile</b></td><td>package-lock.json ล็อกเวอร์ชัน package</td></tr></tbody></table></div></article><article class="lesson" id="d5"><header class="lesson-head"><h2>D5 · แบบทดสอบรวม</h2><p class="meta">ทบทวนทั้งหมด</p><label class="done"><input type="checkbox" data-done="d5"> อ่านจบแล้ว</label></header><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ถ้าจะให้ Claude เปลี่ยนสี accent ต้องแก้ไฟล์ไหนก่อน และทำไม?</summary><div>DESIGN.md ก่อน แล้วค่อย globals.css — เอกสารคือแหล่งความจริง ถ้าแก้แค่โค้ด session หน้า Claude อาจแก้กลับตามเอกสาร</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ทำไม CI ตรวจ [[TODO ใน out/ แทนในโฟลเดอร์ source?</summary><div>เพราะสิ่งที่ผู้ชมเห็นคือ out/ และใน source มี [[TODO ในคอมเมนต์/เอกสารที่ไม่ได้ขึ้นเว็บ (เช่น <code>[[TODO: favicon]]</code> ในคอมเมนต์ layout.tsx)</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> เทสต์ “Navbar links to each Section” พิสูจน์อะไรเพิ่มนอกจาก href ถูก?</summary><div>ว่าไม่มีลิงก์ไป Hero และทุกลิงก์ชี้ไป Section ที่มีอยู่จริง ถ้าเปลี่ยน id ของ Section แต่ลืมแก้ Navbar เทสต์จะแดง</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> ทำไม Projects รับ <code>projects</code> เป็น prop แทนที่จะ import เอง?</summary><div>เพื่อให้เทสต์ส่งข้อมูล fixture เข้าไปได้ (เช่นงานที่ Finished ซึ่งข้อมูลจริงยังไม่มี)</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> กด Tab บนเว็บแล้วไม่เห็นกรอบ focus บนปุ่ม ควรสงสัยอะไร?</summary><div>class focus-visible:outline-… หายไป หรือถูกเปลี่ยนเป็น ring (ซึ่งห้าม) — ดู baseClasses ใน Button.tsx</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> Claude Code ขึ้น “1 1.” แปลกๆ ตอนเลือกเมนูแผน ทำไง?</summary><div>Notepad จาก Ctrl+G ยังเปิดอยู่ ปิดมัน (Don't Save) แล้วค่อยเลือก</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> deploy job แดง แต่ check เขียว สาเหตุที่น่าจะเป็นที่สุด?</summary><div>ยังไม่ได้ตั้ง Settings → Pages → Source เป็น GitHub Actions</div></details><details class="quiz"><summary><span class="q">ทดสอบตัวเอง</span> w-5 ใช้ไม่ได้ในโปรเจกต์นี้ แล้วไอคอน 20px ทำยังไง?</summary><div>ใช้ prop <code>size={20}</code> ของไอคอน (lucide-react หรือ GithubIcon) ไม่ใช้ class width/height</div></details><p>จบบทเรียน 🎉 เว็บของคุณอยู่ที่ <b>https://phuwanaimark24.github.io</b> · โค้ดอยู่ที่ <b>github.com/PhuwanaiMark24/PhuwanaiMark24.github.io</b></p></article>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+(function(){
+ var KEY="pm-course-done";var store={};
+ try{store=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){store={}}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+ var boxes=document.querySelectorAll("[data-done]"),total=boxes.length;
+ function refresh(){var n=0;boxes.forEach(function(b){var id=b.getAttribute("data-done");b.checked=!!store[id];if(store[id])n++;
+   var a=document.querySelector('.side a[data-id="'+id+'"]');if(a)a.classList.toggle("is-done",!!store[id]);});
+  document.getElementById("pcount").textContent=n+" / "+total;document.getElementById("pbar").style.width=(total?n/total*100:0)+"%";}
+ boxes.forEach(function(b){b.addEventListener("change",function(){store[b.getAttribute("data-done")]=b.checked;save();refresh();});});
+ refresh();
+ document.querySelectorAll(".copy").forEach(function(btn){btn.addEventListener("click",function(){
+  var t=btn.closest(".code").querySelector("code").innerText;
+  function ok(){btn.textContent="copied";setTimeout(function(){btn.textContent="copy"},1200)}
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok,function(){})}else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok()}catch(e){}ta.remove();}
+ });});
+ var side=document.querySelector(".side"),btn=document.querySelector(".menu-btn");
+ if(btn)btn.addEventListener("click",function(){side.classList.toggle("open");btn.setAttribute("aria-expanded",side.classList.contains("open"));});
+ side.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){side.classList.remove("open")})});
+ var links={};side.querySelectorAll(".nav-lesson a").forEach(function(a){links[a.getAttribute("data-id")]=a});
+ if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+   Object.values(links).forEach(function(a){a.classList.remove("active")});var a=links[e.target.id];if(a)a.classList.add("active");}})},{rootMargin:"-20% 0px -70% 0px"});
+  document.querySelectorAll(".lesson").forEach(function(l){io.observe(l)});}
+ var s=document.querySelector(".search");s.addEventListener("input",function(){var q=s.value.trim().toLowerCase();
+  side.querySelectorAll(".nav-lesson").forEach(function(li){var id=li.querySelector("a").getAttribute("data-id");var el=document.getElementById(id);
+   var hit=!q||li.textContent.toLowerCase().indexOf(q)>-1||(el&&el.textContent.toLowerCase().indexOf(q)>-1);li.style.display=hit?"":"none";});});
+ if(window.hljs){document.querySelectorAll("pre code").forEach(function(el){if(el.className.indexOf("language-text")<0){try{hljs.highlightElement(el)}catch(e){}}})}
+})();
+</script>
+</body>
+</html>

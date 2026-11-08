@@ -7,6 +7,9 @@
  */
 @source not "../**/*.md";
 
+/* The Thai course page (docs/course/) quotes example and banned classes too. */
+@source not "../docs/course";
+
 /*
  * Design tokens. Names and values come from DESIGN.md (do not rename).
  * Each namespace is reset first so Tailwind only generates classes
